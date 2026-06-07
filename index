@@ -7,39 +7,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Be Vietnam Pro', sans-serif; }
-        body { background: #fdf6f7; padding: 20px; display: flex; justify-content: center; min-height: 100vh; }
-        .farm-container { width: 100%; max-width: 500px; background: #fff; padding: 25px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
+        body { background: #fdf6f7; padding: 15px; display: flex; justify-content: center; min-height: 100vh; }
+        .farm-container { width: 100%; max-width: 450px; background: #fff; padding: 20px; border-radius: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
         
-        h2 { text-align: center; margin-bottom: 20px; color: #ff4d6d; letter-spacing: 0.5px; }
+        h2 { text-align: center; margin-bottom: 20px; color: #ff4d6d; }
 
-        /* KHU VỰC SEARCH ĐẬM NÉT DỄ NHÌN */
-        .search-box-pink { background: #fff5f6; border: 2px solid #ffccd5; padding: 12px; border-radius: 15px; margin-bottom: 12px; }
-        .search-box-blue { background: #f0f7ff; border: 2px solid #bde0fe; padding: 12px; border-radius: 15px; margin-bottom: 20px; }
-        .search-label { font-size: 11px; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .label-pink { color: #b7094c; }
-        .label-blue { color: #003049; }
-        .farm-input { width: 100%; padding: 10px 14px; font-size: 14px; border-radius: 10px; border: 1px solid #ccc; outline: none; background: #fff; color: #333; }
+        /* Tối ưu Input: Tự động xóa khi click */
+        .farm-input { width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #ddd; outline: none; transition: 0.3s; }
+        .farm-input:focus { border-color: #ff4d6d; }
         
-        /* KHU VỰC HIỂN THỊ KẾT QUẢ Ở GIỮA */
-        .section-title { font-size: 12px; font-weight: 700; color: #495057; margin-bottom: 12px; text-transform: uppercase; }
-        .members-section { flex-grow: 1; }
-        
-        /* Giao diện Thống kê khi Tìm kiếm Hoa */
-        .search-summary { background: #fff0f3; border: 1px solid #ffccd5; padding: 12px 15px; border-radius: 15px; color: #a4133c; font-weight: 600; font-size: 13px; margin-bottom: 15px; }
-        .owner-row { padding: 12px 18px; border: 1px solid #f0f0f0; border-radius: 15px; margin-bottom: 10px; background: #fff; font-weight: 600; color: #333; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 5px rgba(0,0,0,0.01); }
-        .owner-flower-tag { font-size: 11px; font-weight: 500; background: #fdf2f8; color: #c2185b; padding: 3px 8px; border-radius: 8px; border: 1px solid #fce7f3; }
+        .search-group { margin-bottom: 20px; }
+        .section-title { font-size: 12px; font-weight: 700; color: #495057; margin-bottom: 10px; text-transform: uppercase; }
 
-        /* Giao diện xem toàn bộ khi không tìm kiếm */
-        .card { padding: 15px; border: 1px solid #f0f0f0; border-radius: 20px; margin-bottom: 15px; background: #fff; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
-        .card h3 { font-size: 14px; color: #ff4d6d; margin-bottom: 10px; }
-        .chips-container { display: flex; flex-wrap: wrap; gap: 6px; }
-        .chip { display: inline-block; padding: 5px 11px; border-radius: 10px; font-size: 11px; background: #fff0f3; border: 1px solid #ffccd5; color: #a4133c; font-weight: 500; }
+        /* Tối ưu hiển thị danh sách (Sắp xếp A-Z) */
+        .owner-row { padding: 12px; border-bottom: 1px solid #f8f9fa; display: flex; justify-content: space-between; align-items: center; }
+        .chip { font-size: 10px; background: #fff0f3; color: #a4133c; padding: 4px 8px; border-radius: 6px; border: 1px solid #ffccd5; }
         
-        /* NÚT HOA XU CHƯA CÓ ĐẨY XUỐNG ĐÁY */
-        .missing-section { margin-top: 25px; padding-top: 20px; border-top: 2px dashed #eee; }
-        .btn-xu { width: 100%; padding: 12px; background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 12px; color: #495057; font-weight: 700; font-size: 13px; cursor: pointer; }
-        .missing-box { margin-top: 12px; padding: 15px; background: #fafafa; border: 1px dashed #dee2e6; border-radius: 15px; display: none; }
-        .xu-missing { display: inline-block; padding: 5px 10px; margin: 3px; border-radius: 10px; font-size: 11px; background: #e9ecef; border: 1px solid #dee2e6; color: #495057; }
+        /* Tối ưu cuộn cho di động */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-thumb { background: #ffccd5; border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -47,129 +33,52 @@
 <div class="farm-container">
     <h2>🌸 Queenss Garden 👑</h2>
     
-    <div class="search-box-pink">
-        <div class="search-label label-pink">🌸 Tìm theo tên hoa:</div>
-        <input type="text" id="flowerSearch" class="farm-input" placeholder="Nhập tên hoa để thống kê người có...">
+    <div class="search-group">
+        <input type="text" id="flowerSearch" class="farm-input" placeholder="🌸 Tìm tên hoa...">
     </div>
-    <div class="search-box-blue">
-        <div class="search-label label-blue">👑 Tìm theo tên thành viên:</div>
-        <input type="text" id="ownerSearch" class="farm-input" placeholder="Nhập tên thành viên...">
+    <div class="search-group">
+        <input type="text" id="ownerSearch" class="farm-input" placeholder="👑 Tìm tên thành viên...">
     </div>
     
-    <div class="members-section">
-        <div class="section-title" id="sectionTitle">📋 Danh sách thành viên:</div>
-        <div id="resultArea"></div>
-    </div>
-    
-    <div class="missing-section">
-        <button class="btn-xu" onclick="toggleMissingXu()">✨ Xem các loại hoa xu hội chưa có</button>
-        <div id="missingBox" class="missing-box">
-            <div id="missingArea"></div>
-        </div>
-    </div>
+    <div class="section-title" id="sectionTitle">📋 Danh sách thành viên:</div>
+    <div id="resultArea"></div>
 </div>
 
 <script>
-    const xuFlowersList = ["Thục quỳ đỏ", "Thục quỳ hồng", "Thục quỳ vàng", "Thanh cúc lam", "Mạch môn tím", "Hoa sao nhái trắng", "Hoa baby trắng", "Hoa baby hồng", "Hoa baby lam", "Hoa lồng đèn đỏ", "Vạn tuế lá xanh", "Trúc đào đỏ tím", "Hải đường đỏ", "Hải đường vàng", "Đỗ quyên hồng", "Đỗ quyên vàng", "Đỗ quyên đỏ", "Tử linh lan hồng", "Tử linh lan đỏ", "Tử linh lan tím", "Hồng jacqueline trắng", "Hoa thúy châu tím", "Hoa thúy châu trắng", "Ghim cài lửa", "Ghim cài vàng mật", "Huệ hosta lam", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo tím nhạt", "Hoa anh thảo xanh nhạt", "Hoa anh thảo hồng nhạt", "Huệ hosta tím", "Mạn đà la", "Nhài nhật", "Lan phượng vĩ đỏ", "Mạch môn hồng phấn", "Hoa lộ vi vàng", "Hoa lộ vi trắng", "Cúc thược dược cam", "Cúc thược dược đen", "Lan vũ nữ vàng", "Hoa poppy himalaya vàng", "Hoa poppy himalaya xanh", "Hoa phi yến tím", "Hoa anh thảo vàng", "Hồng lenten vàng", "Cây sống đời đỏ", "Cây sống đời vàng", "Mộc hương vàng", "Mộc hương trắng", "Thược duyệt đỏ", "Thược dược đỏ", "Lay ơn tím", "Tường vi hồng", "Lay ơn trắng", "Hải quỳ cam", "San hô tím", "San hô cam", "Hải quỳ đỏ", "Hoa hải quỳ tím", "Hoa hải quỳ hồng", "Hoa hải quỳ trắng", "Thược dược trắng", "Hồng môn phấn", "Thanh cúc tím", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Lạc tân phụ tím", "Tỏi trời", "Trúc đào hồng nhạt", "Địa lan trắng", "Hoa hành tím", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Mộc hương cam", "Vạn tuế lá lam", "Thanh cúc hồng"];
-
     const membersData = [
-        { name: "Cá chiên (Anh Kiệt)", flowers: ["Dạ yến thảo lam", "Hoa anh thảo hồng", "Lạp mai đỏ", "Hồng champagne", "Hoa hành tím", "Vạn tuế lá lam", "Diên đức vĩ trắng vàng", "Hồng Lenten đỏ", "Địa lan trắng", "Mộc hương cam", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng"] },
-        { name: "Tinkerbell (Cẩm Tiên cute)", flowers: ["Đăng tiêu trắng tím", "Đông trùng thông vàng", "Sen trời đầy sao", "Tuyết mai hồng", "Thược dược hồng", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Nhụy linh ánh sao", "Hoa bồ câu tím", "Gừng sen bạch ngọc", "Gừng sen ban mai", "Hoa anh thảo vàng", "Hồng lenten đỏ", "Cúc thược dược cam", "Hoa poppy himalaya xanh", "Hồng môn phấn", "Mộc hương cam", "Tử đằng lam", "Cúc indo hồng", "Diên vĩ đức kem đỏ", "Đăng tiêu cam vàng", "Dạ yến thảo lam", "Hoa anh thảo hồng", "Hoa anh thảo xanh", "Hồng champagne", "Mạn châu sa", "San hô xanh", "Ngôi sao bethlehem", "Hoa phi yến tím", "Mộc lan ngọc ngà", "Lạp mai hương phi", "Phù dung tím hộp báu", "Thọ ngọc ôm ánh sáng", "Hạc gửi ngân hà", "Tử linh phúc lộc", "Đế vương xích diễm", "Gấu hoa hồng", "Có rồng ắt lính", "Hạnh nguyệt nghỉ dưới bóng hoa", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc hồng", "Lạc tân phụ tím", "Thục quỳ hồng", "Tỏi trời", "Thanh cúc lam", "Hoa baby trắng", "Trúc đào hồng nhạt", "Ghim cài vàng mật", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo xanh nhạt"] }
+        { name: "Cá chiên (Anh Kiệt)", flowers: ["Dạ yến thảo lam", "Hoa anh thảo hồng", "Lạp mai đỏ", "Hồng champagne", "Hoa hành tím"] },
+        { name: "Tinkerbell (Cẩm Tiên cute)", flowers: ["Đăng tiêu trắng tím", "Đông trùng thông vàng", "Sen trời đầy sao", "Tuyết mai hồng"] }
     ];
 
-    function toTitleCase(str) { 
-        return str.toLowerCase().trim().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '); 
-    }
+    // Tính năng 1: Tự động xóa nội dung khi click vào
+    document.querySelectorAll('.farm-input').forEach(input => {
+        input.addEventListener('click', function() { this.value = ''; renderMembers(); });
+    });
 
-    const resultArea = document.getElementById('resultArea');
-    const sectionTitle = document.getElementById('sectionTitle');
-    const missingArea = document.getElementById('missingArea');
-    const missingBox = document.getElementById('missingBox');
-
-    // Hàm render xử lý thông minh theo đúng yêu cầu mới
     function renderMembers() {
+        const resultArea = document.getElementById('resultArea');
         resultArea.innerHTML = "";
-        const fKey = document.getElementById('flowerSearch').value.toLowerCase().trim();
-        const oKey = document.getElementById('ownerSearch').value.toLowerCase().trim();
+        const fKey = document.getElementById('flowerSearch').value.toLowerCase();
+        const oKey = document.getElementById('ownerSearch').value.toLowerCase();
         
-        // TRƯỜNG HỢP 1: CÓ GÕ TÌM TÊN HOA -> HIỂN THỊ DẠNG THỐNG KÊ RÚT GỌN
-        if (fKey) {
-            sectionTitle.innerText = "🔍 Kết quả tìm kiếm hoa:";
-            let matchCount = 0;
-            let htmlContent = "";
+        membersData.forEach(m => {
+            // Tính năng 2: Sắp xếp hoa theo bảng chữ cái trước khi hiển thị
+            let sortedFlowers = [...new Set(m.flowers)].sort((a, b) => a.localeCompare(b));
             
-            membersData.forEach(m => {
-                const uniqueFlowers = [...new Set(m.flowers.map(f => toTitleCase(f)))];
-                // Tìm những hoa khớp với từ khóa
-                const matchedFlowers = uniqueFlowers.filter(f => f.toLowerCase().includes(fKey));
-                
-                // Thỏa mãn bộ lọc thành viên (nếu có gõ thêm ô thành viên)
-                const matchOwner = m.name.toLowerCase().includes(oKey);
-                
-                if (matchedFlowers.length > 0 && matchOwner) {
-                    matchCount++;
-                    matchedFlowers.forEach(flowerName => {
-                        htmlContent += `
-                            <div class="owner-row">
-                                <span>👑 ${m.name}</span>
-                                <span class="owner-flower-tag">${flowerName}</span>
-                            </div>`;
-                    });
-                }
-            });
+            const matchFlower = fKey ? sortedFlowers.some(f => f.toLowerCase().includes(fKey)) : true;
+            const matchOwner = m.name.toLowerCase().includes(oKey);
             
-            if (matchCount > 0) {
-                resultArea.innerHTML = `<div class="search-summary">📊 Có ${matchCount} thành viên sở hữu loại hoa này:</div>` + htmlContent;
-            } else {
-                resultArea.innerHTML = `<div style="text-align:center; font-size:12px; color:#999; padding:20px;">Không tìm thấy ai sở hữu hoa này...</div>`;
+            if (matchFlower && matchOwner) {
+                let html = `<div class="owner-row"><span>${m.name}</span><div>`;
+                sortedFlowers.filter(f => fKey ? f.toLowerCase().includes(fKey) : true)
+                             .forEach(f => html += `<span class="chip">${f}</span> `);
+                resultArea.innerHTML += html + `</div></div>`;
             }
-            
-        } else {
-            // TRƯỜNG HỢP 2: KHÔNG TÌM HOA -> HIỂN THỊ ĐẦY ĐỦ NHƯ BÌNH THƯỜNG
-            sectionTitle.innerText = "📋 Danh sách thành viên:";
-            
-            membersData.forEach(m => {
-                const uniqueFlowers = [...new Set(m.flowers.map(f => toTitleCase(f)))];
-                const matchOwner = m.name.toLowerCase().includes(oKey);
-                
-                if (matchOwner) {
-                    let html = `<div class="card"><h3>👑 ${m.name}</h3><div class="chips-container">`;
-                    uniqueFlowers.forEach(f => {
-                        html += `<span class="chip">${f}</span>`;
-                    });
-                    html += `</div></div>`;
-                    resultArea.innerHTML += html;
-                }
-            });
-            
-            if (resultArea.innerHTML === "") {
-                resultArea.innerHTML = `<div style="text-align:center; font-size:12px; color:#999; padding:20px;">Không tìm thấy thành viên phù hợp...</div>`;
-            }
-        }
-    }
-
-    function updateMissingXu() {
-        const allOwnedFlowers = new Set();
-        membersData.forEach(m => m.flowers.forEach(f => allOwnedFlowers.add(toTitleCase(f))));
-        const missing = xuFlowersList.filter(xu => !allOwnedFlowers.has(toTitleCase(xu)));
-        missing.sort();
-        missingArea.innerHTML = missing.map(f => `<span class="xu-missing">${f}</span>`).join('');
-    }
-
-    function toggleMissingXu() {
-        if (missingBox.style.display === "block") {
-            missingBox.style.display = "none";
-        } else {
-            missingBox.style.display = "block";
-            setTimeout(() => { missingBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 50);
-        }
+        });
     }
 
     document.getElementById('flowerSearch').addEventListener('input', renderMembers);
     document.getElementById('ownerSearch').addEventListener('input', renderMembers);
-
-    // Chạy khởi tạo đồng bộ
-    updateMissingXu();
     renderMembers();
 </script>
 </body>
