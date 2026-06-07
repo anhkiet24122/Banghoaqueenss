@@ -8,41 +8,44 @@
         body { background: #fdf6f7; padding: 20px; display: flex; justify-content: center; min-height: 100vh; }
         .farm-container { width: 100%; max-width: 500px; background: #fff; padding: 25px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
         
-        /* Nhóm Tìm kiếm */
-        .search-group { margin-bottom: 20px; }
+        /* Cấu trúc các nhóm */
+        .search-group { margin-bottom: 15px; }
         .search-label { font-size: 11px; font-weight: 700; color: #ff758f; margin-bottom: 5px; text-transform: uppercase; }
-        .farm-input { width: 100%; padding: 10px; border: 1px solid #ffccd5; border-radius: 15px; outline: none; margin-bottom: 10px; background: #fffafb; }
+        .farm-input { width: 100%; padding: 10px; border: 1px solid #ffccd5; border-radius: 15px; outline: none; background: #fffafb; }
         
-        /* Nút Hoa Xu */
-        .btn-xu { width: 100%; padding: 12px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 15px; color: #6c757d; font-weight: 600; cursor: pointer; margin-bottom: 20px; transition: 0.3s; }
-        .btn-xu:hover { background: #e9ecef; }
+        /* Khu vực hoa xu chưa sở hữu */
+        .missing-section { margin: 20px 0; padding: 15px; background: #fafafa; border: 1px dashed #dee2e6; border-radius: 20px; }
+        .missing-title { font-size: 13px; font-weight: 700; color: #6c757d; margin-bottom: 10px; }
+        .xu-missing { display: inline-block; padding: 4px 10px; margin: 3px; border-radius: 12px; font-size: 11px; background: #f1f3f5; border: 1px solid #e9ecef; color: #495057; }
         
-        /* Danh sách thành viên */
+        /* Khu vực thành viên */
         .card { padding: 15px; border: 1px solid #eee; border-radius: 20px; margin-bottom: 15px; background: #fff; }
+        .card h3 { font-size: 15px; color: #ff4d6d; margin-bottom: 8px; }
         .chip { display: inline-block; padding: 4px 10px; margin: 3px; border-radius: 12px; font-size: 11px; background: #fdf2f8; border: 1px solid #fce7f3; color: #831843; }
-        
-        /* Danh sách hoa xu thiếu */
-        .xu-missing { display: inline-block; padding: 4px 10px; margin: 3px; border-radius: 12px; font-size: 11px; background: #f8f9fa; border: 1px solid #e9ecef; color: #6c757d; }
     </style>
 </head>
 <body>
 
 <div class="farm-container">
-    <h2>🌸 Queenss Garden 👑</h2>
+    <h2 style="text-align: center; margin-bottom: 20px; color: #ff4d6d;">🌸 Queenss Garden 👑</h2>
     
-    <!-- 1. CỘT SEARCH -->
     <div class="search-group">
         <div class="search-label">🌸 Tìm theo tên hoa:</div>
-        <input type="text" id="flowerSearch" class="farm-input" placeholder="Nhập tên hoa...">
-        <div class="search-label">👑 Tìm theo thành viên:</div>
+        <input type="text" id="flowerSearch" class="farm-input" placeholder="Nhập tên hoa để tìm kiếm...">
+    </div>
+
+    <div class="search-group">
+        <div class="search-label">👑 Tìm theo tên thành viên:</div>
         <input type="text" id="ownerSearch" class="farm-input" placeholder="Nhập tên thành viên...">
     </div>
     
-    <!-- 2. NÚT HOA XU -->
-    <button class="btn-xu" onclick="showMissingXu()">✨ Xem các loại hoa xu hội chưa có</button>
+    <div class="missing-section">
+        <div class="missing-title">✨ Các loại hoa xu hội chưa có:</div>
+        <div id="missingArea"></div>
+    </div>
     
-    <!-- 3. KHU VỰC HIỂN THỊ -->
-    <div id="resultArea"></div>
+    <div class="search-label" style="margin-top: 20px;">📋 Danh sách thành viên:</div>
+    <div id="resultArea" style="margin-top: 10px;"></div>
 </div>
 
 <script>
@@ -56,14 +59,25 @@
     function toTitleCase(str) { return str.toLowerCase().trim().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '); }
 
     const resultArea = document.getElementById('resultArea');
+    const missingArea = document.getElementById('missingArea');
 
+    // Hàm cập nhật danh sách hoa xu chưa có ai sở hữu
+    function updateMissingXu() {
+        const allOwnedFlowers = new Set();
+        membersData.forEach(m => m.flowers.forEach(f => allOwnedFlowers.add(toTitleCase(f))));
+        
+        const missing = xuFlowersList.filter(xu => !allOwnedFlowers.has(toTitleCase(xu)));
+        missingArea.innerHTML = missing.map(f => `<span class="xu-missing">${f}</span>`).join('');
+    }
+
+    // Hàm tìm kiếm và hiển thị thành viên
     function renderMembers() {
         resultArea.innerHTML = "";
+        const fKey = document.getElementById('flowerSearch').value.toLowerCase();
+        const oKey = document.getElementById('ownerSearch').value.toLowerCase();
+        
         membersData.forEach(m => {
             const unique = [...new Set(m.flowers.map(f => toTitleCase(f)))];
-            const fKey = document.getElementById('flowerSearch').value.toLowerCase();
-            const oKey = document.getElementById('ownerSearch').value.toLowerCase();
-            
             const matchFlower = fKey ? unique.some(f => f.toLowerCase().includes(fKey)) : true;
             const matchOwner = m.name.toLowerCase().includes(oKey);
             
@@ -75,17 +89,11 @@
         });
     }
 
-    function showMissingXu() {
-        const allFlowers = new Set();
-        membersData.forEach(m => m.flowers.forEach(f => allFlowers.add(toTitleCase(f))));
-        const missing = xuFlowersList.filter(xu => !allFlowers.has(toTitleCase(xu)));
-        
-        resultArea.innerHTML = `<h3>⚠️ Hoa xu hội chưa có:</h3><div style="margin-top:10px;">` + 
-            missing.map(f => `<span class="xu-missing">${f}</span>`).join('') + `</div>`;
-    }
-
     document.getElementById('flowerSearch').addEventListener('input', renderMembers);
     document.getElementById('ownerSearch').addEventListener('input', renderMembers);
+
+    // Khởi chạy ban đầu
+    updateMissingXu();
     renderMembers();
 </script>
 </body>
