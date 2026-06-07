@@ -22,7 +22,7 @@
         
         h2 { text-align: center; margin-bottom: 25px; color: #ff4d6d; letter-spacing: 0.5px; font-size: 24px; }
 
-        /* Ô TÌM KIẾM THEO TÊN HOA (ĐÃ XÓA Ô THÀNH VIÊN) */
+        /* Ô TÌM KIẾM THEO TÊN HOA */
         .search-box-pink { background: #fff5f6; border: 2px solid #ffccd5; padding: 14px; border-radius: 20px; margin-bottom: 25px; }
         .search-label { font-size: 11px; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
         .label-pink { color: #b7094c; }
@@ -43,38 +43,47 @@
         .section-title { font-size: 13px; font-weight: 700; color: #495057; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; }
         .members-section { flex-grow: 1; }
         
-        /* ĐỊNH DẠNG BẢNG XẾP HẠNG THÀNH VIÊN MÀN HÌNH CHÍNH */
-        .rank-container { display: flex; flex-direction: column; gap: 8px; background: #fff; border: 1px solid #f5f5f5; padding: 15px; border-radius: 20px; }
+        /* ĐỊNH DẠNG BẢNG XẾP HẠNG THÀNH VIÊN ĐÓNG MỞ THÔNG MINH */
+        .rank-container { display: flex; flex-direction: column; gap: 10px; }
         .member-count-badge { font-size: 13px; font-weight: 700; color: #b7094c; margin-bottom: 12px; background: #fff0f3; padding: 8px 12px; border-radius: 10px; display: inline-block; width: max-content; }
-        .rank-item { display: flex; justify-content: space-between; align-items: center; padding: 11px 14px; border-radius: 12px; background: #fafafa; border: 1px solid #f0f0f0; font-size: 13px; font-weight: 500; }
-        .rank-item-left { display: flex; align-items: center; gap: 8px; color: #333; }
-        .rank-number { font-weight: 700; color: #aaa; width: 20px; }
-        .rank-top1 .rank-number { color: #ffb703; }
-        .rank-top2 .rank-number { color: #fb8500; }
-        .rank-top3 .rank-number { color: #219ebc; }
-        .rank-flower-count { font-weight: 700; color: #ff4d6d; background: #fff; padding: 4px 10px; border-radius: 20px; border: 1px solid #ffccd5; font-size: 12px; }
+        
+        /* Khung bọc từng thành viên trên BXH */
+        .rank-collapse-item { border: 1px solid #f0f0f0; border-radius: 16px; overflow: hidden; background: #fff; box-shadow: 0 3px 6px rgba(0,0,0,0.01); transition: all 0.2s; }
+        
+        /* Dòng tiêu đề tên và số lượng hoa */
+        .rank-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; cursor: pointer; user-select: none; transition: background 0.2s; }
+        .rank-header:hover { background: #fff5f6; }
+        
+        .rank-item-left { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: #333; }
+        .rank-number { font-weight: 700; color: #aaa; width: 22px; font-size: 14px; text-align: center; }
+        
+        /* Định dạng màu sắc huy chương Top 1, 2, 3 */
+        .rank-top1 .rank-number { color: #ffb703; font-size: 16px; }
+        .rank-top2 .rank-number { color: #fb8500; font-size: 15px; }
+        .rank-top3 .rank-number { color: #219ebc; font-size: 15px; }
+        
+        /* Huy hiệu đếm số hoa bên phải */
+        .rank-flower-badge { font-weight: 700; color: #ff4d6d; background: #fff; padding: 5px 12px; border-radius: 20px; border: 1px solid #ffccd5; font-size: 12px; display: flex; align-items: center; gap: 4px; }
+        
+        /* Vùng chứa hoa xổ xuống khi click vào dòng BXH */
+        .rank-content { display: none; padding: 15px; background: #fdfcfc; border-top: 1px solid #f9f9f9; }
+        
+        /* Trạng thái mở rộng khi kích hoạt click */
+        .rank-collapse-item.active { border-color: #ffccd5; box-shadow: 0 4px 12px rgba(255, 77, 109, 0.05); }
+        .rank-collapse-item.active .rank-header { background: #fff0f3; color: #ff4d6d; }
+        .rank-collapse-item.active .rank-item-left { color: #ff4d6d; }
+        .rank-collapse-item.active .rank-content { display: block; }
 
-        /* ĐỊNH DẠNG THẺ TÊN ĐÓNG MỞ DƯỚI ĐÁY TRANG */
-        .member-collapse-item { border: 1px solid #f0f0f0; border-radius: 16px; margin-bottom: 10px; overflow: hidden; background: #fff; box-shadow: 0 3px 6px rgba(0,0,0,0.01); }
-        .member-header { padding: 15px 18px; display: flex; justify-content: space-between; align-items: center; background: #fff; cursor: pointer; font-size: 14px; font-weight: 600; color: #333; user-select: none; transition: background 0.2s; }
-        .member-header:hover { background: #fff5f6; color: #ff4d6d; }
-        .member-header .arrow-icon { font-size: 12px; color: #aaa; transition: transform 0.2s; }
-        .member-content { display: none; padding: 15px; background: #fdfcfc; border-top: 1px solid #f9f9f9; }
-        .member-count-info { font-size: 12px; color: #b7094c; font-weight: 600; margin-bottom: 10px; padding-left: 2px; }
-        .member-collapse-item.active .member-header { background: #fff0f3; color: #ff4d6d; }
-        .member-collapse-item.active .arrow-icon { transform: rotate(180deg); color: #ff4d6d; }
-        .member-collapse-item.active .member-content { display: block; }
-
-        /* Chips hiển thị hoa */
+        /* Khung chứa các chip hoa */
         .chips-container { display: flex; flex-wrap: wrap; gap: 8px; }
         .chip { display: inline-block; padding: 6px 12px; border-radius: 12px; font-size: 12px; background: #fff; border: 1px solid #ffccd5; color: #a4133c; font-weight: 500; }
         
-        /* KẾT QUẢ TÌM HOA ĐA DÒNG XẾP CHỒNG KHI SEARCH */
+        /* KẾT QUẢ TÌM HOA ĐA DÒNG XẾP CHỒNG */
         .flower-result-container { display: flex; flex-direction: column; gap: 12px; width: 100%; }
         .summary-result { padding: 18px; border: 2px solid #ffccd5; border-radius: 20px; background: #fff5f6; color: #b7094c; font-size: 13px; line-height: 1.6; }
         .summary-result strong { color: #ff4d6d; font-weight: 700; }
 
-        /* KHU VỰC NÚT BẤM CHÂN TRANG */
+        /* KHU VỰC NÚT HOA XU CHÂN TRANG */
         .bottom-actions-section { margin-top: 25px; padding-top: 20px; border-top: 2px dashed #eee; display: flex; flex-direction: column; gap: 12px; }
         .btn-action { width: 100%; padding: 14px; background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 15px; color: #495057; font-weight: 700; font-size: 13px; cursor: pointer; text-align: center; }
         
@@ -102,11 +111,6 @@
     </div>
     
     <div class="bottom-actions-section">
-        <button class="btn-action" id="btnMembers">👤 Xem danh sách hoa của từng thành viên</button>
-        <div id="membersBox" class="toggle-box" style="padding: 10px 0px; background: transparent; border: none;">
-            <div id="bottomMembersArea"></div>
-        </div>
-
         <button class="btn-action" id="btnXu">✨ Xem các loại hoa xu hội chưa có</button>
         <div id="missingBox" class="toggle-box">
             <div id="missingArea" class="xu-missing-container"></div>
@@ -147,6 +151,8 @@
     ];
 
     const xuFlowersList = rawXuList.map(item => cleanFormat(item));
+    
+    // Tạo bản đồ dữ liệu sạch đồng bộ ngay từ lúc nạp mảng dữ liệu
     const membersData = rawMembers.map(m => ({
         name: m.name,
         flowers: m.flowers.map(f => cleanFormat(f))
@@ -156,8 +162,6 @@
     const searchResultArea = document.getElementById('searchResultArea');
     const missingArea = document.getElementById('missingArea');
     const missingBox = document.getElementById('missingBox');
-    const membersBox = document.getElementById('membersBox');
-    const bottomMembersArea = document.getElementById('bottomMembersArea');
     const flowerInput = document.getElementById('flowerSearch');
     const sectionTitle = document.getElementById('sectionTitle');
 
@@ -165,78 +169,68 @@
         return membersData.filter(m => m.flowers.includes(lowerFlowerName)).map(m => m.name);
     }
 
-    // 1. HÀM TẠO BẢNG XẾP HẠNG THÀNH VIÊN TRÊN MÀN HÌNH CHÍNH
+    // HÀM CHÍNH: XÂY DỰNG BẢNG XẾP HẠNG TÍCH HỢP ĐÓNG MỞ DANH SÁCH HOA (ACCORDION BXH)
     function buildRankList() {
         mainRankArea.innerHTML = "";
+        
         const totalMembers = membersData.length;
-        let rankHtml = `<div class="member-count-badge">👥 Tổng số thành viên: ${totalMembers}</div>`;
-        rankHtml += `<div class="rank-container">`;
+        mainRankArea.innerHTML = `<div class="member-count-badge">👥 Tổng số thành viên: ${totalMembers}</div>`;
+        
+        const container = document.createElement('div');
+        container.className = 'rank-container';
 
+        // Tính số hoa độc bản và xếp hạng Rank giảm dần
         const sortedRank = membersData.map(m => {
-            const uniqueCount = new Set(m.flowers).size;
-            return { name: m.name, count: uniqueCount };
+            const uniqueFlowers = [...new Set(m.flowers)].sort((a, b) => a.localeCompare(b, 'vi'));
+            return { name: m.name, rawFlowers: uniqueFlowers, count: uniqueFlowers.length };
         }).sort((a, b) => b.count - a.count);
 
+        // Sinh HTML thẻ bài xếp hạng đóng mở động lập
         sortedRank.forEach((item, index) => {
             const rankNum = index + 1;
-            let rankClass = `rank-item`;
+            const collapseItem = document.createElement('div');
+            
+            let rankClass = `rank-collapse-item`;
             if (rankNum === 1) rankClass += ' rank-top1';
             if (rankNum === 2) rankClass += ' rank-top2';
             if (rankNum === 3) rankClass += ' rank-top3';
+            collapseItem.className = rankClass;
 
-            rankHtml += `
-                <div class="${rankClass}">
+            let chipsHtml = '';
+            item.rawFlowers.forEach(f => {
+                chipsHtml += `<span class="chip">${capitalizeFirstLetter(f)}</span>`;
+            });
+
+            collapseItem.innerHTML = `
+                <div class="rank-header">
                     <div class="rank-item-left">
                         <span class="rank-number">#${rankNum}</span>
                         <span>👑 ${item.name}</span>
                     </div>
                     <span class="rank-flower-count">${item.count} loại hoa</span>
                 </div>
-            `;
-        });
-
-        rankHtml += `</div>`;
-        mainRankArea.innerHTML = rankHtml;
-    }
-
-    // 2. HÀM TẠO DANH SÁCH CHI TIẾT DẠNG ACCORDION ĐÓNG MỞ
-    function showAllMembersToArea(targetElement) {
-        targetElement.innerHTML = "";
-        membersData.forEach(m => {
-            const uniqueFlowers = [...new Set(m.flowers)].sort((a, b) => a.localeCompare(b, 'vi'));
-            
-            const collapseItem = document.createElement('div');
-            collapseItem.className = 'member-collapse-item';
-            
-            let chipsHtml = '';
-            uniqueFlowers.forEach(f => { 
-                chipsHtml += `<span class="chip">${capitalizeFirstLetter(f)}</span>`; 
-            });
-
-            collapseItem.innerHTML = `
-                <div class="member-header">
-                    <span>👑 ${m.name}</span>
-                    <span class="arrow-icon">▼</span>
-                </div>
-                <div class="member-content">
-                    <div class="member-count-info">✨ Sở hữu: ${uniqueFlowers.length} loại hoa</div>
+                <div class="rank-content">
                     <div class="chips-container">${chipsHtml}</div>
                 </div>
             `;
-            
-            collapseItem.querySelector('.member-header').addEventListener('click', function() {
+
+            // Đăng ký sự kiện Click bung hoa ngay trên BXH cực kỳ thông minh
+            collapseItem.querySelector('.rank-header').addEventListener('click', function() {
                 collapseItem.classList.toggle('active');
             });
-            
-            targetElement.appendChild(collapseItem);
+
+            container.appendChild(collapseItem);
         });
+
+        mainRankArea.appendChild(container);
     }
 
-    // 3. LOGIC XỬ LÝ KHI GÕ TÌM HOA (ĐÃ FIX KHỎI LỖI PHÁT SINH CRASH)
+    // LOGIC KHI GÕ Ô TÌM KIẾM TÊN HOA
     function searchFlowerLogic() {
         const fKey = flowerInput.value.toLowerCase().trim();
         
         if (fKey !== "") {
+            // Khi gõ search -> Ẩn toàn bộ BXH đi, hiển thị các khối xếp chồng màu hồng
             mainRankArea.style.display = "none";
             searchResultArea.style.display = "block";
             sectionTitle.innerText = "📋 Kết quả tìm kiếm theo tên hoa:";
@@ -278,6 +272,7 @@
                 searchResultArea.innerHTML = `<div class="summary-result" style="text-align:center; color:#999; background:#fafafa; border-color:#dee2e6;">❌ Không tìm thấy loại hoa nào chứa từ khóa "${flowerInput.value}"</div>`;
             }
         } else {
+            // Khi trống ô tìm kiếm -> Trả về giao diện BXH đa năng ban đầu
             searchResultArea.style.display = "none";
             mainRankArea.style.display = "block";
             sectionTitle.innerText = "📊 Bảng xếp hạng thành viên:";
@@ -294,30 +289,19 @@
         missingArea.innerHTML = uniqueMissing.map(f => `<span class="xu-missing">${capitalizeFirstLetter(f)}</span>`).join('');
     }
 
-    document.getElementById('btnMembers').addEventListener('click', function() {
-        if (membersBox.style.display === "block") {
-            membersBox.style.display = "none";
-        } else {
-            membersBox.style.display = "block";
-            missingBox.style.display = "none"; 
-            showAllMembersToArea(bottomMembersArea);
-            setTimeout(() => { membersBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 80);
-        }
-    });
-
+    // Sự kiện đóng mở hộp hoa xu chân trang
     document.getElementById('btnXu').addEventListener('click', function() {
         if (missingBox.style.display === "block") {
             missingBox.style.display = "none";
         } else {
             missingBox.style.display = "block";
-            membersBox.style.display = "none"; 
             setTimeout(() => { missingBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 80);
         }
     });
 
     flowerInput.addEventListener('input', searchFlowerLogic);
 
-    // Chạy mặc định ban đầu
+    // Kích hoạt khởi chạy dữ liệu sạch
     updateMissingXu();
     buildRankList();
     searchFlowerLogic();
