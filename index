@@ -41,6 +41,12 @@
         }
         .farm-input:focus { border-color: #ff4d6d; }
         
+        /* BẢNG TỔNG HỢP NHANH KHI SEARCH HOA */
+        .summary-box { background: #fff0f3; border: 1px solid #ffccd5; padding: 15px; border-radius: 20px; margin-bottom: 20px; display: none; }
+        .summary-title { font-size: 13px; font-weight: 700; color: #b7094c; margin-bottom: 8px; }
+        .summary-names { display: flex; flex-wrap: wrap; gap: 6px; }
+        .name-badge { background: #fff; border: 1px solid #ffccd5; padding: 4px 10px; border-radius: 8px; font-size: 12px; color: #333; font-weight: 500; }
+
         /* DANH SÁCH HIỂN THỊ THÀNH VIÊN */
         .section-title { font-size: 12px; font-weight: 700; color: #495057; margin-bottom: 12px; text-transform: uppercase; }
         .members-section { flex-grow: 1; }
@@ -71,6 +77,11 @@
         <div class="search-label label-blue">👑 Tìm theo tên thành viên:</div>
         <input type="text" id="ownerSearch" class="farm-input" placeholder="Nhập tên thành viên...">
     </div>
+
+    <div id="summaryBox" class="summary-box">
+        <div id="summaryTitle" class="summary-title"></div>
+        <div id="summaryNames" class="summary-names"></div>
+    </div>
     
     <div class="members-section">
         <div class="section-title" id="sectionTitle">📋 Danh sách thành viên:</div>
@@ -89,7 +100,6 @@
     // Hàm tự động ép định dạng chuẩn: Chữ cái đầu viết hoa, còn lại viết thường toàn bộ
     function cleanFormat(str) {
         if (!str) return '';
-        // Sửa các lỗi chính tả gõ vội hay gặp
         let txt = str.trim().toLowerCase();
         if (txt === "dạ yến tháo lam") txt = "dạ yến thảo lam";
         if (txt === "nhà nhật") txt = "nhài nhật";
@@ -103,7 +113,7 @@
     // Danh sách hoa xu gốc đầy đủ
     const rawXuList = ["Thục quỳ đỏ", "Thục quỳ hồng", "Thục quỳ vàng", "Thanh cúc lam", "Mạch môn tím", "Hoa sao nhái trắng", "Hoa baby hồng", "Hoa baby lam", "Hoa lồng đèn đỏ", "Vạn tuế lá xanh", "Trúc đào đỏ tím", "Hải đường đỏ", "Hải đường vàng", "Đỗ quyên hồng", "Đỗ quyên vàng", "Đỗ quyên đỏ", "Tử linh lan hồng", "Tử linh lan đỏ", "Tử linh lan tím", "Hồng jacqueline trắng", "Hoa thúy châu tím", "Hoa thúy châu trắng", "Ghim cài lửa", "Ghim cài vàng mật", "Huệ hosta lam", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo tím nhạt", "Hoa anh thảo xanh nhạt", "Hoa anh thảo hồng nhạt", "Huệ hosta tím", "Mạn đà la", "Nhài nhật", "Lan phượng vĩ đỏ", "Mạch môn hồng phấn", "Hoa lộ vi vàng", "Hoa lộ vi trắng", "Cúc thược dược cam", "Cúc thược dược đen", "Lan vũ nữ vàng", "Hoa poppy himalaya vàng", "Hoa poppy himalaya xanh", "Hoa phi yến tím", "Hoa anh thảo vàng", "Hồng lenten vàng", "Cây sống đời đỏ", "Cây sống đời vàng", "Mộc hương vàng", "Mộc hương trắng", "Thược dược đỏ", "Lay ơn tím", "Tường vi hồng", "Lay ơn trắng", "Hải quỳ cam", "San coral tím", "San hô cam", "Hải quỳ đỏ", "Hoa hải quỳ tím", "Hoa hải quỳ hồng", "Hoa hải quỳ trắng", "Thược dược trắng", "Hồng môn phấn", "Thanh cúc tím", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Lạc tân phụ tím", "Tỏi trời", "Trúc đào hồng nhạt", "Địa lan trắng", "Hoa hành tím", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Mộc hương cam", "Vạn tuế lá lam", "Thanh cúc hồng", "Hoa baby trắng", "San hô tím"];
 
-    // Danh sách thành viên đầy đủ (Đã cập nhật thêm 8 người mới)
+    // Danh sách thành viên đầy đủ 10 người
     const rawMembers = [
         { name: "Cá chiên (Anh Kiệt)", flowers: ["Dạ yến thảo lam", "Hoa anh thảo hồng", "Lạp mai đỏ", "Hồng champagne", "Hoa hành tím", "Vạn tuế lá lam", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Địa lan trắng", "Mộc hương cam", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Mộc lan ngọc ngà"] },
         { name: "Tinkerbell (Cẩm Tiên cute)", flowers: ["Đăng tiêu trắng tím", "Đông trùng thông vàng", "Sen trời đầy sao", "Tuyết mai hồng", "Thược dược hồng", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Nhụy linh ánh sao", "Hoa bồ câu tím", "Gừng sen bạch ngọc", "Gừng sen ban mai", "Hoa anh thảo vàng", "Hồng lenten đỏ", "Cúc thược dược cam", "Hoa poppy himalaya xanh", "Hồng môn phấn", "Mộc hương cam", "Tử đằng lam", "Cúc indo hồng", "Diên vĩ đức kem đỏ", "Đăng tiêu cam vàng", "Dạ yến thảo lam", "Hoa anh thảo hồng", "Hoa anh thảo xanh", "Hồng champagne", "Mạn châu sa", "San hô xanh", "Ngôi sao bethlehem", "Hoa phi yến tím", "Mộc lan ngọc ngà", "Lạp mai hương phi", "Phù dung tím hộp báu", "Thọ ngọc ôm ánh sáng", "Hạc gửi ngân hà", "Tử linh phúc lộc", "Đế vương xích diễm", "Gấu hoa hồng", "Có rồng ắt lính", "Hạnh nguyệt nghỉ dưới bóng hoa", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc hồng", "Lạc tân phụ tím", "Thục quỳ hồng", "Tỏi trời", "Thanh cúc lam", "Hoa baby trắng", "Trúc đào hồng nhạt", "Ghim cài vàng mật", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo xanh nhạt"] },
@@ -117,7 +127,7 @@
         { name: "Mina (Mỹ Anh)", flowers: ["Ngân hà chiếu nhụy", "Mộc lan ngọc ngà", "Dạ yến thảo lam", "Hoa anh thảo hồng", "Lạp mai đỏ", "Hồng champagne", "Địa lan trắng", "Mạn đà la", "San hô tím", "Hoa poppy cam", "Thược dược trắng", "Lay ơn tím", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc tím", "Thanh cúc hồng", "Lạc tân phụ tím", "Tỏi trời"] }
     ];
 
-    // CHUẨN HÓA DỮ LIỆU TẬN GỐC NGAY KHI CHẠY TRANG
+    // CHUẨN HÓA DỮ LIỆU GỐC
     const xuFlowersList = rawXuList.map(item => cleanFormat(item));
     const membersData = rawMembers.map(m => {
         return {
@@ -131,38 +141,73 @@
     const missingBox = document.getElementById('missingBox');
     const flowerInput = document.getElementById('flowerSearch');
     const ownerInput = document.getElementById('ownerSearch');
+    
+    const summaryBox = document.getElementById('summaryBox');
+    const summaryTitle = document.getElementById('summaryTitle');
+    const summaryNames = document.getElementById('summaryNames');
 
-    // Hàm đếm tổng số người đang sở hữu một loại hoa bất kỳ
-    function countOwners(flowerName) {
-        let count = 0;
+    // Hàm lấy danh sách tên những người sở hữu một loại hoa cụ thể
+    function getOwnersOfFlower(flowerName) {
+        const owners = [];
         const target = flowerName.toLowerCase().trim();
         membersData.forEach(m => {
             if (m.flowers.some(f => f.toLowerCase().trim() === target)) {
-                count++;
+                owners.push(m.name);
             }
         });
-        return count;
+        return owners;
     }
 
-    // Hàm render tìm kiếm mượt mà
+    // Hàm render tìm kiếm chính kết hợp bảng tổng hợp nhanh
     function renderMembers() {
         resultArea.innerHTML = "";
         const fKey = flowerInput.value.toLowerCase().trim();
         const oKey = ownerInput.value.toLowerCase().trim();
         
+        // --- XỬ LÝ KHU VỰC BẢNG TỔNG HỢP NHANH ---
+        if (fKey !== "" && oKey === "") {
+            // Tìm chính xác tên hoa hiển thị đầy đủ dựa theo từ khóa gõ vào
+            let exactFlowerName = "";
+            for (let m of membersData) {
+                let found = m.flowers.find(f => f.toLowerCase().includes(fKey));
+                if (found) {
+                    exactFlowerName = found; 
+                    break;
+                }
+            }
+            
+            // Nếu không tìm thấy trong kho nhà thành viên thì tìm trong danh sách hoa xu gốc
+            if (!exactFlowerName) {
+                let foundInXu = xuFlowersList.find(xu => xu.toLowerCase().includes(fKey));
+                if (foundInXu) exactFlowerName = foundInXu;
+            }
+
+            const finalSearchName = exactFlowerName || flowerInput.value;
+            const ownersList = getOwnersOfFlower(finalSearchName);
+            
+            summaryTitle.innerHTML = `✨ Có <strong>${ownersList.length}</strong> thành viên sở hữu hoa <strong>${finalSearchName}</strong>:`;
+            if (ownersList.length > 0) {
+                summaryNames.innerHTML = ownersList.map(name => `<span class="name-badge">👑 ${name}</span>`).join('');
+            } else {
+                summaryNames.innerHTML = `<span style="font-size:12px; color:#999;">Chưa có thành viên nào sở hữu bông này.</span>`;
+            }
+            summaryBox.style.display = "block";
+        } else {
+            summaryBox.style.display = "none";
+        }
+
+        // --- RENDER CHI TIẾT DANH SÁCH THÀNH VIÊN ---
         membersData.forEach(m => {
             const matchOwner = m.name.toLowerCase().includes(oKey);
             const filteredFlowers = m.flowers.filter(f => f.toLowerCase().includes(fKey));
             
             if (matchOwner && filteredFlowers.length > 0) {
-                // Sắp xếp hoa theo thứ tự A-Z tiếng Việt
                 const sortedFlowers = [...new Set(filteredFlowers)].sort((a, b) => a.localeCompare(b, 'vi'));
                 
                 let html = `<div class="card"><h3>👑 ${m.name}</h3><div class="chips-container">`;
                 sortedFlowers.forEach(f => {
-                    // Nếu đang gõ ô tìm kiếm hoa thì hiển thị kèm số lượng người sở hữu hoa đó
                     if (fKey !== "") {
-                        const totalOwners = countOwners(f);
+                        const totalOwners = getOwnersOfFlower(f).length;
                         html += `<span class="chip">${f} (${totalOwners})</span>`;
                     } else {
                         html += `<span class="chip">${f}</span>`;
@@ -178,7 +223,7 @@
         }
     }
 
-    // Hàm hiển thị danh sách hoa xu hội chưa sở hữu công bằng 100%
+    // Hàm hiển thị danh sách hoa xu hội chưa sở hữu
     function updateMissingXu() {
         const ownedSet = new Set();
         membersData.forEach(m => {
@@ -186,8 +231,6 @@
         });
         
         const missing = xuFlowersList.filter(xu => !ownedSet.has(xu.toLowerCase().trim()));
-        
-        // Loại bỏ trùng lặp và Sắp xếp danh sách hoa xu chưa có từ A-Z
         const uniqueMissing = [...new Set(missing)].sort((a, b) => a.localeCompare(b, 'vi'));
         
         missingArea.innerHTML = uniqueMissing.map(f => `<span class="xu-missing">${f}</span>`).join('');
@@ -206,7 +249,7 @@
     flowerInput.addEventListener('input', renderMembers);
     ownerInput.addEventListener('input', renderMembers);
 
-    // Kích hoạt chạy dữ liệu ngay từ đầu
+    // Chạy kích hoạt ban đầu
     updateMissingXu();
     renderMembers();
 </script>
