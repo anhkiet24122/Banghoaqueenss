@@ -2,62 +2,60 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🌸 Queenss Garden 👑</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Be Vietnam Pro', sans-serif; }
         body { background: #fdf6f7; padding: 20px; display: flex; justify-content: center; min-height: 100vh; }
         .farm-container { width: 100%; max-width: 500px; background: #fff; padding: 25px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
         
-        /* Tối ưu hóa cột Search cho dễ nhìn */
-        .search-group { margin-bottom: 20px; background: #fafafa; padding: 15px; border-radius: 20px; border: 1px solid #eaeaea; }
-        .search-block { margin-bottom: 15px; }
-        .search-block:last-child { margin-bottom: 0; }
-        .search-label { font-size: 12px; font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
-        .label-flower { color: #d63384; }
-        .label-owner { color: #0d6efd; }
-        .farm-input { width: 100%; padding: 12px 16px; font-size: 14px; border-radius: 12px; outline: none; transition: 0.3s; background: #fff; }
+        h2 { text-align: center; margin-bottom: 20px; color: #ff4d6d; letter-spacing: 0.5px; }
+
+        /* TỐI ƯU CỘT SEARCH - RÕ RÀNG, DỄ NHÌN */
+        .search-box-pink {
+            background: #fff5f6; border: 2px solid #ffccd5; padding: 12px; border-radius: 15px; margin-bottom: 15px;
+        }
+        .search-box-blue {
+            background: #f0f7ff; border: 2px solid #bde0fe; padding: 12px; border-radius: 15px; margin-bottom: 25px;
+        }
+        .search-label { font-size: 11px; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .label-pink { color: #b7094c; }
+        .label-blue { color: #003049; }
+        .farm-input { width: 100%; padding: 10px 14px; font-size: 14px; border-radius: 10px; border: 1px solid #ccc; outline: none; background: #fff; color: #333; }
+        .farm-input:focus { border-color: #333; }
         
-        /* Khung viền search khi bình thường và khi nhấn vào */
-        #flowerSearch { border: 2px solid #ffccd5; color: #831843; }
-        #flowerSearch:focus { border-color: #d63384; box-shadow: 0 0 0 3px rgba(214, 51, 132, 0.1); }
-        #ownerSearch { border: 2px solid #bde0fe; color: #03045e; }
-        #ownerSearch:focus { border-color: #0d6efd; box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1); }
+        /* DANH SÁCH THÀNH VIÊN (Ở GIỮA) */
+        .section-title { font-size: 13px; font-weight: 700; color: #495057; margin-bottom: 12px; text-transform: uppercase; }
+        .card { padding: 15px; border: 1px solid #f0f0f0; border-radius: 20px; margin-bottom: 15px; background: #fff; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+        .card h3 { font-size: 14px; color: #ff4d6d; margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
+        .chips-container { display: flex; flex-wrap: wrap; gap: 6px; }
+        .chip { display: inline-block; padding: 5px 11px; border-radius: 10px; font-size: 11px; background: #fff0f3; border: 1px solid #ffccd5; color: #a4133c; font-weight: 500; }
         
-        /* Khu vực thành viên (Đưa lên trên) */
-        .members-section { margin-bottom: 20px; }
-        .section-title { font-size: 13px; font-weight: 700; color: #495057; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .card { padding: 15px; border: 1px solid #eee; border-radius: 20px; margin-bottom: 15px; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.01); }
-        .card h3 { font-size: 15px; color: #ff4d6d; margin-bottom: 8px; }
-        .chip { display: inline-block; padding: 5px 11px; margin: 3px; border-radius: 12px; font-size: 11px; background: #fdf2f8; border: 1px solid #fce7f3; color: #831843; font-weight: 500; }
-        
-        /* Khu vực nút hoa xu chưa sở hữu (Đưa xuống dưới cùng) */
-        .missing-section { margin-top: 25px; padding-top: 20px; border-top: 1px dashed #dee2e6; }
-        .btn-xu { width: 100%; padding: 12px; background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 15px; color: #495057; font-weight: 700; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .btn-xu:hover { background: #e9ecef; border-color: #ced4da; }
-        .missing-box { margin-top: 15px; padding: 12px; background: #fafafa; border-radius: 15px; display: none; }
-        .xu-missing { display: inline-block; padding: 4px 10px; margin: 3px; border-radius: 12px; font-size: 11px; background: #e9ecef; border: 1px solid #dee2e6; color: #495057; }
+        /* NÚT HOA XU CHƯA CÓ (Ở DƯỚI CÙNG) */
+        .missing-section { margin-top: 30px; padding-top: 20px; border-top: 2px dashed #eee; }
+        .btn-xu { width: 100%; padding: 12px; background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 12px; color: #495057; font-weight: 700; font-size: 13px; cursor: pointer; transition: 0.2s; }
+        .btn-xu:hover { background: #e9ecef; }
+        .missing-box { margin-top: 12px; padding: 15px; background: #fdfefe; border: 1px solid #e9ecef; border-radius: 15px; display: none; }
+        .xu-missing { display: inline-block; padding: 5px 10px; margin: 3px; border-radius: 10px; font-size: 11px; background: #f1f3f5; border: 1px solid #e9ecef; color: #495057; }
     </style>
 </head>
 <body>
 
 <div class="farm-container">
-    <h2 style="text-align: center; margin-bottom: 20px; color: #ff4d6d; letter-spacing: 1px;">🌸 Queenss Garden 👑</h2>
+    <h2>🌸 Queenss Garden 👑</h2>
     
-    <div class="search-group">
-        <div class="search-block">
-            <div class="search-label label-flower">🌸 TÌM THEO TÊN HOA:</div>
-            <input type="text" id="flowerSearch" class="farm-input" placeholder="Nhập tên hoa cần tìm...">
-        </div>
-        <div class="search-block">
-            <div class="search-label label-owner">👑 TÌM THEO TÊN THÀNH VIÊN:</div>
-            <input type="text" id="ownerSearch" class="farm-input" placeholder="Nhập tên thành viên cần tìm...">
-        </div>
+    <div class="search-box-pink">
+        <div class="search-label label-pink">🌸 Tìm theo tên hoa:</div>
+        <input type="text" id="flowerSearch" class="farm-input" placeholder="Nhập tên loại hoa...">
+    </div>
+    <div class="search-box-blue">
+        <div class="search-label label-blue">👑 Tìm theo tên thành viên:</div>
+        <input type="text" id="ownerSearch" class="farm-input" placeholder="Nhập tên người cần tìm...">
     </div>
     
-    <div class="members-section">
-        <div class="section-title">📋 Danh sách thành viên:</div>
-        <div id="resultArea"></div>
-    </div>
+    <div class="section-title">📋 Danh sách thành viên trong hội:</div>
+    <div id="resultArea"></div>
     
     <div class="missing-section">
         <button class="btn-xu" onclick="toggleMissingXu()">✨ Xem các loại hoa xu hội chưa có</button>
@@ -68,59 +66,78 @@
 </div>
 
 <script>
-    const xuFlowersList = ["Thục quỳ đỏ", "Thục quỳ hồng", "Thục quỳ vàng", "Thanh cúc lam", "Mạch môn tím", "Hoa sao nhái trắng", "Hoa baby trắng", "Hoa baby hồng", "Hoa baby lam", "Hoa lồng đèn đỏ", "Vạn tuế lá xanh", "Trúc đào đỏ tím", "Hải đường đỏ", "Hải đường vàng", "Đỗ quyên hồng", "Đỗ quyên vàng", "Đỗ quyên đỏ", "Tử linh lan hồng", "Tử linh lan đỏ", "Tử linh lan tím", "Hồng jacqueline trắng", "Hoa thúy châu tím", "Hoa thúy châu trắng", "Ghim cài lửa", "Ghim cài vàng mật", "Huệ hosta lam", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo tím nhạt", "Hoa anh thảo xanh nhạt", "Hoa anh thảo hồng nhạt", "Huệ hosta tím", "Mạn đà la", "Nhài nhật", "Lan phượng vĩ đỏ", "Mạch môn hồng phấn", "Hoa lộ vi vàng", "Hoa lộ vi trắng", "Cúc thược dược cam", "Cúc thược dược đen", "Lan vũ nữ vàng", "Hoa poppy himalaya vàng", "Hoa poppy himalaya xanh", "Hoa phi yến tím", "Hoa anh thảo vàng", "Hồng lenten vàng", "Cây sống đời đỏ", "Cây sống đời vàng", "Mộc hương vàng", "Mộc hương trắng", "Thược dược đỏ", "Lay ơn tím", "Tường vi hồng", "Lay ơn trắng", "Hải quỳ cam", "San hô tím", "San hô cam", "Hải quỳ đỏ", "Hoa hải quỳ tím", "Hoa hải quỳ hồng", "Hoa hải quỳ trắng", "Thược dược trắng", "Hồng môn phấn", "Thanh cúc tím", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Lạc tân phụ tím", "Tỏi trời", "Trúc đào hồng nhạt", "Địa lan trắng", "Hoa hành tím", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Mộc hương cam", "Vạn tuế lá lam", "Thanh cúc hồng"];
+    const xuFlowersList = ["Thục quỳ đỏ", "Thục quỳ hồng", "Thục quỳ vàng", "Thanh cúc lam", "Mạch môn tím", "Hoa sao nhái trắng", "Hoa baby trắng", "Hoa baby hồng", "Hoa baby lam", "Hoa lồng đèn đỏ", "Vạn tuế lá xanh", "Trúc đào đỏ tím", "Hải đường đỏ", "Hải đường vàng", "Đỗ quyên hồng", "Đỗ quyên vàng", "Đỗ quyên đỏ", "Tử linh lan hồng", "Tử linh lan đỏ", "Tử linh lan tím", "Hồng jacqueline trắng", "Hoa thúy châu tím", "Hoa thúy châu trắng", "Ghim cài lửa", "Ghim cài vàng mật", "Huệ hosta lam", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo tím nhạt", "Hoa anh thảo xanh nhạt", "Hoa anh thảo hồng nhạt", "Huệ hosta tím", "Mạn đà la", "Nhài nhật", "Lan phượng vĩ đỏ", "Mạch môn hồng phấn", "Hoa lộ vi vàng", "Hoa lộ vi trắng", "Cúc thược dược cam", "Cúc thược dược đen", "Lan vũ nữ vàng", "Hoa poppy himalaya vàng", "Hoa poppy himalaya xanh", "Hoa phi yến tím", "Hoa anh thảo vàng", "Hồng lenten vàng", "Cây sống đời đỏ", "Cây sống đời vàng", "Mộc hương vàng", "Mộc hương trắng", "Thược duyệt đỏ", "Thược dược đỏ", "Lay ơn tím", "Tường vi hồng", "Lay ơn trắng", "Hải quỳ cam", "San hô tím", "San hô cam", "Hải quỳ đỏ", "Hoa hải quỳ tím", "Hoa hải quỳ hồng", "Hoa hải quỳ trắng", "Thược dược trắng", "Hồng môn phấn", "Thanh cúc tím", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Lạc tân phụ tím", "Tỏi trời", "Trúc đào hồng nhạt", "Địa lan trắng", "Hoa hành tím", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Mộc hương cam", "Vạn tuế lá lam", "Thanh cúc hồng"];
 
     const membersData = [
         { name: "Cá chiên (Anh Kiệt)", flowers: ["Dạ yến thảo lam", "Hoa anh thảo hồng", "Lạp mai đỏ", "Hồng champagne", "Hoa hành tím", "Vạn tuế lá lam", "Diên đức vĩ trắng vàng", "Hồng Lenten đỏ", "Địa lan trắng", "Mộc hương cam", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng"] },
         { name: "Tinkerbell (Cẩm Tiên cute)", flowers: ["Đăng tiêu trắng tím", "Đông trùng thông vàng", "Sen trời đầy sao", "Tuyết mai hồng", "Thược dược hồng", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Nhụy linh ánh sao", "Hoa bồ câu tím", "Gừng sen bạch ngọc", "Gừng sen ban mai", "Hoa anh thảo vàng", "Hồng lenten đỏ", "Cúc thược dược cam", "Hoa poppy himalaya xanh", "Hồng môn phấn", "Mộc hương cam", "Tử đằng lam", "Cúc indo hồng", "Diên vĩ đức kem đỏ", "Đăng tiêu cam vàng", "Dạ yến thảo lam", "Hoa anh thảo hồng", "Hoa anh thảo xanh", "Hồng champagne", "Mạn châu sa", "San hô xanh", "Ngôi sao bethlehem", "Hoa phi yến tím", "Mộc lan ngọc ngà", "Lạp mai hương phi", "Phù dung tím hộp báu", "Thọ ngọc ôm ánh sáng", "Hạc gửi ngân hà", "Tử linh phúc lộc", "Đế vương xích diễm", "Gấu hoa hồng", "Có rồng ắt lính", "Hạnh nguyệt nghỉ dưới bóng hoa", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc hồng", "Lạc tân phụ tím", "Thục quỳ hồng", "Tỏi trời", "Thanh cúc lam", "Hoa baby trắng", "Trúc đào hồng nhạt", "Ghim cài vàng mật", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo xanh nhạt"] }
     ];
 
-    function toTitleCase(str) { return str.toLowerCase().trim().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '); }
+    function toTitleCase(str) { 
+        return str.toLowerCase().trim().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '); 
+    }
 
     const resultArea = document.getElementById('resultArea');
     const missingArea = document.getElementById('missingArea');
     const missingBox = document.getElementById('missingBox');
 
-    // Hàm cập nhật danh sách hoa xu chưa sở hữu
+    // Hàm hiển thị danh sách thành viên (có bộ lọc và xóa trùng)
+    function renderMembers() {
+        resultArea.innerHTML = "";
+        const fKey = document.getElementById('flowerSearch').value.toLowerCase().trim();
+        const oKey = document.getElementById('ownerSearch').value.toLowerCase().trim();
+        
+        membersData.forEach(m => {
+            // Loại bỏ hoàn toàn hoa trùng lặp của từng người
+            const uniqueFlowers = [...new Set(m.flowers.map(f => toTitleCase(f)))];
+            
+            const matchFlower = fKey ? uniqueFlowers.some(f => f.toLowerCase().includes(fKey)) : true;
+            const matchOwner = m.name.toLowerCase().includes(oKey);
+            
+            if (matchFlower && matchOwner) {
+                let html = `<div class="card"><h3>👑 ${m.name}</h3><div class="chips-container">`;
+                uniqueFlowers.forEach(f => {
+                    html += `<span class="chip">${f}</span>`;
+                });
+                html += `</div></div>`;
+                resultArea.innerHTML += html;
+            }
+        });
+        
+        if(resultArea.innerHTML === "") {
+            resultArea.innerHTML = `<div style="text-align:center; font-size:12px; color:#999; padding:20px;">Không tìm thấy kết quả phù hợp...</div>`;
+        }
+    }
+
+    // Hàm tính toán danh sách hoa xu chưa ai sở hữu
     function updateMissingXu() {
         const allOwnedFlowers = new Set();
         membersData.forEach(m => m.flowers.forEach(f => allOwnedFlowers.add(toTitleCase(f))));
+        
         const missing = xuFlowersList.filter(xu => !allOwnedFlowers.has(toTitleCase(xu)));
+        
+        // Sắp xếp bảng chữ cái cho đẹp mắt
+        missing.sort(); 
+        
         missingArea.innerHTML = missing.map(f => `<span class="xu-missing">${f}</span>`).join('');
     }
 
-    // Ẩn/Hiện phần danh sách hoa xu chưa sở hữu khi click nút
+    // Cơ chế Đóng/Mở nút Hoa Xu dưới cùng
     function toggleMissingXu() {
         if (missingBox.style.display === "block") {
             missingBox.style.display = "none";
         } else {
             missingBox.style.display = "block";
+            // Cuộn nhẹ xuống dưới để người dùng thấy danh sách vừa mở rộng
+            setTimeout(() => { missingBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 50);
         }
     }
 
-    // Tìm kiếm và lọc trùng
-    function renderMembers() {
-        resultArea.innerHTML = "";
-        const fKey = document.getElementById('flowerSearch').value.toLowerCase();
-        const oKey = document.getElementById('ownerSearch').value.toLowerCase();
-        
-        membersData.forEach(m => {
-            const unique = [...new Set(m.flowers.map(f => toTitleCase(f)))];
-            const matchFlower = fKey ? unique.some(f => f.toLowerCase().includes(fKey)) : true;
-            const matchOwner = m.name.toLowerCase().includes(oKey);
-            
-            if (matchFlower && matchOwner) {
-                let html = `<div class="card"><h3>👑 ${m.name}</h3><div class="chips-container">`;
-                unique.forEach(f => html += `<span class="chip">${f}</span>`);
-                resultArea.innerHTML += html + `</div></div>`;
-            }
-        });
-    }
-
+    // Đăng ký sự kiện gõ phím cho 2 ô tìm kiếm độc lập
     document.getElementById('flowerSearch').addEventListener('input', renderMembers);
     document.getElementById('ownerSearch').addEventListener('input', renderMembers);
 
-    // Chạy lệnh khi mở trang
+    // Chạy khởi tạo dữ liệu ngay khi mở ứng dụng
     updateMissingXu();
     renderMembers();
 </script>
