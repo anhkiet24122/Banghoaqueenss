@@ -51,6 +51,7 @@
         .chip { display: inline-block; padding: 5px 11px; border-radius: 10px; font-size: 11px; background: #fff0f3; border: 1px solid #ffccd5; color: #a4133c; font-weight: 500; line-height: 1.5; }
         
         /* HIỂN THỊ KẾT QUẢ GOM GỌN KHI TÌM HOA */
+        .flower-result-wrapper { display: flex; flex-direction: column; gap: 12px; }
         .summary-result { padding: 18px; border: 2px solid #ffccd5; border-radius: 20px; background: #fff5f6; color: #b7094c; font-size: 13px; font-weight: 500; line-height: 1.6; }
         .summary-result strong { color: #ff4d6d; font-weight: 700; }
 
@@ -106,7 +107,7 @@
     // Danh sách hoa xu gốc đầy đủ
     const rawXuList = ["Thục quỳ đỏ", "Thục quỳ hồng", "Thục quỳ vàng", "Thanh cúc lam", "Mạch môn tím", "Hoa sao nhái trắng", "Hoa baby hồng", "Hoa baby lam", "Hoa lồng đèn đỏ", "Vạn tuế lá xanh", "Trúc đào đỏ tím", "Hải đường đỏ", "Hải đường vàng", "Đỗ quyên hồng", "Đỗ quyên vàng", "Đỗ quyên đỏ", "Tử linh lan hồng", "Tử linh lan đỏ", "Tử linh lan tím", "Hồng jacqueline trắng", "Hoa thúy châu tím", "Hoa thúy châu trắng", "Ghim cài lửa", "Ghim cài vàng mật", "Huệ hosta lam", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo tím nhạt", "Hoa anh thảo xanh nhạt", "Hoa anh thảo hồng nhạt", "Huệ hosta tím", "Mạn đà la", "Nhài nhật", "Lan phượng vĩ đỏ", "Mạch môn hồng phấn", "Hoa lộ vi vàng", "Hoa lộ vi trắng", "Cúc thược dược cam", "Cúc thược dược đen", "Lan vũ nữ vàng", "Hoa poppy himalaya vàng", "Hoa poppy himalaya xanh", "Hoa phi yến tím", "Hoa anh thảo vàng", "Hồng lenten vàng", "Cây sống đời đỏ", "Cây sống đời vàng", "Mộc hương vàng", "Mộc hương trắng", "Thược dược đỏ", "Lay ơn tím", "Tường vi hồng", "Lay ơn trắng", "Hải quỳ cam", "San coral tím", "San hô cam", "Hải quỳ đỏ", "Hoa hải quỳ tím", "Hoa hải quỳ hồng", "Hoa hải quỳ trắng", "Thược dược trắng", "Hồng môn phấn", "Thanh cúc tím", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Lạc tân phụ tím", "Tỏi trời", "Trúc đào hồng nhạt", "Địa lan trắng", "Hoa hành tím", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Mộc hương cam", "Vạn tuế lá lam", "Thanh cúc hồng", "Hoa baby trắng", "San hô tím"];
 
-    // Danh sách thành viên đầy đủ 10 người (Đã đổi tên Cẩm Tiên xinh)
+    // Danh sách thành viên đầy đủ 10 người (Đã đổi tên thành Cẩm Tiên xinh)
     const rawMembers = [
         { name: "Cá chiên (Anh Kiệt)", flowers: ["Dạ yến thảo lam", "Hoa anh thảo hồng", "Lạp mai đỏ", "Hồng champagne", "Hoa hành tím", "Vạn tuế lá lam", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Địa lan trắng", "Mộc hương cam", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Mộc lan ngọc ngà"] },
         { name: "Tinkerbell (Cẩm Tiên cute)", flowers: ["Đăng tiêu trắng tím", "Đông trùng thông vàng", "Sen trời đầy sao", "Tuyết mai hồng", "Thược dược hồng", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Nhụy linh ánh sao", "Hoa bồ câu tím", "Gừng sen bạch ngọc", "Gừng sen ban mai", "Hoa anh thảo vàng", "Hồng lenten đỏ", "Cúc thược dược cam", "Hoa poppy himalaya xanh", "Hồng môn phấn", "Mộc hương cam", "Tử đằng lam", "Cúc indo hồng", "Diên vĩ đức kem đỏ", "Đăng tiêu cam vàng", "Dạ yến thảo lam", "Hoa anh thảo hồng", "Hoa anh thảo xanh", "Hồng champagne", "Mạn châu sa", "San hô xanh", "Ngôi sao bethlehem", "Hoa phi yến tím", "Mộc lan ngọc ngà", "Lạp mai hương phi", "Phù dung tím hộp báu", "Thọ ngọc ôm ánh sáng", "Hạc gửi ngân hà", "Tử linh phúc lộc", "Đế vương xích diễm", "Gấu hoa hồng", "Có rồng ắt lính", "Hạnh nguyệt nghỉ dưới bóng hoa", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc hồng", "Lạc tân phụ tím", "Thục quỳ hồng", "Tỏi trời", "Thanh cúc lam", "Hoa baby trắng", "Trúc đào hồng nhạt", "Ghim cài vàng mật", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo xanh nhạt"] },
@@ -134,7 +135,7 @@
     const flowerInput = document.getElementById('flowerSearch');
     const ownerInput = document.getElementById('ownerSearch');
 
-    // Hàm lấy chính xác danh sách thành viên sở hữu bông hoa cụ thể
+    // Hàm lấy danh sách thành viên sở hữu bông hoa cụ thể
     function getOwnersOfFlower(flowerName) {
         const owners = [];
         const target = flowerName.toLowerCase().trim();
@@ -146,40 +147,62 @@
         return owners;
     }
 
-    // Hàm hiển thị kết quả chính
+    // Hàm hiển thị kết quả chính nâng cấp tìm kiếm nhiều hoa cùng lúc
     function renderMembers() {
         resultArea.innerHTML = "";
         const fKey = flowerInput.value.toLowerCase().trim();
         const oKey = ownerInput.value.toLowerCase().trim();
         
-        // NẾU ĐANG TÌM KIẾM HOA (VÀ KHÔNG TÌM TÊN THÀNH VIÊN) -> LIỆT KÊ DẠNG GOM GỌN MỘT DÒNG DUY NHẤT
+        // NẾU ĐANG TÌM KIẾM THEO TÊN HOA -> TÌM TẤT CẢ CÁC LOÀI HOA CHỨA TỪ KHÓA
         if (fKey !== "" && oKey === "") {
-            let exactFlowerName = "";
-            for (let m of membersData) {
-                let found = m.flowers.find(f => f.toLowerCase().includes(fKey));
-                if (found) { exactFlowerName = found; break; }
-            }
-            if (!exactFlowerName) {
-                let foundInXu = xuFlowersList.find(xu => xu.toLowerCase().includes(fKey));
-                if (foundInXu) exactFlowerName = foundInXu;
-            }
+            // Gom tất cả các loại hoa có trong dữ liệu thành viên trùng khớp từ khóa
+            let matchedFlowersSet = new Set();
+            membersData.forEach(m => {
+                m.flowers.forEach(f => {
+                    if (f.toLowerCase().includes(fKey)) {
+                        matchedFlowersSet.add(f);
+                    }
+                });
+            });
 
-            const finalSearchName = exactFlowerName || flowerInput.value;
-            const ownersList = getOwnersOfFlower(finalSearchName);
-            
-            if (ownersList.length > 0) {
-                resultArea.innerHTML = `
-                    <div class="summary-result">
-                        🌸 Hoa <strong>${finalSearchName}</strong> hiện có <strong>${ownersList.length}</strong> thành viên sở hữu:<br>
-                        👉 <em>${ownersList.join(', ')}</em>
-                    </div>`;
+            // Kiểm tra thêm trong danh sách hoa xu gốc đề phòng hoa chưa ai có nhưng khớp từ khóa
+            xuFlowersList.forEach(xu => {
+                if (xu.toLowerCase().includes(fKey)) {
+                    matchedFlowersSet.add(xu);
+                }
+            });
+
+            // Chuyển thành mảng và sắp xếp theo bảng chữ cái tiếng Việt
+            const matchedFlowersList = Array.from(matchedFlowersSet).sort((a, b) => a.localeCompare(b, 'vi'));
+
+            if (matchedFlowersList.length > 0) {
+                let htmlWrapper = '<div class="flower-result-wrapper">';
+                
+                matchedFlowersList.forEach(flowerName => {
+                    const ownersList = getOwnersOfFlower(flowerName);
+                    if (ownersList.length > 0) {
+                        htmlWrapper += `
+                            <div class="summary-result">
+                                🌸 Hoa <strong>${flowerName}</strong> hiện có <strong>${ownersList.length}</strong> thành viên sở hữu:<br>
+                                👉 <em>${ownersList.join(', ')}</em>
+                            </div>`;
+                    } else {
+                        htmlWrapper += `
+                            <div class="summary-result" style="color: #999; border-color: #dee2e6; background: #fafafa;">
+                                Chưa có thành viên nào sở hữu hoa <strong>${flowerName}</strong>.
+                            </div>`;
+                    }
+                });
+                
+                htmlWrapper += '</div>';
+                resultArea.innerHTML = htmlWrapper;
             } else {
                 resultArea.innerHTML = `
                     <div class="summary-result" style="text-align: center; color: #999; border-color: #dee2e6; background: #fafafa;">
-                        Chưa có thành viên nào trong hội sở hữu hoa <strong>${finalSearchName}</strong>.
+                        Không tìm thấy loại hoa nào chứa từ khóa "<strong>${flowerInput.value}</strong>".
                     </div>`;
             }
-            return; // Dừng hàm tại đây, không chạy xuống phần vẽ thẻ dài bên dưới nữa
+            return; 
         }
 
         // NẾU TÌM THÀNH VIÊN HOẶC ĐỂ TRỐNG -> HIỂN THỊ CÁC THẺ CARD GỐC BAN ĐẦU
