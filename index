@@ -7,11 +7,11 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Be Vietnam Pro', sans-serif; }
         body { background: #fdf6f7; padding: 20px; display: flex; justify-content: center; min-height: 100vh; }
         .farm-container { width: 100%; max-width: 500px; background: #fff; padding: 25px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        .search-group { margin-bottom: 15px; }
+        .search-group { margin-bottom: 20px; }
         .search-label { font-size: 11px; font-weight: 700; color: #ff758f; margin-bottom: 5px; }
         .farm-input { width: 100%; padding: 10px; border: 1px solid #ffccd5; border-radius: 15px; outline: none; margin-bottom: 10px; }
         .btn-xu { width: 100%; padding: 12px; background: #fff9e6; border: 1px solid #ffe599; border-radius: 15px; color: #b57b00; font-weight: 700; cursor: pointer; margin-bottom: 20px; }
-        .card { padding: 15px; border: 1px solid #eee; border-radius: 20px; margin-bottom: 15px; }
+        .card { padding: 15px; border: 1px solid #eee; border-radius: 20px; margin-bottom: 15px; background: #fafafa; }
         .chip { display: inline-block; padding: 4px 10px; margin: 3px; border-radius: 12px; font-size: 11px; background: #fdf2f8; border: 1px solid #fce7f3; color: #831843; }
         .xu-missing { display: inline-block; padding: 4px 10px; margin: 3px; border-radius: 12px; font-size: 11px; background: #f5f5f4; border: 1px solid #e7e5e4; color: #57534e; }
     </style>
@@ -22,9 +22,9 @@
     <h2>🌸 Queenss Garden 👑</h2>
     
     <div class="search-group">
-        <div class="search-label">🌸 TÌM TÊN HOA:</div>
+        <div class="search-label">🌸 TÌM THEO TÊN HOA:</div>
         <input type="text" id="flowerSearch" class="farm-input" placeholder="Nhập tên hoa...">
-        <div class="search-label">👑 TÌM THÀNH VIÊN:</div>
+        <div class="search-label">👑 TÌM THEO THÀNH VIÊN:</div>
         <input type="text" id="ownerSearch" class="farm-input" placeholder="Nhập tên thành viên...">
     </div>
     
@@ -40,31 +40,42 @@
         { name: "Tinkerbell (Cẩm Tiên cute)", flowers: ["Đăng tiêu trắng tím", "Đông trùng thông vàng", "Sen trời đầy sao", "Tuyết mai hồng", "Thược dược hồng", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Nhụy linh ánh sao", "Hoa bồ câu tím", "Gừng sen bạch ngọc", "Gừng sen ban mai", "Hoa anh thảo vàng", "Hồng lenten đỏ", "Cúc thược dược cam", "Hoa poppy himalaya xanh", "Hồng môn phấn", "Mộc hương cam", "Tử đằng lam", "Cúc indo hồng", "Diên vĩ đức kem đỏ", "Đăng tiêu cam vàng", "Dạ yến thảo lam", "Hoa anh thảo hồng", "Hoa anh thảo xanh", "Hồng champagne", "Mạn châu sa", "San hô xanh", "Ngôi sao bethlehem", "Hoa phi yến tím", "Mộc lan ngọc ngà", "Lạp mai hương phi", "Phù dung tím hộp báu", "Thọ ngọc ôm ánh sáng", "Hạc gửi ngân hà", "Tử linh phúc lộc", "Đế vương xích diễm", "Gấu hoa hồng", "Có rồng ắt lính", "Hạnh nguyệt nghỉ dưới bóng hoa", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc hồng", "Lạc tân phụ tím", "Thục quỳ hồng", "Tỏi trời", "Thanh cúc lam", "Hoa baby trắng", "Trúc đào hồng nhạt", "Ghim cài vàng mật", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo xanh nhạt"] }
     ];
 
-    function toTitleCase(str) { return str.toLowerCase().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '); }
-    
-    // Render tất cả thành viên
+    function toTitleCase(str) { return str.toLowerCase().trim().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '); }
+
     const resultArea = document.getElementById('resultArea');
-    function renderMembers() {
+
+    // Chức năng Tìm kiếm
+    function filterData() {
+        const fKey = document.getElementById('flowerSearch').value.toLowerCase();
+        const oKey = document.getElementById('ownerSearch').value.toLowerCase();
         resultArea.innerHTML = "";
+        
         membersData.forEach(m => {
-            const unique = [...new Set(m.flowers.map(f => toTitleCase(f.trim())))];
-            let html = `<div class="card"><h3>👑 ${m.name}</h3><div class="chips-container">`;
-            unique.forEach(f => html += `<span class="chip">${f}</span>`);
-            resultArea.innerHTML += html + `</div></div>`;
+            const unique = [...new Set(m.flowers.map(f => toTitleCase(f)))];
+            const matchFlower = fKey ? unique.some(f => f.toLowerCase().includes(fKey)) : true;
+            const matchOwner = m.name.toLowerCase().includes(oKey);
+            
+            if (matchFlower && matchOwner) {
+                let html = `<div class="card"><h3>👑 ${m.name}</h3><div class="chips-container">`;
+                unique.forEach(f => html += `<span class="chip">${f}</span>`);
+                resultArea.innerHTML += html + `</div></div>`;
+            }
         });
     }
 
-    // Nút xem hoa xu còn thiếu
+    document.getElementById('flowerSearch').addEventListener('input', filterData);
+    document.getElementById('ownerSearch').addEventListener('input', filterData);
+
+    // Chức năng xem hoa thiếu
     function showMissingXu() {
         const allFlowers = new Set();
-        membersData.forEach(m => m.flowers.forEach(f => allFlowers.add(toTitleCase(f.trim()))));
+        membersData.forEach(m => m.flowers.forEach(f => allFlowers.add(toTitleCase(f))));
         const missing = xuFlowersList.filter(xu => !allFlowers.has(toTitleCase(xu)));
-        
         resultArea.innerHTML = `<h3>⚠️ Các loại hoa xu hội chưa có:</h3><div style="margin-top:10px;">` + 
             missing.map(f => `<span class="xu-missing">${f}</span>`).join('') + `</div>`;
     }
 
-    renderMembers();
+    filterData(); // Load ban đầu
 </script>
 </body>
 </html>
