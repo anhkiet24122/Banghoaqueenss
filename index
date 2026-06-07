@@ -6,6 +6,7 @@
     <title>🌸 Queenss Garden 👑</title>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght=400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Khung CSS cơ bản bắt buộc để xử lý logic ẩn hiện */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Be Vietnam Pro', sans-serif; }
         body { 
             background: #fff0f3; 
@@ -16,36 +17,19 @@
             justify-content: center; 
             min-height: 100vh; 
         }
+        /* Cấu trúc hoạt động đóng mở hộp hoa chi tiết */
         .rank-content-box { display: none; padding: 18px; background: #fffdfd; border-top: 1px solid #fff0f2; }
         .active-folder .rank-content-box { display: block !important; }
         .active-folder .click-header-line { background: #fff0f3 !important; color: #ff4d6d !important; }
         
+        /* Đồng bộ trạng thái mở rộng cho Cá Chiên (Nam tính) */
         .active-folder.gentleman-card-style .click-header-line { background: #e0f2fe !important; color: #003049 !important; }
         .active-folder.gentleman-card-style .rank-content-box { background: #fcfdfe !important; border-top-color: #bae6fd !important; }
 
+        /* Định dạng chip hoa */
         .flower-chip-item { display: inline-block; padding: 6px 12px; border-radius: 14px; font-size: 11.5px; background: #fff; border: 1px solid #ffccd5; color: #a4133c; font-weight: 500; box-shadow: 0 2px 5px rgba(255, 182, 193, 0.08); margin: 3px; }
         .gentleman-card-style .flower-chip-item { border-color: #bae6fd !important; color: #003049 !important; }
         .xu-missing-badge { display: inline-block; padding: 6px 12px; border-radius: 14px; font-size: 11.5px; background: #fff; border: 1px solid #b7e4c7; color: #2d6a4f; font-weight: 500; margin: 3px; }
-        
-        /* Phong cách cho bức tranh Chibi ký tự */
-        .chibi-art-container {
-            margin-top: 25px;
-            padding: 15px;
-            background: #fff5f6;
-            border: 2px dashed #ffccd5;
-            border-radius: 25px;
-            text-align: center;
-        }
-        .chibi-canvas {
-            font-family: monospace;
-            font-size: 9px;
-            line-height: 1.2;
-            color: #ff758f;
-            white-space: pre;
-            overflow-x: auto;
-            display: inline-block;
-            text-align: left;
-        }
     </style>
 </head>
 <body>
@@ -57,32 +41,28 @@
 
     <h2>🌸 Queenss Garden 👑</h2>
     
-    <!-- Ô TÌM KIẾM THEO TÊN HOA -->
     <div style="background: linear-gradient(135deg, #fff5f6, #fff0f3); border: 2.5px dashed #ff758f; padding: 18px; border-radius: 28px; margin-bottom: 25px; box-shadow: 0 8px 20px rgba(255, 117, 143, 0.08);">
         <div style="font-size: 12px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: #c9184a; display: flex; align-items: center; gap: 6px;">🌱 Tìm theo tên hoa:</div>
         <input type="text" id="flowerSearch" style="width: 100%; padding: 14px 18px; font-size: 14px; border-radius: 20px; border: 2px solid #ffccd5; outline: none; background: #fff; color: #4a4a4a;" placeholder="Nhập tên hoa muốn tra cứu...">
     </div>
     
-    <!-- KHU VỰC HIỂN THỊ NỘI DUNG CHÍNH -->
     <div style="flex-grow: 1;">
         
         <div id="defaultGardenWidgets" style="display: flex; flex-direction: column; gap: 18px;">
             
-            <!-- HƯỚNG DẪN SỬ DỤNG -->
             <div>
                 <button id="btnHelp" style="width: 100%; padding: 16px 20px; font-size: 14px; font-weight: 700; color: #fff; border: none; border-radius: 25px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; user-select: none; background: linear-gradient(135deg, #ffca3a, #ff9f1c); box-shadow: 0 6px 15px rgba(255, 159, 28, 0.3);">📖 Hướng dẫn sử dụng vườn hoa</button>
                 <div id="helpBox" style="margin-top: 8px; padding: 20px; background: rgba(255, 253, 253, 0.95); border: 2px dashed #ffccd5; border-radius: 28px; display: none; box-shadow: inset 0 4px 10px rgba(255, 182, 193, 0.05);">
                     <div style="color: #5c5757; font-size: 13px; line-height: 1.8;">
                         <p style="margin-bottom: 10px; font-weight: 500;">Chào mừng các nàng đến với mảnh vườn <strong>Queenss Garden</strong>! Cách xem siêu đơn giản luôn nè:</p>
                         <p style="margin-bottom: 4px;">🌸 <strong>Tìm ai có hoa gì:</strong> Gõ từ khóa tên hoa vào ô tìm kiếm ở trên. Hệ thống sẽ gom gọn và hiện những ai sở hữu loài hoa đó.</p>
-                        <p style="margin-bottom: 4px;">🌸 <strong>Xem bảng xếp hạng:</strong> Bấm nút màu hồng bên dưới để xem thứ hạng gom hoa của cả nhà.</p>
+                        <p style="margin-bottom: 4px;">🌸 <strong>Xem bảng xếp hạng:</strong> Bấm nút màu hồng bên dưới để xem thứ hạng gom hoa của cả nhà (Đã thêm thành viên mới).</p>
                         <p style="margin-bottom: 4px;">🌸 <strong>Xem túi hoa cá nhân:</strong> Khi bảng xếp hạng hiện ra, bấm trực tiếp vào tên của thành viên đó để mở bộ sưu tập hoa của họ.</p>
-                        <p style="margin-bottom: 4px;">🌸 <strong>Kiểm tra hoa xu:</strong> Bách nút xanh lục dưới đáy để biết loài hoa nào cả hội đang thiếu.</p>
+                        <p style="margin-bottom: 4px;">🌸 <strong>Kiểm tra hoa xu:</strong> Bấm nút xanh lục dưới đáy để biết loài hoa nào cả hội đang thiếu.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- BẢNG XẾP HẠNG THÀNH VIÊN -->
             <div>
                 <button id="btnRank" style="width: 100%; padding: 16px 20px; font-size: 14px; font-weight: 700; color: #fff; border: none; border-radius: 25px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; user-select: none; background: linear-gradient(135deg, #ff85a1, #ff4d6d); box-shadow: 0 6px 15px rgba(255, 77, 109, 0.3);">🏆 Xem bảng xếp hạng & Hoa của thành viên</button>
                 <div id="rankBox" style="margin-top: 8px; padding: 20px; background: rgba(255, 253, 253, 0.95); border: 2px dashed #ffccd5; border-radius: 28px; display: none;">
@@ -90,33 +70,15 @@
                 </div>
             </div>
 
-            <!-- DANH SÁCH HOA XU -->
             <div>
                 <button id="btnXu" style="width: 100%; padding: 16px 20px; font-size: 14px; font-weight: 700; color: #245500; border: none; border-radius: 25px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; user-select: none; background: linear-gradient(135deg, #9ef01a, #70e000); box-shadow: 0 6px 15px rgba(112, 224, 0, 0.3);">✨ Xem các loại hoa xu hội chưa có</button>
                 <div id="missingBox" style="margin-top: 8px; padding: 20px; background: rgba(255, 253, 253, 0.95); border: 2px dashed #ffccd5; border-radius: 28px; display: none;">
                     <div id="missingArea" style="display: flex; flex-wrap: wrap; gap: 6px;"></div>
                 </div>
             </div>
-
-            <!-- BỨC TRANH CHIBI KÝ TỰ: CÁC NÀNG TRỒNG HOA & CHÀNG TRAI CHẠY XE LÚA -->
-            <div id="chibiArtBox" class="chibi-art-container">
-                <div style="font-size: 11px; font-weight: 700; color: #b7094c; margin-bottom: 8px;">🎨 Khu Vườn Chibi Của Hội Trồng Cây 🌱</div>
-                <div class="chibi-canvas">
-      (Girls Planting Flowers)       (Boy & Rice Truck)
-        \(*^v^*)/   (='-')/            _🎩_
-         /     \     /   \            (•‿• )  _,,
-        (  🎀   )   (  👗 )          / >🌾\==/_|_\_
-      _--_|_--_|_  _--_|_--_|_      /______|_|_____\
-     [____________][____________]    O-O          O-O
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     🌸 🌷 🌹 🌻  🌾 🌾 🌾 🌾     🌾🌾🌾 [Xe Lúa] 🌾🌾🌾
-                </div>
-                <div style="font-size: 10px; color: #6a994e; margin-top: 5px; font-style: italic;">"Các cô gái đang trồng hoa, chàng trai lái xe lúa đi qua"</div>
-            </div>
             
         </div>
         
-        <!-- TRẠNG THÁI TÌM KIẾM -->
         <div id="searchViewArea" style="display: none;">
             <div style="font-size: 13px; font-weight: 700; color: #5c677d; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 4px;">📋 Kết quả tìm kiếm theo tên hoa:</div>
             <div id="searchResultArea"></div>
@@ -136,6 +98,7 @@
         if (txt === "ngân hà chúy nhụy") return "ngân hà chiếu nhụy";
         if (txt === "cúc thược duyệt cam") return "cúc thược dược cam";
         if (txt === "phu dung cam hộp báu") return "phù dung cam hộp báu";
+        if (txt === "thực quỳ hồng") return "thục quỳ hồng";
         return txt;
     }
 
@@ -145,6 +108,7 @@
 
     const rawXuList = ["Thục quỳ đỏ", "Thục quỳ hồng", "Thục quỳ vàng", "Thanh cúc lam", "Mạch môn tím", "Hoa sao nhái trắng", "Hoa baby hồng", "Hoa baby lam", "Hoa lồng đèn đỏ", "Vạn tuế lá xanh", "Trúc đào đỏ tím", "Hải đường đỏ", "Hải đường vàng", "Đỗ quyên hồng", "Đỗ quyên vàng", "Đỗ quyên đỏ", "Tử linh lan hồng", "Tử linh lan đỏ", "Tử linh lan tím", "Hồng jacqueline trắng", "Hoa thúy châu tím", "Hoa thúy châu trắng", "Ghim cài lửa", "Ghim cài vàng mật", "Huệ hosta lam", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo tím nhạt", "Hoa anh thảo xanh nhạt", "Hoa anh thảo hồng nhạt", "Huệ hosta tím", "Mạn đà la", "Nhài nhật", "Lan phượng vĩ đỏ", "Mạch môn hồng phấn", "Hoa lộ vi vàng", "Hoa lộ vi trắng", "Cúc thược dược cam", "Cúc thược dược đen", "Lan vũ nữ vàng", "Hoa poppy himalaya vàng", "Hoa poppy himalaya xanh", "Hoa phi yến tím", "Hoa anh thảo vàng", "Hồng lenten vàng", "Cây sống đời đỏ", "Cây sống đời vàng", "Mộc hương vàng", "Mộc hương trắng", "Thược dược đỏ", "Lay ơn tím", "Tường vi hồng", "Lay ơn trắng", "Hải quỳ cam", "San coral tím", "San hô cam", "Hải quỳ đỏ", "Hoa hải quỳ tím", "Hoa hải quỳ hồng", "Hoa hải quỳ trắng", "Thược dược trắng", "Hồng môn phấn", "Thanh cúc tím", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Lạc tân phụ tím", "Tỏi trời", "Trúc đào hồng nhạt", "Địa lan trắng", "Hoa hành tím", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Mộc hương cam", "Vạn tuế lá lam", "Thanh cúc hồng", "Hoa baby trắng", "San hô tím"];
 
+    // KHO DỮ LIỆU ĐÃ THÊM THÀNH VIÊN CÁ NƯỚNG (THU HÀ) CHUẨN XÁC
     const rawMembers = [
         { name: "Cá chiên (Anh Kiệt)", flowers: ["Dạ yến thảo lam", "Hoa anh thảo hồng", "Lạp mai đỏ", "Hồng champagne", "Hoa hành tím", "Vạn tuế lá lam", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Địa lan trắng", "Mộc hương cam", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Mộc lan ngọc ngà"] },
         { name: "Tinkerbell (Cẩm Tiên cute)", flowers: ["Đăng tiêu trắng tím", "Đông trùng thông vàng", "Sen trời đầy sao", "Tuyết mai hồng", "Thược dược hồng", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Nhụy linh ánh sao", "Hoa bồ câu tím", "Gừng sen bạch ngọc", "Gừng sen ban mai", "Hoa anh thảo vàng", "Hồng lenten đỏ", "Cúc thược dược cam", "Hoa poppy himalaya xanh", "Hồng môn phấn", "Mộc hương cam", "Tử đằng lam", "Cúc indo hồng", "Diên vĩ đức kem đỏ", "Đăng tiêu cam vàng", "Dạ yến thảo lam", "Hoa anh thảo hồng", "Hoa anh thảo xanh", "Hồng champagne", "Mạn châu sa", "San hô xanh", "Ngôi sao bethlehem", "Hoa phi yến tím", "Mộc lan ngọc ngà", "Lạp mai hương phi", "Phù dung tím hộp báu", "Thọ ngọc ôm ánh sáng", "Hạc gửi ngân hà", "Tử linh phúc lộc", "Đế vương xích diễm", "Gấu hoa hồng", "Có rồng ắt lính", "Hạnh nguyệt nghỉ dưới bóng hoa", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc hồng", "Lạc tân phụ tím", "Thục quỳ hồng", "Tỏi trời", "Thanh cúc lam", "Hoa baby trắng", "Trúc đào hồng nhạt", "Ghim cài vàng mật", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo xanh nhạt"] },
@@ -157,7 +121,8 @@
         { name: "Hải Đường (Thanh Ngân)", flowers: ["Trái tim đá quý", "Mộc lan ngọc ngà", "Cá heo hồng", "Hoa hành tím", "Lan phượng vĩ đỏ", "Hoa poppy himalaya xanh", "San hô tím", "Hoa poppy tím", "Hoa lồng đèn cam", "Lan vũ nữ cam", "Dạ yến thảo lam", "Hồng champagne", "Cúc thược dược cam", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Hoa anh thảo hồng", "Hoa anh thảo xanh", "Ngôi sao bethlehem"] },
         { name: "Mina (Mỹ Anh)", flowers: ["Ngân hà chiếu nhụy", "Mộc lan ngọc ngà", "Dạ yến thảo lam", "Hoa anh thảo hồng", "Lạp mai đỏ", "Hồng champagne", "Địa lan trắng", "Mạn đà la", "San hô tím", "Hoa poppy cam", "Thược dược trắng", "Lay ơn tím", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc tím", "Thanh cúc hồng", "Lạc tân phụ tím", "Tỏi trời"] },
         { name: "Sương (Sương)", flowers: ["Lạp mai đỏ", "Bụp hồng cận hồng", "Dạ yến thảo lam", "Hoa anh thảo xanh", "Hồng champagne", "Hoa lộ vi vàng", "Mộc hương cam", "Gấu bông", "Cây holly vòng xanh", "Mộc lan ngọc ngà", "Trúc đào hồng nhạt", "Tỏi trời"] },
-        { name: "Mẫn hoa (Thảo Vy)", flowers: ["Dạ yến thảo lam", "Hoa anh thảo hồng", "Lạp mai đỏ", "Mạn châu sa", "San hô xanh", "Ngôi sao bethlehem", "Lan phượng vĩ đỏ", "Hồng lenten vàng", "Mạch môn hồng phấn", "Hoa lộ vi trắng", "Hoa hải quỳ hồng", "Hoa poppy tím", "Hoa poppy đỏ", "Hoa poppy cam", "Cúc indo hồng", "Diên vĩ đức hồng tím", "Hồng lenten hồng", "Mạch môn sương trắng", "Hoa sao nhái tím", "Lay ơn vàng", "Thược dược hồng", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Loa kèn peru đỏ", "Đông trùng thông vàng", "Đông trùng thông tím", "Hoa thụy hương trắng tuyết", "Hoa huệ mưa thanh nhã", "Hoa mặt rồng hồng phấn", "Hồng cecil lam", "Sắc cam mùa xuân", "Mẫu đơn ánh ngọc", "Nguyệt quý mây hồng", "Nguyệt quý mây vàng", "Hương hoa diên vĩ", "Cúc mẫu đơn tím nho", "Trái tim tìm mật", "Trái tim đá quý", "Ngân hà chiếu nhụy", "Hạnh nguyệt nghỉ dưới bóng hoa", "Trái tim mộng ảo"] }
+        { name: "Mẫn hoa (Thảo Vy)", flowers: ["Dạ yến thảo lam", "Hoa anh thảo hồng", "Lạp mai đỏ", "Mạn châu sa", "San hô xanh", "Ngôi sao bethlehem", "Lan phượng vĩ đỏ", "Hồng lenten vàng", "Mạch môn hồng phấn", "Hoa lộ vi trắng", "Hoa hải quỳ hồng", "Hoa poppy tím", "Hoa poppy đỏ", "Hoa poppy cam", "Cúc indo hồng", "Diên vĩ đức hồng tím", "Hồng lenten hồng", "Mạch môn sương trắng", "Hoa sao nhái tím", "Lay ơn vàng", "Thược dược hồng", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Loa kèn peru đỏ", "Đông trùng thông vàng", "Đông trùng thông tím", "Hoa thụy hương trắng tuyết", "Hoa huệ mưa thanh nhã", "Hoa mặt rồng hồng phấn", "Hồng cecil lam", "Sắc cam mùa xuân", "Mẫu đơn ánh ngọc", "Nguyệt quý mây hồng", "Nguyệt quý mây vàng", "Hương hoa diên vĩ", "Cúc mẫu đơn tím nho", "Trái tim tìm mật", "Trái tim đá quý", "Ngân hà chiếu nhụy", "Hạnh nguyệt nghỉ dưới bóng hoa", "Trái tim mộng ảo"] },
+        { name: "Cá nướng(Thu Hà)", flowers: ["Mộc lan ngọc ngà", "Cá heo hồng", "Dạ yến thảo lam", "Hoa anh thảo xanh", "Lạp mai đỏ", "Hồng champagne", "Ngôi sao bethlehem", "Lan phượng vĩ đỏ", "Mạn đà la", "San hô cam", "Hải quỳ đỏ", "Hoa poppy tím", "Hoa lồng đèn cam", "Lan vũ nữ cam", "Hoa loa kèn hồng", "Thược dược đỏ", "Lay ơn trắng", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Thanh cúc tím", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Lạc tân phụ tím", "Thục quỳ hồng", "Hoa baby hồng"] }
     ];
 
     const xuFlowersList = rawXuList.map(item => cleanFormat(item));
@@ -172,7 +137,6 @@
     const missingBox = document.getElementById('missingBox');
     const rankBox = document.getElementById('rankBox');
     const helpBox = document.getElementById('helpBox');
-    const chibiArtBox = document.getElementById('chibiArtBox');
     const flowerInput = document.getElementById('flowerSearch');
     const defaultGardenWidgets = document.getElementById('defaultGardenWidgets');
     const searchViewArea = document.getElementById('searchViewArea');
@@ -181,8 +145,10 @@
         return membersData.filter(m => m.flowers.includes(lowerFlowerName)).map(m => m.name);
     }
 
+    // TẠO GIAO DIỆN BẢNG XẾP HẠNG ĐÓNG MỞ (13 THÀNH VIÊN)
     function buildRankList() {
         mainRankArea.innerHTML = "";
+        
         const totalMembers = membersData.length;
         mainRankArea.innerHTML = `<div style="font-size: 12px; font-weight: 700; color: #40916c; margin-bottom: 14px; background: #d8f3dc; padding: 6px 14px; border-radius: 12px; display: inline-block; border: 1px solid #b7e4c7;">🌱 Tổng số hoa của hội: ${totalMembers} thành viên</div>`;
         
@@ -197,9 +163,11 @@
         sortedRank.forEach((item, index) => {
             const rankNum = index + 1;
             const collapseItem = document.createElement('div');
+            
             let isBoy = item.name.includes("Cá chiên");
             
             collapseItem.style.cssText = "border: 1px solid #ffe3e8; border-radius: 20px; overflow: hidden; background: #fff; box-shadow: 0 4px 10px rgba(255, 182, 193, 0.08); transition: all 0.3s;";
+            
             if (isBoy) {
                 collapseItem.style.cssText = "border: 1px solid #bde0fe; border-radius: 20px; overflow: hidden; background: #fff; box-shadow: 0 4px 10px rgba(0, 48, 73, 0.04); transition: all 0.3s;";
                 collapseItem.className = "cute-rank-item gentleman-card-style";
@@ -244,6 +212,7 @@
         mainRankArea.appendChild(container);
     }
 
+    // LOGIC KHI TÌM KIẾM THEO TÊN HOA
     function searchFlowerLogic() {
         const fKey = flowerInput.value.toLowerCase().trim();
         
@@ -301,42 +270,39 @@
         missingArea.innerHTML = uniqueMissing.map(f => `<span class="xu-missing-badge">${capitalizeFirstLetter(f)}</span>`).join('');
     }
 
+    // Nút sụp mở Hướng dẫn sử dụng
     document.getElementById('btnHelp').addEventListener('click', function() {
         if (helpBox.style.display === "block") {
             helpBox.style.display = "none";
-            chibiArtBox.style.display = "block"; // Hiện lại tranh khi đóng hướng dẫn
         } else {
             helpBox.style.display = "block";
             rankBox.style.display = "none";
             missingBox.style.display = "none";
-            chibiArtBox.style.display = "none"; // Ẩn tranh khi mở hướng dẫn
             setTimeout(() => { helpBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 80);
         }
     });
 
+    // Nút sụp mở Bảng xếp hạng
     document.getElementById('btnRank').addEventListener('click', function() {
         if (rankBox.style.display === "block") {
             rankBox.style.display = "none";
-            chibiArtBox.style.display = "block"; // Hiện lại tranh khi đóng BXH
         } else {
             rankBox.style.display = "block";
             helpBox.style.display = "none";
             missingBox.style.display = "none"; 
-            chibiArtBox.style.display = "none"; // Ẩn tranh khi mở BXH
             buildRankList();
             setTimeout(() => { rankBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 80);
         }
     });
 
+    // Nút sụp mở danh sách Hoa Xu
     document.getElementById('btnXu').addEventListener('click', function() {
         if (missingBox.style.display === "block") {
             missingBox.style.display = "none";
-            chibiArtBox.style.display = "block"; // Hiện lại tranh khi đóng Hoa Xu
         } else {
             missingBox.style.display = "block";
             helpBox.style.display = "none";
             rankBox.style.display = "none"; 
-            chibiArtBox.style.display = "none"; // Ẩn tranh khi mở Hoa Xu
             setTimeout(() => { missingBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 80);
         }
     });
