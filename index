@@ -43,17 +43,24 @@
         .section-title { font-size: 13px; font-weight: 700; color: #495057; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; }
         .members-section { flex-grow: 1; }
         
-        /* ĐỊNH DẠNG THẺ TIÊU ĐỀ THÀNH VIÊN (ACCORDION) */
+        /* ĐỊNH DẠNG BẢNG XẾP HẠNG THÀNH VIÊN GỌN GÀNG */
+        .rank-container { display: flex; flex-direction: column; gap: 8px; background: #fffefea1; border: 1px solid #f0f0f0; padding: 15px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.01); }
+        .member-count-badge { font-size: 13px; font-weight: 700; color: #b7094c; margin-bottom: 8px; background: #fff0f3; padding: 8px 12px; border-radius: 10px; display: inline-block; width: max-content; }
+        .rank-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border-radius: 12px; background: #fafafa; border: 1px solid #f5f5f5; font-size: 13px; font-weight: 500; }
+        .rank-item-left { display: flex; align-items: center; gap: 8px; color: #333; }
+        .rank-number { font-weight: 700; color: #aaa; width: 20px; }
+        .rank-top1 .rank-number { color: #ffb703; }
+        .rank-top2 .rank-number { color: #fb8500; }
+        .rank-top3 .rank-number { color: #219ebc; }
+        .rank-flower-count { font-weight: 700; color: #ff4d6d; background: #fff; padding: 4px 10px; border-radius: 20px; border: 1px solid #ffccd5; font-size: 12px; }
+
+        /* ĐỊNH DẠNG CÁC Ô TÊN THÀNH VIÊN TRONG PHẦN XEM CHI TIẾT ĐÁY TRANG */
         .member-collapse-item { border: 1px solid #f0f0f0; border-radius: 16px; margin-bottom: 10px; overflow: hidden; background: #fff; box-shadow: 0 3px 6px rgba(0,0,0,0.01); }
         .member-header { padding: 15px 18px; display: flex; justify-content: space-between; align-items: center; background: #fff; cursor: pointer; font-size: 14px; font-weight: 600; color: #333; user-select: none; transition: background 0.2s; }
         .member-header:hover { background: #fff5f6; color: #ff4d6d; }
         .member-header .arrow-icon { font-size: 12px; color: #aaa; transition: transform 0.2s; }
-        
-        /* Vùng chứa danh sách hoa ẩn bên trong */
         .member-content { display: none; padding: 15px; background: #fdfcfc; border-top: 1px solid #f9f9f9; }
         .member-count-info { font-size: 12px; color: #b7094c; font-weight: 600; margin-bottom: 10px; padding-left: 2px; }
-        
-        /* Khi thẻ ở trạng thái mở rộng */
         .member-collapse-item.active .member-header { background: #fff0f3; color: #ff4d6d; }
         .member-collapse-item.active .arrow-icon { transform: rotate(180deg); color: #ff4d6d; }
         .member-collapse-item.active .member-content { display: block; }
@@ -81,23 +88,30 @@
 <div class="farm-container">
     <h2>🌸 Queenss Garden 👑</h2>
     
+    <!-- Ô TÌM KIẾM THEO TÊN HOA -->
     <div class="search-box-pink">
         <div class="search-label label-pink">🌸 Tìm theo tên hoa:</div>
         <input type="text" id="flowerSearch" class="farm-input" placeholder="Nhập tên hoa để xem ai sở hữu...">
     </div>
     
+    <!-- KHU VỰC HIỂN THỊ CHÍNH -->
     <div class="members-section">
-        <div class="section-title" id="sectionTitle">📋 Danh sách thành viên:</div>
-        <div id="mainMembersList"></div>
+        <div class="section-title" id="sectionTitle">📊 Bảng xếp hạng thành viên:</div>
+        <!-- Vùng hiển thị bảng xếp hạng mặc định -->
+        <div id="mainRankArea"></div>
+        <!-- Vùng riêng biệt hiển thị kết quả khi gõ tìm hoa -->
         <div id="searchResultArea" style="display: none;"></div>
     </div>
     
+    <!-- KHU VỰC NÚT BẤM CHÂN TRANG -->
     <div class="bottom-actions-section">
+        <!-- NÚT XEM THÀNH VIÊN -->
         <button class="btn-action" id="btnMembers">👤 Xem danh sách hoa của từng thành viên</button>
         <div id="membersBox" class="toggle-box" style="padding: 10px 0px; background: transparent; border: none;">
             <div id="bottomMembersArea"></div>
         </div>
 
+        <!-- NÚT XEM HOA XU CHƯA CÓ -->
         <button class="btn-action" id="btnXu">✨ Xem các loại hoa xu hội chưa có</button>
         <div id="missingBox" class="toggle-box">
             <div id="missingArea" class="xu-missing-container"></div>
@@ -143,7 +157,7 @@
         flowers: m.flowers.map(f => cleanFormat(f))
     }));
 
-    const mainMembersList = document.getElementById('mainMembersList');
+    const mainRankArea = document.getElementById('mainRankArea');
     const searchResultArea = document.getElementById('searchResultArea');
     const missingArea = document.getElementById('missingArea');
     const missingBox = document.getElementById('missingBox');
@@ -156,8 +170,46 @@
         return membersData.filter(m => m.flowers.includes(lowerFlowerName)).map(m => m.name);
     }
 
-    // Hàm sinh cấu trúc Accordion đóng mở độc lập chuẩn xác
-    function buildAccordionList(targetElement) {
+    // HÀM TẠO BẢNG XẾP HẠNG THÀNH VIÊN THEO SỐ LƯỢNG HOA
+    function buildRankList() {
+        mainRankArea.innerHTML = "";
+        
+        // Thống kê số lượng thành viên trong hội
+        const totalMembers = membersData.length;
+        let rankHtml = `<div class="member-count-badge">👥 Tổng số thành viên: ${totalMembers}</div>`;
+        rankHtml += `<div class="rank-container">`;
+
+        // Tính toán số hoa không trùng lặp và sắp xếp giảm dần
+        const sortedRank = membersData.map(m => {
+            const uniqueCount = new Set(m.flowers).size;
+            return { name: m.name, count: uniqueCount };
+        }).sort((a, b) => b.count - a.count);
+
+        // Đổ dữ liệu xếp hạng ra HTML
+        sortedRank.forEach((item, index) => {
+            const rankNum = index + 1;
+            let rankClass = `rank-item`;
+            if (rankNum === 1) rankClass += ' rank-top1';
+            if (rankNum === 2) rankClass += ' rank-top2';
+            if (rankNum === 3) rankClass += ' rank-top3';
+
+            rankHtml += `
+                <div class="${rankClass}">
+                    <div class="rank-item-left">
+                        <span class="rank-number">#${rankNum}</span>
+                        <span>👑 ${item.name}</span>
+                    </div>
+                    <span class="rank-flower-count">${item.count} loại hoa</span>
+                </div>
+            `;
+        });
+
+        rankHtml += `</div>`;
+        mainRankArea.innerHTML = rankHtml;
+    }
+
+    // Hàm tạo danh sách dạng Accordion đóng mở dưới đáy trang khi bấm xem chi tiết
+    function showAllMembersToArea(targetElement) {
         targetElement.innerHTML = "";
         membersData.forEach(m => {
             const uniqueFlowers = [...new Set(m.flowers)].sort((a, b) => a.localeCompare(b, 'vi'));
@@ -181,7 +233,6 @@
                 </div>
             `;
             
-            // Xử lý sự kiện click độc lập cho từng thẻ
             collapseItem.querySelector('.member-header').addEventListener('click', function() {
                 collapseItem.classList.toggle('active');
             });
@@ -190,13 +241,13 @@
         });
     }
 
-    // Logic kiểm soát việc tìm kiếm hoa
+    // Logic kiểm soát ô tìm kiếm hoa
     function searchFlowerLogic() {
         const fKey = flowerInput.value.toLowerCase().trim();
         
         if (fKey !== "") {
-            // Khi gõ tìm kiếm -> Ẩn danh sách gốc đi, chỉ hiện vùng tìm kiếm
-            mainMembersList.style.display = "none";
+            // Khi gõ tìm kiếm -> Ẩn bảng xếp hạng đi, chỉ hiển thị kết quả tìm hoa đa dòng xếp chồng
+            mainRankArea.style.display = "none";
             searchResultArea.style.display = "block";
             sectionTitle.innerText = "📋 Kết quả tìm kiếm theo tên hoa:";
             
@@ -237,10 +288,10 @@
                 searchResultArea.innerHTML = `<div class="summary-result" style="text-align:center; color:#999; background:#fafafa; border-color:#dee2e6;">❌ Không tìm thấy loại hoa nào chứa từ khóa "${flowerInput.value}"</div>`;
             }
         } else {
-            // Khi ô tìm kiếm trống -> Hiện danh sách gốc đóng mở, ẩn vùng tìm kiếm
+            // Khi ô tìm kiếm trống -> Hiện lại bảng xếp hạng mặc định
             searchResultArea.style.display = "none";
-            mainMembersList.style.display = "block";
-            sectionTitle.innerText = "📋 Danh sách thành viên:";
+            mainRankArea.style.display = "block";
+            sectionTitle.innerText = "📊 Bảng xếp hạng thành viên:";
         }
     }
 
@@ -254,19 +305,19 @@
         missingArea.innerHTML = uniqueMissing.map(f => `<span class="xu-missing">${capitalizeFirstLetter(f)}</span>`).join('');
     }
 
-    // Nút xem danh sách ở đáy trang
+    // Nút xem chi tiết hoa của từng thành viên dưới đáy trang
     document.getElementById('btnMembers').addEventListener('click', function() {
         if (membersBox.style.display === "block") {
             membersBox.style.display = "none";
         } else {
             membersBox.style.display = "block";
             missingBox.style.display = "none"; 
-            buildAccordionList(bottomMembersArea);
+            showAllMembersToArea(bottomMembersArea);
             setTimeout(() => { membersBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 80);
         }
     });
 
-    // Nút xem hoa xu ở đáy trang
+    // Nút xem hoa xu ở chân trang
     document.getElementById('btnXu').addEventListener('click', function() {
         if (missingBox.style.display === "block") {
             missingBox.style.display = "none";
@@ -279,9 +330,9 @@
 
     flowerInput.addEventListener('input', searchFlowerLogic);
 
-    // Khởi chạy mặc định ban đầu thiết lập sẵn cấu trúc
+    // Khởi chạy dữ liệu mặc định ban đầu
     updateMissingXu();
-    buildAccordionList(mainMembersList);
+    buildRankList();
     searchFlowerLogic();
 </script>
 </body>
