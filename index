@@ -25,7 +25,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
             display: flex; 
             flex-direction: column; 
-            transition: all 0.4s;
         }
 
         .header {
@@ -45,7 +44,6 @@
         .dark-mode body { background: #12121a; }
         .dark-mode h2 { color: #ff6b8a; }
 
-        /* Search */
         .search-box-pink { background: #fff5f6; border: 2px solid #ffccd5; padding: 14px; border-radius: 20px; margin-bottom: 12px; }
         .search-box-blue { background: #f0f7ff; border: 2px solid #bde0fe; padding: 14px; border-radius: 20px; margin-bottom: 20px; }
         .dark-mode .search-box-pink { background: #2a1f24; border-color: #c2255c; }
@@ -76,9 +74,9 @@
             font-size: 18px;
             cursor: pointer;
             color: #999;
+            padding: 0 5px;
         }
 
-        /* Stats */
         .stats {
             background: #fff0f5;
             padding: 14px;
@@ -90,7 +88,6 @@
         }
         .dark-mode .stats { background: #2a1f24; border-color: #6b2a44; }
 
-        /* Members */
         .section-title { 
             font-size: 13px; 
             font-weight: 700; 
@@ -133,7 +130,6 @@
         }
         .dark-mode .chip { background: #3a2a2f; border-color: #c2255c; color: #ff9eb8; }
 
-        /* Flower Result */
         .flower-result-container { display: flex; flex-direction: column; gap: 12px; }
         .summary-result { 
             padding: 18px; 
@@ -160,7 +156,6 @@
             color: #ff9eb8; 
         }
 
-        /* Missing */
         .missing-section { margin-top: 30px; padding-top: 20px; border-top: 2px dashed #eee; }
         .btn-xu { 
             width: 100%; 
@@ -206,10 +201,7 @@
         <button id="darkModeToggle" style="background:none; border:none; font-size:22px; cursor:pointer;">🌙</button>
     </div>
 
-    <!-- Thống kê -->
-    <div class="stats" id="statsArea">
-        Đang tải thống kê...
-    </div>
+    <div class="stats" id="statsArea">Đang tải thống kê...</div>
 
     <div class="search-box-pink">
         <div class="search-label label-pink">🌸 Tìm theo tên hoa:</div>
@@ -241,7 +233,6 @@
 </div>
 
 <script>
-    // ================== DATA & UTILS ==================
     function cleanFormat(str) {
         if (!str) return '';
         let txt = str.trim();
@@ -255,10 +246,9 @@
         return txt.charAt(0).toUpperCase() + txt.slice(1);
     }
 
-    const rawXuList = ["Thục quỳ đỏ", "Thục quỳ hồng", "Thục quỳ vàng", "Thanh cúc lam", "Mạch môn tím", "Hoa sao nhái trắng", "Hoa baby hồng", "H    oa baby lam", "Hoa lồng đèn đỏ", "Vạn tuế lá xanh", "Trúc đào đỏ tím", "Hải đường đỏ", "Hải đường vàng", "Đỗ quyên hồng", "Đỗ quyên vàng", "Đỗ quyên đỏ", "Tử linh lan hồng", "Tử linh lan đỏ", "Tử linh lan tím", "Hồng jacqueline trắng", "Hoa thúy châu tím", "Hoa thúy châu trắng", "Ghim cài lửa", "Ghim cài vàng mật", "Huệ hosta lam", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo tím nhạt", "Hoa anh thảo xanh nhạt", "Hoa anh thảo hồng nhạt", "Huệ hosta tím", "Mạn đà la", "Nhài nhật", "Lan phượng vĩ đỏ", "Mạch môn hồng phấn", "Hoa lộ vi vàng", "Hoa lộ vi trắng", "Cúc thược dược cam", "Cúc thược dược đen", "Lan vũ nữ vàng", "Hoa poppy himalaya vàng", "Hoa poppy himalaya xanh", "Hoa phi yến tím", "Hoa anh thảo vàng", "Hồng lenten vàng", "Cây sống đời đỏ", "Cây sống đời vàng", "Mộc hương vàng", "Mộc hương trắng", "Thược dược đỏ", "Lay ơn tím", "Tường vi hồng", "Lay ơn trắng", "Hải quỳ cam", "San coral tím", "San hô cam", "Hải quỳ đỏ", "Hoa hải quỳ tím", "Hoa hải quỳ hồng", "Hoa hải quỳ trắng", "Thược dược trắng", "Hồng môn phấn", "Thanh cúc tím", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Lạc tân phụ tím", "Tỏi trời", "Trúc đào hồng nhạt", "Địa lan trắng", "Hoa hành tím", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Mộc hương cam", "Vạn tuế lá lam", "Thanh cúc hồng", "Hoa baby trắng", "San hô tím"];
+    const rawXuList = ["Thục quỳ đỏ", "Thục quỳ hồng", "Thục quỳ vàng", "Thanh cúc lam", "Mạch môn tím", "Hoa sao nhái trắng", "Hoa baby hồng", "Hoa baby lam", "Hoa lồng đèn đỏ", "Vạn tuế lá xanh", "Trúc đào đỏ tím", "Hải đường đỏ", "Hải đường vàng", "Đỗ quyên hồng", "Đỗ quyên vàng", "Đỗ quyên đỏ", "Tử linh lan hồng", "Tử linh lan đỏ", "Tử linh lan tím", "Hồng jacqueline trắng", "Hoa thúy châu tím", "Hoa thúy châu trắng", "Ghim cài lửa", "Ghim cài vàng mật", "Huệ hosta lam", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo tím nhạt", "Hoa anh thảo xanh nhạt", "Hoa anh thảo hồng nhạt", "Huệ hosta tím", "Mạn đà la", "Nhài nhật", "Lan phượng vĩ đỏ", "Mạch môn hồng phấn", "Hoa lộ vi vàng", "Hoa lộ vi trắng", "Cúc thược dược cam", "Cúc thược dược đen", "Lan vũ nữ vàng", "Hoa poppy himalaya vàng", "Hoa poppy himalaya xanh", "Hoa phi yến tím", "Hoa anh thảo vàng", "Hồng lenten vàng", "Cây sống đời đỏ", "Cây sống đời vàng", "Mộc hương vàng", "Mộc hương trắng", "Thược dược đỏ", "Lay ơn tím", "Tường vi hồng", "Lay ơn trắng", "Hải quỳ cam", "San coral tím", "San hô cam", "Hải quỳ đỏ", "Hoa hải quỳ tím", "Hoa hải quỳ hồng", "Hoa hải quỳ trắng", "Thược dược trắng", "Hồng môn phấn", "Thanh cúc tím", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Lạc tân phụ tím", "Tỏi trời", "Trúc đào hồng nhạt", "Địa lan trắng", "Hoa hành tím", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Mộc hương cam", "Vạn tuế lá lam", "Thanh cúc hồng", "Hoa baby trắng", "San hô tím"];
 
-    const rawMembers = [ /* ... giữ nguyên dữ liệu thành viên như cũ ... */ 
-        // (Tôi giữ nguyên phần rawMembers của bạn để tránh dài, bạn copy-paste lại từ code cũ vào đây)
+    const rawMembers = [
         { name: "Cá chiên (Anh Kiệt)", flowers: ["Dạ yến thảo lam", "Hoa anh thảo hồng", "Lạp mai đỏ", "Hồng champagne", "Hoa hành tím", "Vạn tuế lá lam", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Địa lan trắng", "Mộc hương cam", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Mộc lan ngọc ngà"] },
         { name: "Tinkerbell (Cẩm Tiên cute)", flowers: ["Đăng tiêu trắng tím", "Đông trùng thông vàng", "Sen trời đầy sao", "Tuyết mai hồng", "Thược dược hồng", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Nhụy linh ánh sao", "Hoa bồ câu tím", "Gừng sen bạch ngọc", "Gừng sen ban mai", "Hoa anh thảo vàng", "Hồng lenten đỏ", "Cúc thược dược cam", "Hoa poppy himalaya xanh", "Hồng môn phấn", "Mộc hương cam", "Tử đằng lam", "Cúc indo hồng", "Diên vĩ đức kem đỏ", "Đăng tiêu cam vàng", "Dạ yến thảo lam", "Hoa anh thảo hồng", "Hoa anh thảo xanh", "Hồng champagne", "Mạn châu sa", "San hô xanh", "Ngôi sao bethlehem", "Hoa phi yến tím", "Mộc lan ngọc ngà", "Lạp mai hương phi", "Phù dung tím hộp báu", "Thọ ngọc ôm ánh sáng", "Hạc gửi ngân hà", "Tử linh phúc lộc", "Đế vương xích diễm", "Gấu hoa hồng", "Có rồng ắt lính", "Hạnh nguyệt nghỉ dưới bóng hoa", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc hồng", "Lạc tân phụ tím", "Thục quỳ hồng", "Tỏi trời", "Thanh cúc lam", "Hoa baby trắng", "Trúc đào hồng nhạt", "Ghim cài vàng mật", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo xanh nhạt"] },
         { name: "A Xa Ry (Bạch Yến)", flowers: ["Hoa anh thảo hồng", "Dạ yến thảo lam", "Hồng champagne", "Ngôi sao bethlehem", "Nhài nhật", "Lan phượng vĩ đỏ", "Diên vĩ đức trắng vàng", "Hồng môn phấn", "Mạn đà la", "Cúc indo hồng", "Hoa sao nhái tím", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Đông trùng thông vàng", "Hoa mặt rồng hồng phấn", "Mộc lan ngọc ngà", "Thỏ ngọc ôm ánh sáng", "Trái tim đá quý", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc hồng", "Lạc tân phụ tím", "Tỏi trời", "Thanh cúc lam", "Hoa baby trắng"] },
@@ -269,8 +259,6 @@
         { name: "Mộng khiết (Yến Ly)", flowers: ["Cây holly vòng xanh", "Dạ yến thảo lam", "Hoa anh thảo hồng", "Hồng champagne", "Mạch môn hồng phấn", "Hoa lộ vi trắng", "Hồng môn phấn", "Mạn đà la", "Hải quỳ cam", "Mộc hương trắng", "San hô cam", "Lay ơn trắng", "Gấu bông", "Bụp hồng cận hồng"] },
         { name: "Hải Đường (Thanh Ngân)", flowers: ["Trái tim đá quý", "Mộc lan ngọc ngà", "Cá heo hồng", "Hoa hành tím", "Lan phượng vĩ đỏ", "Hoa poppy himalaya xanh", "San hô tím", "Hoa poppy tím", "Hoa lồng đèn cam", "Lan vũ nữ cam", "Dạ yến thảo lam", "Hồng champagne", "Cúc thược dược cam", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Hoa anh thảo hồng", "Hoa anh thảo xanh", "Ngôi sao bethlehem"] },
         { name: "Mina (Mỹ Anh)", flowers: ["Ngân hà chiếu nhụy", "Mộc lan ngọc ngà", "Dạ yến thảo lam", "Hoa anh thảo hồng", "Lạp mai đỏ", "Hồng champagne", "Địa lan trắng", "Mạn đà la", "San hô tím", "Hoa poppy cam", "Thược dược trắng", "Lay ơn tím", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc tím", "Thanh cúc hồng", "Lạc tân phụ tím", "Tỏi trời"] }
-    ];
-        // Bạn copy toàn bộ mảng rawMembers từ file cũ của bạn vào đây
     ];
 
     const xuFlowersList = rawXuList.map(item => cleanFormat(item));
@@ -283,7 +271,7 @@
         return m;
     });
 
-    // ================== DOM ELEMENTS ==================
+    // DOM
     const resultArea = document.getElementById('resultArea');
     const missingArea = document.getElementById('missingArea');
     const missingBox = document.getElementById('missingBox');
@@ -294,7 +282,6 @@
 
     let isDarkMode = false;
 
-    // ================== FUNCTIONS ==================
     function getOwnersOfFlower(flowerName) {
         const target = flowerName.toLowerCase().trim();
         return membersData.filter(m => m.flowers.some(f => f.toLowerCase().trim() === target)).map(m => m.name);
@@ -331,10 +318,12 @@
             ownerInput.value = "";
             let matchedSet = new Set();
 
-            membersData.forEach(m => {
-                m.flowers.forEach(f => { if (f.toLowerCase().includes(fKey)) matchedSet.add(f); });
+            membersData.forEach(m => m.flowers.forEach(f => {
+                if (f.toLowerCase().includes(fKey)) matchedSet.add(f);
+            }));
+            xuFlowersList.forEach(xu => {
+                if (xu.toLowerCase().includes(fKey)) matchedSet.add(xu);
             });
-            xuFlowersList.forEach(xu => { if (xu.toLowerCase().includes(fKey)) matchedSet.add(xu); });
 
             const sortedMatches = Array.from(matchedSet).sort((a, b) => a.localeCompare(b, 'vi'));
 
@@ -365,7 +354,6 @@
             return;
         }
 
-        // Hiển thị danh sách thành viên (có search hoặc mặc định)
         const filteredMembers = oKey ? 
             membersData.filter(m => m.name.toLowerCase().includes(oKey)) :
             [...membersData].sort((a, b) => b.flowerCount - a.flowerCount);
@@ -395,7 +383,6 @@
             .map(f => `<span class="xu-missing">${f}</span>`).join('');
     }
 
-    // ================== EVENT LISTENERS ==================
     const debouncedRender = debounce(renderMembers);
 
     flowerInput.addEventListener('input', debouncedRender);
@@ -421,7 +408,7 @@
         darkToggle.textContent = isDarkMode ? '☀️' : '🌙';
     });
 
-    // ================== INIT ==================
+    // Khởi chạy
     updateStats();
     updateMissingXu();
     renderMembers();
