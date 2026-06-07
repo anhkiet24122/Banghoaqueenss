@@ -12,16 +12,15 @@
         
         h2 { text-align: center; margin-bottom: 20px; color: #ff4d6d; letter-spacing: 0.5px; }
 
-        /* CỘT SEARCH */
+        /* KHU VỰC SEARCH ĐẬM NÉT DỄ NHÌN */
         .search-box-pink { background: #fff5f6; border: 2px solid #ffccd5; padding: 12px; border-radius: 15px; margin-bottom: 12px; }
         .search-box-blue { background: #f0f7ff; border: 2px solid #bde0fe; padding: 12px; border-radius: 15px; margin-bottom: 20px; }
         .search-label { font-size: 11px; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
         .label-pink { color: #b7094c; }
         .label-blue { color: #003049; }
         .farm-input { width: 100%; padding: 10px 14px; font-size: 14px; border-radius: 10px; border: 1px solid #ccc; outline: none; background: #fff; color: #333; }
-        .farm-input:focus { border-color: #333; }
         
-        /* DANH SÁCH THÀNH VIÊN */
+        /* DANH SÁCH THÀNH VIÊN Ở GIỮA */
         .section-title { font-size: 12px; font-weight: 700; color: #495057; margin-bottom: 12px; text-transform: uppercase; }
         .members-section { flex-grow: 1; }
         .card { padding: 15px; border: 1px solid #f0f0f0; border-radius: 20px; margin-bottom: 15px; background: #fff; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
@@ -29,12 +28,11 @@
         .chips-container { display: flex; flex-wrap: wrap; gap: 6px; }
         .chip { display: inline-block; padding: 5px 11px; border-radius: 10px; font-size: 11px; background: #fff0f3; border: 1px solid #ffccd5; color: #a4133c; font-weight: 500; }
         
-        /* NÚT HOA XU CHƯA CÓ DƯỚI CÙNG */
+        /* NÚT HOA XU CHƯA CÓ ĐẨY XUỐNG ĐÁY */
         .missing-section { margin-top: 25px; padding-top: 20px; border-top: 2px dashed #eee; }
-        .btn-xu { width: 100%; padding: 12px; background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 12px; color: #495057; font-weight: 700; font-size: 13px; cursor: pointer; transition: 0.2s; }
-        .btn-xu:hover { background: #e9ecef; }
+        .btn-xu { width: 100%; padding: 12px; background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 12px; color: #495057; font-weight: 700; font-size: 13px; cursor: pointer; }
         .missing-box { margin-top: 12px; padding: 15px; background: #fafafa; border: 1px dashed #dee2e6; border-radius: 15px; display: none; }
-        .xu-missing { display: inline-block; padding: 4px 10px; margin: 3px; border-radius: 10px; font-size: 11px; background: #e9ecef; border: 1px solid #dee2e6; color: #495057; }
+        .xu-missing { display: inline-block; padding: 5px 10px; margin: 3px; border-radius: 10px; font-size: 11px; background: #e9ecef; border: 1px solid #dee2e6; color: #495057; }
     </style>
 </head>
 <body>
@@ -44,7 +42,7 @@
     
     <div class="search-box-pink">
         <div class="search-label label-pink">🌸 Tìm theo tên hoa:</div>
-        <input type="text" id="flowerSearch" class="farm-input" placeholder="Nhập tên hoa để tìm người sở hữu...">
+        <input type="text" id="flowerSearch" class="farm-input" placeholder="Nhập tên hoa để lọc nhanh...">
     </div>
     <div class="search-box-blue">
         <div class="search-label label-blue">👑 Tìm theo tên thành viên:</div>
@@ -80,7 +78,7 @@
     const missingArea = document.getElementById('missingArea');
     const missingBox = document.getElementById('missingBox');
 
-    // Hàm render kết quả tìm kiếm tối ưu
+    // Hàm tìm kiếm và cắt gọn hoa cực chuẩn
     function renderMembers() {
         resultArea.innerHTML = "";
         const fKey = document.getElementById('flowerSearch').value.toLowerCase().trim();
@@ -89,12 +87,12 @@
         membersData.forEach(m => {
             const uniqueFlowers = [...new Set(m.flowers.map(f => toTitleCase(f)))];
             
-            // Tìm kiếm xem người này có sở hữu hoa khớp từ khoá không
-            const hasMatchedFlower = fKey ? uniqueFlowers.some(f => f.toLowerCase().includes(fKey)) : true;
+            // Lọc xem hoa của người này có khớp từ khóa tìm kiếm không
+            const matchFlower = fKey ? uniqueFlowers.some(f => f.toLowerCase().includes(fKey)) : true;
             const matchOwner = m.name.toLowerCase().includes(oKey);
             
-            if (hasMatchedFlower && matchOwner) {
-                // LỌC CHỈ HIỂN THỊ HOA ĐƯỢC SEARCH (Nếu có gõ từ khóa ô hoa)
+            if (matchFlower && matchOwner) {
+                // Nếu đang gõ ô hoa, chỉ giữ lại đúng bông hoa khớp từ khóa đó
                 const flowersToDisplay = fKey 
                     ? uniqueFlowers.filter(f => f.toLowerCase().includes(fKey))
                     : uniqueFlowers;
@@ -133,6 +131,7 @@
     document.getElementById('flowerSearch').addEventListener('input', renderMembers);
     document.getElementById('ownerSearch').addEventListener('input', renderMembers);
 
+    // Chạy đồng bộ ngay từ đầu
     updateMissingXu();
     renderMembers();
 </script>
