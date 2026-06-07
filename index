@@ -22,7 +22,7 @@
         
         h2 { text-align: center; margin-bottom: 25px; color: #ff4d6d; letter-spacing: 0.5px; font-size: 24px; }
 
-        /* Ô TÌM KIẾM THEO TÊN HOA (ĐÃ XÓA HOÀN TOÀN Ô THÀNH VIÊN) */
+        /* Ô TÌM KIẾM THEO TÊN HOA (ĐÃ XÓA Ô THÀNH VIÊN) */
         .search-box-pink { background: #fff5f6; border: 2px solid #ffccd5; padding: 14px; border-radius: 20px; margin-bottom: 25px; }
         .search-label { font-size: 11px; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
         .label-pink { color: #b7094c; }
@@ -54,7 +54,7 @@
         .rank-top3 .rank-number { color: #219ebc; }
         .rank-flower-count { font-weight: 700; color: #ff4d6d; background: #fff; padding: 4px 10px; border-radius: 20px; border: 1px solid #ffccd5; font-size: 12px; }
 
-        /* ĐỊNH DẠNG THÈ TIÊN ĐÓNG MỞ (KHI BẤM NÚT ĐÁY TRANG) */
+        /* ĐỊNH DẠNG THẺ TÊN ĐÓNG MỞ DƯỚI ĐÁY TRANG */
         .member-collapse-item { border: 1px solid #f0f0f0; border-radius: 16px; margin-bottom: 10px; overflow: hidden; background: #fff; box-shadow: 0 3px 6px rgba(0,0,0,0.01); }
         .member-header { padding: 15px 18px; display: flex; justify-content: space-between; align-items: center; background: #fff; cursor: pointer; font-size: 14px; font-weight: 600; color: #333; user-select: none; transition: background 0.2s; }
         .member-header:hover { background: #fff5f6; color: #ff4d6d; }
@@ -199,7 +199,7 @@
         mainRankArea.innerHTML = rankHtml;
     }
 
-    // 2. HÀM TẠO DANH SÁCH CHI TIẾT DẠNG ACCORDION
+    // 2. HÀM TẠO DANH SÁCH CHI TIẾT DẠNG ACCORDION ĐÓNG MỞ
     function showAllMembersToArea(targetElement) {
         targetElement.innerHTML = "";
         membersData.forEach(m => {
@@ -232,7 +232,7 @@
         });
     }
 
-    // 3. LOGIC XỬ LÝ KHI GÕ Ô TÌM KIẾM TÊN HOA (ĐÃ FIX LỖI STYLE TRÙNG)
+    // 3. LOGIC XỬ LÝ KHI GÕ TÌM HOA (ĐÃ FIX KHỎI LỖI PHÁT SINH CRASH)
     function searchFlowerLogic() {
         const fKey = flowerInput.value.toLowerCase().trim();
         
@@ -317,7 +317,7 @@
 
     flowerInput.addEventListener('input', searchFlowerLogic);
 
-    // Khởi tạo chạy ban đầu
+    // Chạy mặc định ban đầu
     updateMissingXu();
     buildRankList();
     searchFlowerLogic();
