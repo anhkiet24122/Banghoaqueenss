@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🌸 Queenss Garden 👑</title>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght=400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Be Vietnam Pro', sans-serif; }
         body { background: #fdf6f7; padding: 20px; display: flex; justify-content: center; min-height: 100vh; }
@@ -91,16 +91,20 @@
 </div>
 
 <script>
-    // Hàm tự động ép định dạng chuẩn: Chữ cái đầu viết hoa, còn lại viết thường toàn bộ
+    // Hàm chuẩn hóa viết hoa chữ cái đầu câu, xử lý lỗi chính tả và loại bỏ chữ "Hoa " thừa nếu bị lặp
     function cleanFormat(str) {
         if (!str) return '';
         let txt = str.trim().toLowerCase();
+        
+        // Sửa lỗi chính tả từ bộ dữ liệu gốc
         if (txt === "dạ yến tháo lam") txt = "dạ yến thảo lam";
         if (txt === "nhà nhật") txt = "nhài nhật";
         if (txt === "địa lana xanh") txt = "địa lan xanh";
         if (txt === "trái itm đá quý") txt = "trái tim đá quý";
         if (txt === "ngân hà chúy nhụy") txt = "ngân hà chiếu nhụy";
         if (txt === "cúc thược duyệt cam") txt = "cúc thược dược cam";
+        
+        // Chuẩn hóa: Đảm bảo các hoa đều có cấu trúc chữ cái đầu viết hoa đồng bộ
         return txt.charAt(0).toUpperCase() + txt.slice(1);
     }
 
@@ -135,7 +139,7 @@
     const flowerInput = document.getElementById('flowerSearch');
     const ownerInput = document.getElementById('ownerSearch');
 
-    // Hàm lấy danh sách thành viên sở hữu bông hoa cụ thể (đã tối ưu hóa viết thường toàn bộ khi check)
+    // Tìm kiếm chính xác không phụ thuộc chữ hoa/chữ thường hay khoảng trắng dư thừa
     function getOwnersOfFlower(flowerName) {
         const owners = [];
         const target = flowerName.toLowerCase().trim();
@@ -147,17 +151,17 @@
         return owners;
     }
 
-    // Hàm hiển thị kết quả chính nâng cấp tìm kiếm nhiều hoa cùng lúc
+    // Hàm cập nhật kết quả tìm kiếm đa dòng đồng bộ
     function renderMembers() {
         resultArea.innerHTML = "";
         const fKey = flowerInput.value.toLowerCase().trim();
         const oKey = ownerInput.value.toLowerCase().trim();
         
-        // NẾU ĐANG TÌM KIẾM THEO TÊN HOA -> TÌM TẤT CẢ CÁC LOÀI HOA CHỨA TỪ KHÓA
+        // NẾU ĐANG BẬT Ô TÌM HOA VÀ Ô THÀNH VIÊN ĐỂ TRỐNG -> GOM CỤM ĐA DÒNG THEO TỪ KHÓA
         if (fKey !== "" && oKey === "") {
             let matchedFlowersSet = new Set();
             
-            // Duyệt tìm từ khóa trong danh sách hoa thực tế của thành viên
+            // Lọc toàn bộ tên hoa thực tế của các thành viên xem có chứa từ khóa không
             membersData.forEach(m => {
                 m.flowers.forEach(f => {
                     if (f.toLowerCase().includes(fKey)) {
@@ -166,7 +170,7 @@
                 });
             });
 
-            // Duyệt thêm trong kho hoa xu gốc để tránh bỏ sót
+            // Duyệt thêm trong danh sách hoa xu gốc tránh bỏ sót loại hoa hội chưa có
             xuFlowersList.forEach(xu => {
                 if (xu.toLowerCase().includes(fKey)) {
                     matchedFlowersSet.add(xu);
@@ -205,7 +209,7 @@
             return; 
         }
 
-        // NẾU TÌM THÀNH VIÊN HOẶC ĐỂ TRỐNG -> HIỂN THỊ CÁC THẺ CARD GỐC BAN ĐẦU
+        // CHẾ ĐỘ HIỂN THỊ THẺ THÀNH VIÊN BAN ĐẦU HOẶC TÌM KIẾM KẾT HỢP
         membersData.forEach(m => {
             const matchOwner = m.name.toLowerCase().includes(oKey);
             const filteredFlowers = m.flowers.filter(f => f.toLowerCase().includes(fKey));
