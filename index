@@ -22,7 +22,7 @@
         
         h2 { text-align: center; margin-bottom: 25px; color: #ff4d6d; letter-spacing: 0.5px; font-size: 24px; }
 
-        /* Ô TÌM KIẾM THEO TÊN HOA */
+        /* Ô TÌM KIẾM THEO TÊN HOA (ĐÃ XÓA HOÀN TOÀN Ô THÀNH VIÊN MÀU XANH) */
         .search-box-pink { background: #fff5f6; border: 2px solid #ffccd5; padding: 14px; border-radius: 20px; margin-bottom: 25px; }
         .search-label { font-size: 11px; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
         .label-pink { color: #b7094c; }
@@ -43,10 +43,10 @@
         .section-title { font-size: 13px; font-weight: 700; color: #495057; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; }
         .members-section { flex-grow: 1; }
         
-        /* ĐỊNH DẠNG BẢNG XẾP HẠNG THÀNH VIÊN GỌN GÀNG */
-        .rank-container { display: flex; flex-direction: column; gap: 8px; background: #fffefea1; border: 1px solid #f0f0f0; padding: 15px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.01); }
-        .member-count-badge { font-size: 13px; font-weight: 700; color: #b7094c; margin-bottom: 8px; background: #fff0f3; padding: 8px 12px; border-radius: 10px; display: inline-block; width: max-content; }
-        .rank-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border-radius: 12px; background: #fafafa; border: 1px solid #f5f5f5; font-size: 13px; font-weight: 500; }
+        /* ĐỊNH DẠNG BẢNG XẾP HẠNG THÀNH VIÊN MÀN HÌNH CHÍNH */
+        .rank-container { display: flex; flex-direction: column; gap: 8px; background: #fff; border: 1px solid #f5f5f5; padding: 15px; border-radius: 20px; }
+        .member-count-badge { font-size: 13px; font-weight: 700; color: #b7094c; margin-bottom: 12px; background: #fff0f3; padding: 8px 12px; border-radius: 10px; display: inline-block; width: max-content; }
+        .rank-item { display: flex; justify-content: space-between; align-items: center; padding: 11px 14px; border-radius: 12px; background: #fafafa; border: 1px solid #f0f0f0; font-size: 13px; font-weight: 500; }
         .rank-item-left { display: flex; align-items: center; gap: 8px; color: #333; }
         .rank-number { font-weight: 700; color: #aaa; width: 20px; }
         .rank-top1 .rank-number { color: #ffb703; }
@@ -54,7 +54,7 @@
         .rank-top3 .rank-number { color: #219ebc; }
         .rank-flower-count { font-weight: 700; color: #ff4d6d; background: #fff; padding: 4px 10px; border-radius: 20px; border: 1px solid #ffccd5; font-size: 12px; }
 
-        /* ĐỊNH DẠNG CÁC Ô TÊN THÀNH VIÊN TRONG PHẦN XEM CHI TIẾT ĐÁY TRANG */
+        /* ĐỊNH DẠNG Ô TÊN THÀNH VIÊN ĐÓNG MỞ (KHI BẤM NÚT CHI TIẾT ĐÁY TRANG) */
         .member-collapse-item { border: 1px solid #f0f0f0; border-radius: 16px; margin-bottom: 10px; overflow: hidden; background: #fff; box-shadow: 0 3px 6px rgba(0,0,0,0.01); }
         .member-header { padding: 15px 18px; display: flex; justify-content: space-between; align-items: center; background: #fff; cursor: pointer; font-size: 14px; font-weight: 600; color: #333; user-select: none; transition: background 0.2s; }
         .member-header:hover { background: #fff5f6; color: #ff4d6d; }
@@ -65,16 +65,16 @@
         .member-collapse-item.active .arrow-icon { transform: rotate(180deg); color: #ff4d6d; }
         .member-collapse-item.active .member-content { display: block; }
 
-        /* Chips hiển thị hoa */
+        /* Chips hiển thị danh sách hoa */
         .chips-container { display: flex; flex-wrap: wrap; gap: 8px; }
         .chip { display: inline-block; padding: 6px 12px; border-radius: 12px; font-size: 12px; background: #fff; border: 1px solid #ffccd5; color: #a4133c; font-weight: 500; }
         
-        /* KẾT QUẢ TÌM HOA ĐA DÒNG XẾP CHỒNG */
+        /* KẾT QUẢ TÌM HOA ĐA DÒNG XẾP CHỒNG KHI SEARCH */
         .flower-result-container { display: flex; flex-direction: column; gap: 12px; width: 100%; }
         .summary-result { padding: 18px; border: 2px solid #ffccd5; border-radius: 20px; background: #fff5f6; color: #b7094c; font-size: 13px; line-height: 1.6; }
         .summary-result strong { color: #ff4d6d; font-weight: 700; }
 
-        /* KHU VỰC CÁC NÚT BẤM CHÂN TRANG */
+        /* KHU VỰC NÚT BẤM DƯỚI ĐÁY TRANG */
         .bottom-actions-section { margin-top: 25px; padding-top: 20px; border-top: 2px dashed #eee; display: flex; flex-direction: column; gap: 12px; }
         .btn-action { width: 100%; padding: 14px; background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 15px; color: #495057; font-weight: 700; font-size: 13px; cursor: pointer; text-align: center; }
         
@@ -88,30 +88,25 @@
 <div class="farm-container">
     <h2>🌸 Queenss Garden 👑</h2>
     
-    <!-- Ô TÌM KIẾM THEO TÊN HOA -->
     <div class="search-box-pink">
         <div class="search-label label-pink">🌸 Tìm theo tên hoa:</div>
         <input type="text" id="flowerSearch" class="farm-input" placeholder="Nhập tên hoa để xem ai sở hữu...">
     </div>
     
-    <!-- KHU VỰC HIỂN THỊ CHÍNH -->
     <div class="members-section">
         <div class="section-title" id="sectionTitle">📊 Bảng xếp hạng thành viên:</div>
-        <!-- Vùng hiển thị bảng xếp hạng mặc định -->
+        
         <div id="mainRankArea"></div>
-        <!-- Vùng riêng biệt hiển thị kết quả khi gõ tìm hoa -->
+        
         <div id="searchResultArea" style="display: none;"></div>
     </div>
     
-    <!-- KHU VỰC NÚT BẤM CHÂN TRANG -->
     <div class="bottom-actions-section">
-        <!-- NÚT XEM THÀNH VIÊN -->
         <button class="btn-action" id="btnMembers">👤 Xem danh sách hoa của từng thành viên</button>
         <div id="membersBox" class="toggle-box" style="padding: 10px 0px; background: transparent; border: none;">
             <div id="bottomMembersArea"></div>
         </div>
 
-        <!-- NÚT XEM HOA XU CHƯA CÓ -->
         <button class="btn-action" id="btnXu">✨ Xem các loại hoa xu hội chưa có</button>
         <div id="missingBox" class="toggle-box">
             <div id="missingArea" class="xu-missing-container"></div>
@@ -120,6 +115,7 @@
 </div>
 
 <script>
+    // Hàm chuẩn hóa dọn dẹp kí tự chữ thường đồng bộ hệ thống
     function cleanFormat(str) {
         if (!str) return '';
         let txt = str.trim().toLowerCase();
@@ -132,12 +128,15 @@
         return txt;
     }
 
+    // Hàm viết hoa chữ cái đầu tiên phục vụ hiển thị chuỗi
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    // Kho dữ liệu hoa xu hệ thống
     const rawXuList = ["Thục quỳ đỏ", "Thục quỳ hồng", "Thục quỳ vàng", "Thanh cúc lam", "Mạch môn tím", "Hoa sao nhái trắng", "Hoa baby hồng", "Hoa baby lam", "Hoa lồng đèn đỏ", "Vạn tuế lá xanh", "Trúc đào đỏ tím", "Hải đường đỏ", "Hải đường vàng", "Đỗ quyên hồng", "Đỗ quyên vàng", "Đỗ quyên đỏ", "Tử linh lan hồng", "Tử linh lan đỏ", "Tử linh lan tím", "Hồng jacqueline trắng", "Hoa thúy châu tím", "Hoa thúy châu trắng", "Ghim cài lửa", "Ghim cài vàng mật", "Huệ hosta lam", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo tím nhạt", "Hoa anh thảo xanh nhạt", "Hoa anh thảo hồng nhạt", "Huệ hosta tím", "Mạn đà la", "Nhài nhật", "Lan phượng vĩ đỏ", "Mạch môn hồng phấn", "Hoa lộ vi vàng", "Hoa lộ vi trắng", "Cúc thược dược cam", "Cúc thược dược đen", "Lan vũ nữ vàng", "Hoa poppy himalaya vàng", "Hoa poppy himalaya xanh", "Hoa phi yến tím", "Hoa anh thảo vàng", "Hồng lenten vàng", "Cây sống đời đỏ", "Cây sống đời vàng", "Mộc hương vàng", "Mộc hương trắng", "Thược dược đỏ", "Lay ơn tím", "Tường vi hồng", "Lay ơn trắng", "Hải quỳ cam", "San coral tím", "San hô cam", "Hải quỳ đỏ", "Hoa hải quỳ tím", "Hoa hải quỳ hồng", "Hoa hải quỳ trắng", "Thược dược trắng", "Hồng môn phấn", "Thanh cúc tím", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Lạc tân phụ tím", "Tỏi trời", "Trúc đào hồng nhạt", "Địa lan trắng", "Hoa hành tím", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Mộc hương cam", "Vạn tuế lá lam", "Thanh cúc hồng", "Hoa baby trắng", "San hô tím"];
 
+    // Kho dữ liệu chuẩn 10 thành viên (Đã sửa gấu gấu hồng -> gấu hoa hồng ở Cẩm Tiên xinh)
     const rawMembers = [
         { name: "Cá chiên (Anh Kiệt)", flowers: ["Dạ yến thảo lam", "Hoa anh thảo hồng", "Lạp mai đỏ", "Hồng champagne", "Hoa hành tím", "Vạn tuế lá lam", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Địa lan trắng", "Mộc hương cam", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Mộc lan ngọc ngà"] },
         { name: "Tinkerbell (Cẩm Tiên cute)", flowers: ["Đăng tiêu trắng tím", "Đông trùng thông vàng", "Sen trời đầy sao", "Tuyết mai hồng", "Thược dược hồng", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Nhụy linh ánh sao", "Hoa bồ câu tím", "Gừng sen bạch ngọc", "Gừng sen ban mai", "Hoa anh thảo vàng", "Hồng lenten đỏ", "Cúc thược dược cam", "Hoa poppy himalaya xanh", "Hồng môn phấn", "Mộc hương cam", "Tử đằng lam", "Cúc indo hồng", "Diên vĩ đức kem đỏ", "Đăng tiêu cam vàng", "Dạ yến thảo lam", "Hoa anh thảo hồng", "Hoa anh thảo xanh", "Hồng champagne", "Mạn châu sa", "San hô xanh", "Ngôi sao bethlehem", "Hoa phi yến tím", "Mộc lan ngọc ngà", "Lạp mai hương phi", "Phù dung tím hộp báu", "Thọ ngọc ôm ánh sáng", "Hạc gửi ngân hà", "Tử linh phúc lộc", "Đế vương xích diễm", "Gấu hoa hồng", "Có rồng ắt lính", "Hạnh nguyệt nghỉ dưới bóng hoa", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc hồng", "Lạc tân phụ tím", "Thục quỳ hồng", "Tỏi trời", "Thanh cúc lam", "Hoa baby trắng", "Trúc đào hồng nhạt", "Ghim cài vàng mật", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo xanh nhạt"] },
@@ -170,22 +169,21 @@
         return membersData.filter(m => m.flowers.includes(lowerFlowerName)).map(m => m.name);
     }
 
-    // HÀM TẠO BẢNG XẾP HẠNG THÀNH VIÊN THEO SỐ LƯỢNG HOA
+    // 1. HÀM TẠO BẢNG XẾP HẠNG THÀNH VIÊN TRÊN MÀN HÌNH CHÍNH (ĐÚNG Ý BẠN)
     function buildRankList() {
         mainRankArea.innerHTML = "";
         
-        // Thống kê số lượng thành viên trong hội
         const totalMembers = membersData.length;
         let rankHtml = `<div class="member-count-badge">👥 Tổng số thành viên: ${totalMembers}</div>`;
         rankHtml += `<div class="rank-container">`;
 
-        // Tính toán số hoa không trùng lặp và sắp xếp giảm dần
+        // Tính toán số hoa không trùng lặp của từng người và sắp xếp giảm dần
         const sortedRank = membersData.map(m => {
             const uniqueCount = new Set(m.flowers).size;
             return { name: m.name, count: uniqueCount };
         }).sort((a, b) => b.count - a.count);
 
-        // Đổ dữ liệu xếp hạng ra HTML
+        // Render ra giao diện xếp hạng cực đẹp
         sortedRank.forEach((item, index) => {
             const rankNum = index + 1;
             let rankClass = `rank-item`;
@@ -208,7 +206,7 @@
         mainRankArea.innerHTML = rankHtml;
     }
 
-    // Hàm tạo danh sách dạng Accordion đóng mở dưới đáy trang khi bấm xem chi tiết
+    // 2. HÀM TẠO DANH SÁCH CHI TIẾT DẠNG ACCORDION (CHỈ HIỆN TÊN, CLICK MỚI HIỆN HOA)
     function showAllMembersToArea(targetElement) {
         targetElement.innerHTML = "";
         membersData.forEach(m => {
@@ -233,6 +231,7 @@
                 </div>
             `;
             
+            // Đăng ký sự kiện click mở rộng mượt mà độc lập
             collapseItem.querySelector('.member-header').addEventListener('click', function() {
                 collapseItem.classList.toggle('active');
             });
@@ -241,13 +240,14 @@
         });
     }
 
-    // Logic kiểm soát ô tìm kiếm hoa
+    // 3. LOGIC XỬ LÝ KHI GÕ Ô TÌM KIẾM TÊN HOA
     function searchFlowerLogic() {
         const fKey = flowerInput.value.toLowerCase().trim();
         
         if (fKey !== "") {
-            // Khi gõ tìm kiếm -> Ẩn bảng xếp hạng đi, chỉ hiển thị kết quả tìm hoa đa dòng xếp chồng
-            mainRankArea.style.display = "none";
+            // Khi gõ tìm kiếm -> Ẩn bảng xếp hạng đi, hiện kết quả gom gọn đa dòng xếp chồng
+            mainRankArea.style.style.display = "none"; // Fix lỗi đè
+            mainRankArea.setAttribute("style", "display: none;");
             searchResultArea.style.display = "block";
             sectionTitle.innerText = "📋 Kết quả tìm kiếm theo tên hoa:";
             
@@ -288,9 +288,9 @@
                 searchResultArea.innerHTML = `<div class="summary-result" style="text-align:center; color:#999; background:#fafafa; border-color:#dee2e6;">❌ Không tìm thấy loại hoa nào chứa từ khóa "${flowerInput.value}"</div>`;
             }
         } else {
-            // Khi ô tìm kiếm trống -> Hiện lại bảng xếp hạng mặc định
+            // Khi ô tìm kiếm trống -> Hiện lại bảng xếp hạng mặc định ban đầu
             searchResultArea.style.display = "none";
-            mainRankArea.style.display = "block";
+            mainRankArea.setAttribute("style", "display: block;");
             sectionTitle.innerText = "📊 Bảng xếp hạng thành viên:";
         }
     }
@@ -305,7 +305,7 @@
         missingArea.innerHTML = uniqueMissing.map(f => `<span class="xu-missing">${capitalizeFirstLetter(f)}</span>`).join('');
     }
 
-    // Nút xem chi tiết hoa của từng thành viên dưới đáy trang
+    // Nút xem danh sách chi tiết đóng/mở dưới đáy trang
     document.getElementById('btnMembers').addEventListener('click', function() {
         if (membersBox.style.display === "block") {
             membersBox.style.display = "none";
@@ -317,7 +317,7 @@
         }
     });
 
-    // Nút xem hoa xu ở chân trang
+    // Nút xem hoa xu dưới đáy trang
     document.getElementById('btnXu').addEventListener('click', function() {
         if (missingBox.style.display === "block") {
             missingBox.style.display = "none";
@@ -330,7 +330,7 @@
 
     flowerInput.addEventListener('input', searchFlowerLogic);
 
-    // Khởi chạy dữ liệu mặc định ban đầu
+    // Khởi tạo chạy lần đầu
     updateMissingXu();
     buildRankList();
     searchFlowerLogic();
