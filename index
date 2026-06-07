@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🌸 Queenss Garden 👑</title>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght=400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Be Vietnam Pro', sans-serif; }
         body { background: #fdf6f7; padding: 20px; display: flex; justify-content: center; min-height: 100vh; }
@@ -43,17 +43,17 @@
         .section-title { font-size: 13px; font-weight: 700; color: #495057; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; }
         .members-section { flex-grow: 1; }
         
-        /* THẺ TIÊU ĐỀ TÊN THÀNH VIÊN (CHỈ SỬ DỤNG THẺ TÊN BẤM ĐỂ MỞ) */
+        /* ĐỊNH DẠNG CÁC Ô TÊN THÀNH VIÊN ĐÓNG MỞ (ACCORDION) */
         .member-collapse-item { border: 1px solid #f0f0f0; border-radius: 16px; margin-bottom: 10px; overflow: hidden; background: #fff; box-shadow: 0 3px 6px rgba(0,0,0,0.01); }
         .member-header { padding: 15px 18px; display: flex; justify-content: space-between; align-items: center; background: #fff; cursor: pointer; font-size: 14px; font-weight: 600; color: #333; transition: background 0.2s; }
         .member-header:hover { background: #fff5f6; color: #ff4d6d; }
         .member-header .arrow-icon { font-size: 12px; color: #aaa; transition: transform 0.2s; }
         
-        /* Nội dung hoa xổ xuống */
+        /* Vùng nội dung hoa ẩn bên trong */
         .member-content { display: none; padding: 15px; background: #fdfcfc; border-top: 1px solid #f9f9f9; }
         .member-count-info { font-size: 12px; color: #b7094c; font-weight: 600; margin-bottom: 10px; padding-left: 2px; }
         
-        /* Trạng thái mở thẻ tên */
+        /* Khi click active sẽ bung hoa và xoay mũi tên */
         .member-collapse-item.active .member-header { background: #fff0f3; color: #ff4d6d; }
         .member-collapse-item.active .arrow-icon { transform: rotate(180deg); color: #ff4d6d; }
         .member-collapse-item.active .member-content { display: block; }
@@ -62,12 +62,12 @@
         .chips-container { display: flex; flex-wrap: wrap; gap: 8px; }
         .chip { display: inline-block; padding: 6px 12px; border-radius: 12px; font-size: 12px; background: #fff; border: 1px solid #ffccd5; color: #a4133c; font-weight: 500; }
         
-        /* KẾT QUẢ TÌM HOA ĐA DÒNG XẾP CHỒNG KHÔNG THAY ĐỔI */
+        /* KẾT QUẢ TÌM HOA ĐA DÒNG XẾP CHỒNG */
         .flower-result-container { display: flex; flex-direction: column; gap: 12px; width: 100%; }
         .summary-result { padding: 18px; border: 2px solid #ffccd5; border-radius: 20px; background: #fff5f6; color: #b7094c; font-size: 13px; line-height: 1.6; }
         .summary-result strong { color: #ff4d6d; font-weight: 700; }
 
-        /* KHU VỰC CÁC NÚT BẤM DƯỚI ĐÁY */
+        /* KHU VỰC CÁC NÚT BẤM CHÂN TRANG */
         .bottom-actions-section { margin-top: 25px; padding-top: 20px; border-top: 2px dashed #eee; display: flex; flex-direction: column; gap: 12px; }
         .btn-action { width: 100%; padding: 14px; background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 15px; color: #495057; font-weight: 700; font-size: 13px; cursor: pointer; text-align: center; }
         
@@ -93,7 +93,7 @@
     
     <div class="bottom-actions-section">
         <button class="btn-action" id="btnMembers">👤 Xem danh sách hoa của từng thành viên</button>
-        <div id="membersBox" class="toggle-box" style="padding: 10px 5px; background: transparent; border: none;">
+        <div id="membersBox" class="toggle-box" style="padding: 10px 0px; background: transparent; border: none;">
             <div id="membersArea"></div>
         </div>
 
@@ -154,13 +154,13 @@
         return membersData.filter(m => m.flowers.includes(lowerFlowerName)).map(m => m.name);
     }
 
-    // Logic Render chính
+    // Logic Render màn hình chính
     function renderMembers() {
         resultArea.innerHTML = "";
         const fKey = flowerInput.value.toLowerCase().trim();
         
         if (fKey !== "") {
-            // Khi gõ ô tìm kiếm tên hoa -> Ra kết quả đa dòng gom gọn
+            // Chế độ gõ ô tìm kiếm tên hoa -> hiện đa dòng gom gọn xếp chồng
             sectionTitle.innerText = "📋 Kết quả tìm kiếm theo tên hoa:";
             let matchedLowerSet = new Set();
             
@@ -200,19 +200,18 @@
                 resultArea.innerHTML = `<div class="summary-result" style="text-align:center; color:#999; background:#fafafa; border-color:#dee2e6;">❌ Không tìm thấy loại hoa nào chứa từ khóa "${flowerInput.value}"</div>`;
             }
         } else {
-            // Khi trống ô tìm kiếm -> Hiện danh sách chỉ bằng thẻ tên (Collapse Accordion) cực gọn
+            // Chế độ khi trống ô tìm kiếm -> CHỈ HIỆN THẺ TÊN (Click mới bung hoa)
             sectionTitle.innerText = "📋 Danh sách thành viên:";
             showAllMembersToArea(resultArea);
         }
     }
 
-    // Hàm tạo danh sách dạng Accordion (Chỉ hiện thẻ tên, click mới bung hoa)
+    // Hàm tạo danh sách dạng Accordion đóng mở thông minh
     function showAllMembersToArea(targetElement) {
         targetElement.innerHTML = "";
-        membersData.forEach((m, idx) => {
+        membersData.forEach(m => {
             const uniqueFlowers = [...new Set(m.flowers)].sort((a, b) => a.localeCompare(b, 'vi'));
             
-            // Khung cấu trúc HTML của một cụm thẻ bài rút gọn
             const collapseItem = document.createElement('div');
             collapseItem.className = 'member-collapse-item';
             
@@ -232,7 +231,7 @@
                 </div>
             `;
             
-            // Xử lý sự kiện click trực tiếp để đóng mở
+            // Xử lý sự kiện click mở rộng mượt mà
             collapseItem.querySelector('.member-header').addEventListener('click', function() {
                 collapseItem.classList.toggle('active');
             });
@@ -251,7 +250,7 @@
         missingArea.innerHTML = uniqueMissing.map(f => `<span class="xu-missing">${capitalizeFirstLetter(f)}</span>`).join('');
     }
 
-    // Nút xem danh sách hoa thành viên ở đáy trang
+    // Nút xem danh sách hoa của từng thành viên dưới đáy trang
     document.getElementById('btnMembers').addEventListener('click', function() {
         if (membersBox.style.display === "block") {
             membersBox.style.display = "none";
@@ -263,7 +262,7 @@
         }
     });
 
-    // Nút xem hoa xu ở đáy trang
+    // Nút xem hoa xu ở chân trang
     document.getElementById('btnXu').addEventListener('click', function() {
         if (missingBox.style.display === "block") {
             missingBox.style.display = "none";
@@ -276,7 +275,7 @@
 
     flowerInput.addEventListener('input', renderMembers);
 
-    // Chạy mặc định ban đầu
+    // Chạy kích hoạt dữ liệu sạch
     updateMissingXu();
     renderMembers();
 </script>
