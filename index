@@ -91,7 +91,7 @@
 </div>
 
 <script>
-    // Hàm format chuẩn hóa chữ hoa/thường
+    // Hàm format chuẩn hóa chữ hoa/thường tránh lệch kí tự
     function cleanFormat(str) {
         if (!str) return '';
         let txt = str.trim();
@@ -108,7 +108,7 @@
     // Danh sách hoa xu gốc
     const rawXuList = ["Thục quỳ đỏ", "Thục quỳ hồng", "Thục quỳ vàng", "Thanh cúc lam", "Mạch môn tím", "Hoa sao nhái trắng", "Hoa baby hồng", "Hoa baby lam", "Hoa lồng đèn đỏ", "Vạn tuế lá xanh", "Trúc đào đỏ tím", "Hải đường đỏ", "Hải đường vàng", "Đỗ quyên hồng", "Đỗ quyên vàng", "Đỗ quyên đỏ", "Tử linh lan hồng", "Tử linh lan đỏ", "Tử linh lan tím", "Hồng jacqueline trắng", "Hoa thúy châu tím", "Hoa thúy châu trắng", "Ghim cài lửa", "Ghim cài vàng mật", "Huệ hosta lam", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo tím nhạt", "Hoa anh thảo xanh nhạt", "Hoa anh thảo hồng nhạt", "Huệ hosta tím", "Mạn đà la", "Nhài nhật", "Lan phượng vĩ đỏ", "Mạch môn hồng phấn", "Hoa lộ vi vàng", "Hoa lộ vi trắng", "Cúc thược dược cam", "Cúc thược dược đen", "Lan vũ nữ vàng", "Hoa poppy himalaya vàng", "Hoa poppy himalaya xanh", "Hoa phi yến tím", "Hoa anh thảo vàng", "Hồng lenten vàng", "Cây sống đời đỏ", "Cây sống đời vàng", "Mộc hương vàng", "Mộc hương trắng", "Thược dược đỏ", "Lay ơn tím", "Tường vi hồng", "Lay ơn trắng", "Hải quỳ cam", "San coral tím", "San hô cam", "Hải quỳ đỏ", "Hoa hải quỳ tím", "Hoa hải quỳ hồng", "Hoa hải quỳ trắng", "Thược dược trắng", "Hồng môn phấn", "Thanh cúc tím", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Lạc tân phụ tím", "Tỏi trời", "Trúc đào hồng nhạt", "Địa lan trắng", "Hoa hành tím", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Mộc hương cam", "Vạn tuế lá lam", "Thanh cúc hồng", "Hoa baby trắng", "San hô tím"];
 
-    // 10 Thành viên
+    // 10 Thành viên dữ liệu gốc
     const rawMembers = [
         { name: "Cá chiên (Anh Kiệt)", flowers: ["Dạ yến thảo lam", "Hoa anh thảo hồng", "Lạp mai đỏ", "Hồng champagne", "Hoa hành tím", "Vạn tuế lá lam", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Địa lan trắng", "Mộc hương cam", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Mộc lan ngọc ngà"] },
         { name: "Tinkerbell (Cẩm Tiên cute)", flowers: ["Đăng tiêu trắng tím", "Đông trùng thông vàng", "Sen trời đầy sao", "Tuyết mai hồng", "Thược dược hồng", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Nhụy linh ánh sao", "Hoa bồ câu tím", "Gừng sen bạch ngọc", "Gừng sen ban mai", "Hoa anh thảo vàng", "Hồng lenten đỏ", "Cúc thược dược cam", "Hoa poppy himalaya xanh", "Hồng môn phấn", "Mộc hương cam", "Tử đằng lam", "Cúc indo hồng", "Diên vĩ đức kem đỏ", "Đăng tiêu cam vàng", "Dạ yến thảo lam", "Hoa anh thảo hồng", "Hoa anh thảo xanh", "Hồng champagne", "Mạn châu sa", "San hô xanh", "Ngôi sao bethlehem", "Hoa phi yến tím", "Mộc lan ngọc ngà", "Lạp mai hương phi", "Phù dung tím hộp báu", "Thọ ngọc ôm ánh sáng", "Hạc gửi ngân hà", "Tử linh phúc lộc", "Đế vương xích diễm", "Gấu hoa hồng", "Có rồng ắt lính", "Hạnh nguyệt nghỉ dưới bóng hoa", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc hồng", "Lạc tân phụ tím", "Thục quỳ hồng", "Tỏi trời", "Thanh cúc lam", "Hoa baby trắng", "Trúc đào hồng nhạt", "Ghim cài vàng mật", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo xanh nhạt"] },
@@ -139,24 +139,26 @@
         return membersData.filter(m => m.flowers.some(f => f.toLowerCase().trim() === target)).map(m => m.name);
     }
 
-    // LOGIC TÌM KIẾM ĐÃ ĐƯỢC TÁCH BIỆT RÕ RÀNG - CHẠY 100%
     function renderMembers() {
         resultArea.innerHTML = "";
         const fKey = flowerInput.value.toLowerCase().trim();
         const oKey = ownerInput.value.toLowerCase().trim();
         
-        // CHẾ ĐỘ 1: ĐANG GÕ Ô TÌM HOA (ƯU TIÊN Ô HOA TRƯỚC)
+        // CHẾ ĐỘ TÌM KIẾM THEO TÊN HOA
         if (fKey !== "") {
-            ownerInput.value = ""; // Tự động xóa ô thành viên để tránh xung đột code
-            let matchedSet = new Set();
+            ownerInput.value = ""; 
+            let matchedLowerSet = new Set();
             
-            // Tìm tất cả các loại hoa có chứa từ khóa của cả thành viên lẫn danh sách xu
+            // Ép toàn bộ về chữ thường trước để gộp trùng (Ví dụ: "gấu bông" và "gấu Bông" lọt vào đây đều thành 1 nhóm)
             membersData.forEach(m => {
-                m.flowers.forEach(f => { if (f.toLowerCase().includes(fKey)) matchedSet.add(f); });
+                m.flowers.forEach(f => { if (f.toLowerCase().includes(fKey)) matchedLowerSet.add(f.toLowerCase().trim()); });
             });
-            xuFlowersList.forEach(xu => { if (xu.toLowerCase().includes(fKey)) matchedSet.add(xu); });
+            xuFlowersList.forEach(xu => { if (xu.toLowerCase().includes(fKey)) matchedLowerSet.add(xu.toLowerCase().trim()); });
 
-            const sortedMatches = Array.from(matchedSet).sort((a, b) => a.localeCompare(b, 'vi'));
+            // Sau khi gộp trùng chữ thường, chuyển đổi lại thành chữ chuẩn hóa viết hoa đầu từ
+            const sortedMatches = Array.from(matchedLowerSet).map(lowStr => {
+                return lowStr.charAt(0).toUpperCase() + lowStr.slice(1);
+            }).sort((a, b) => a.localeCompare(b, 'vi'));
 
             if (sortedMatches.length > 0) {
                 let htmlWrapper = '<div class="flower-result-container">';
@@ -164,7 +166,7 @@
                     const ownersList = getOwnersOfFlower(flowerName);
                     let displayTitle = flowerName;
                     
-                    // Chuẩn hóa bỏ chữ "Hoa " ở đầu tiêu đề nếu cần để tránh lặp từ
+                    // Bỏ tiền tố chữ "Hoa " ở đầu tiêu đề nếu bị lặp từ
                     if (displayTitle.toLowerCase().startsWith("hoa ")) {
                         displayTitle = displayTitle.slice(4);
                     }
@@ -190,9 +192,9 @@
             return;
         }
 
-        // CHẾ ĐỘ 2: ĐANG GÕ Ô TÌM THÀNH VIÊN HOẶC TRẠNG THÁI HIỂN THỊ BAN ĐẦU
+        // CHẾ ĐỘ TÌM KIẾM THEO THÀNH VIÊN HOẶC LÚC MỚI MỞ TRANG
         if (oKey !== "") {
-            flowerInput.value = ""; // Tự động xóa ô hoa để tránh xung đột code
+            flowerInput.value = ""; 
         }
 
         membersData.forEach(m => {
@@ -233,7 +235,7 @@
     flowerInput.addEventListener('input', renderMembers);
     ownerInput.addEventListener('input', renderMembers);
 
-    // Chạy kích hoạt dữ liệu ban đầu khi vừa load trang
+    // Kích hoạt giao diện ban đầu
     updateMissingXu();
     renderMembers();
 </script>
