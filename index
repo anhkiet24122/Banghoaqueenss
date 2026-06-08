@@ -37,7 +37,7 @@
             box-shadow: none !important;
         }
 
-        /* PHẨM CAM (Nâng cấp từ phẩm vàng - rực rỡ và ấm áp) */
+        /* PHẨM CAM (Đổi từ Phẩm Vàng cũ - rực rỡ và ấm áp) */
         .tier-orange { 
             background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%) !important; 
             border: 1.5px solid #ff9800 !important; 
@@ -149,11 +149,11 @@
 
     const rawXuList = ["Thục quỳ đỏ", "Thục quỳ hồng", "Thục quỳ vàng", "Thanh cúc lam", "Mạch môn tím", "Hoa sao nhái trắng", "Hoa baby hồng", "Hoa baby lam", "Hoa lồng đèn đỏ", "Vạn tuế lá xanh", "Trúc đào đỏ tím", "Hải đường đỏ", "Hải đường vàng", "Đỗ quyên hồng", "Đỗ quyên vàng", "Đỗ quyên đỏ", "Tử linh lan hồng", "Tử linh lan đỏ", "Tử linh lan tím", "Hồng jacqueline trắng", "Hoa thúy châu tím", "Hoa thúy châu trắng", "Ghim cài lửa", "Ghim cài vàng mật", "Huệ hosta lam", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo tím nhạt", "Hoa anh thảo xanh nhạt", "Hoa anh thảo hồng nhạt", "Huệ hosta tím", "Mạn đà la", "Nhài nhật", "Lan phượng vĩ đỏ", "Mạch môn hồng phấn", "Hoa lộ vi vàng", "Hoa lộ vi trắng", "Cúc thược dược cam", "Cúc thược dược đen", "Lan vũ nữ vàng", "Hoa poppy himalaya vàng", "Hoa poppy himalaya xanh", "Hoa phi yến tím", "Hoa anh thảo vàng", "Hồng lenten vàng", "Cây sống đời đỏ", "Cây sống đời vàng", "Mộc hương vàng", "Mộc hương trắng", "Thược dược đỏ", "Lay ơn tím", "Tường vi hồng", "Lay ơn trắng", "Hải quỳ cam", "San coral tím", "San hô cam", "Hải quỳ đỏ", "Hoa hải quỳ tím", "Hoa hải quỳ hồng", "Hoa hải quỳ trắng", "Thược dược trắng", "Hồng môn phấn", "Thanh cúc tím", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Lạc tân phụ tím", "Tỏi trời", "Trúc đào hồng nhạt", "Địa lan trắng", "Hoa hành tím", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Mộc hương cam", "Vạn tuế lá lam", "Thanh cúc hồng", "Hoa baby trắng", "San hô tím"];
 
-    // DANH SÁCH PHÂN PHẨM CHÍNH XÁC (ĐÃ ĐỔI TÊN THÀNH CAM_LIST)
+    /* DANH SÁCH PHÂN PHẨM CHÍNH XÁC (Chuyển đổi đồng bộ tên biến thành ORANGE_LIST) */
     const ORANGE_LIST = ["mộc lan ngọc ngà", "thuyền tiên sông ngân", "bóng quế cành ngọc", "tùng linh chiếu rọi", "hồng cecil lam", "hồng cecil phấn", "lạp mai hương phi", "lạp mai linh lung", "mẫu đơn ánh tím", "cá heo xanh", "cá heo hồng", "cá heo trắng", "sắc cam mùa xuân", "mẫu đơn ánh ngọc", "mẫu đơn ánh xanh", "tiên nữ rải hoa", "phù dung hồng hộp báu", "phù dung cam hộp báu", "phù dung tím hộp báu", "mưa bụi cô tô", "trúc ánh sắc vàng", "nguyệt quý mây hồng", "nguyệt quý ánh vàng", "nguyệt quý sắc cam", "thỏ ngọc ôm ánh sáng", "hạc gửi ngân hà", "tử linh phúc lộc", "chương hoa mộng điệp", "sách mai điệp ảnh", "hương hoa diên vĩ", "đế vương hồng tía", "đế vương lam lưu ly", "đế vương xích diễm", "cháo ngọt sương hoa", "hương lam đêm", "gấu hoa hồng", "cừu bông ngọt ngào", "cúc mẫu đơn tím nho", "trái tim tìm mật", "trái tim đá quý", "ngọc lan lưu hương", "diều giấy đón xuân"];
     const PINK_LIST = ["ngân hà chiếu nhụy", "chép vàng vượt sóng", "thiên cung", "thanh loan bích vũ", "có rồng ắt linh", "gia nguyệt neo thuyền câu cá", "mai nguyệt huyền âm", "đình hoa đêm mộng", "liễu nguyệt én hót bên đình", "hạnh nguyệt nghỉ dưới bóng hoa", "trái tim mộng ảo", "sắc xuân núi non"];
 
-    // ĐẦY ĐỦ 16 THÀNH VIÊN TRONG HỘI
+    // DỮ LIỆU 16 THÀNH VIÊN TRONG HỘI
     const rawMembers = [
         { name: "Cá chiên (Anh Kiệt)", flowers: ["Dạ yến thảo lam", "Hoa anh thảo hồng", "Lạp mai đỏ", "Hồng champagne", "Hoa hành tím", "Vạn tuế lá lam", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Địa lan trắng", "Mộc hương cam", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Mộc lan ngọc ngà"] },
         { name: "Tinkerbell (Cẩm Tiên cute)", flowers: ["Đăng tiêu trắng tím", "Đông trùng thông vàng", "Sen trời đầy sao", "Tuyết mai hồng", "Thược dược hồng", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Nhụy linh ánh sao", "Hoa bồ câu tím", "Gừng sen bạch ngọc", "Gừng sen ban mai", "Hoa anh thảo vàng", "Hồng lenten đỏ", "Cúc thược dược cam", "Hoa poppy himalaya xanh", "Hồng môn phấn", "Mộc hương cam", "Tử đằng lam", "Cúc indo hồng", "Diên vĩ đức kem đỏ", "Đăng tiêu cam vàng", "Dạ yến thảo lam", "Hoa anh thảo hồng", "Hoa anh thảo xanh", "Hồng champagne", "Mạn châu sa", "San hô xanh", "Ngôi sao bethlehem", "Hoa phi yến tím", "Mộc lan ngọc ngà", "Lạp mai hương phi", "Phù dung tím hộp báu", "Thọ ngọc ôm ánh sáng", "Hạc gửi ngân hà", "Tử linh phúc lộc", "Đế vương xích diễm", "Gấu hoa hồng", "Có rồng ắt linh", "Hạnh nguyệt nghỉ dưới bóng hoa", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc hồng", "Lạc tân phụ tím", "Thục quỳ hồng", "Tỏi trời", "Thanh cúc lam", "Hoa baby trắng", "Trúc đào hồng nhạt", "Ghim cài vàng mật", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo xanh nhạt", "Nguyệt quý mây hồng", "trái tim đá quý"] },
@@ -193,7 +193,7 @@
         return membersData.filter(m => m.flowers.includes(lowerFlowerName)).map(m => m.name);
     }
 
-    // Xác định điểm số ưu tiên để xếp hạng hoa (Hồng = 3, Cam = 2, Thường/Trắng = 1)
+    // Xử lý điểm số phân tầng (Hồng = 3, Cam = 2, Thường = 1)
     function getFlowerWeight(flowerName) {
         const name = flowerName.toLowerCase().trim();
         if (PINK_LIST.includes(name)) return { score: 3, className: 'tier-pink' };
@@ -228,7 +228,7 @@
                 collapseItem.className = "cute-rank-item";
             }
 
-            // Ép buộc sắp xếp từ Phẩm cao xuống Phẩm thấp (Hồng -> Cam -> Trắng)
+            // Ép buộc gom nhóm và sắp xếp từ Phẩm cao xuống Phẩm thấp (Hồng -> Cam -> Trắng)
             const sortedFlowersWithTier = item.rawFlowers.map(f => {
                 const info = getFlowerWeight(f);
                 return { name: f, score: info.score, className: info.className };
@@ -247,7 +247,7 @@
                 chipsHtml += `<span class="flower-chip-item ${f.className}">${capitalizeFirstLetter(f.name)}</span>`;
             });
 
-            // Tạo dòng thống kê số lượng phẩm hiếm (Đã cập nhật tên thành Phẩm Cam)
+            // Thay đổi text thống kê nội bộ thành "Phẩm Cam" theo yêu cầu mới
             let summaryHtml = '';
             if (pinkCount > 0 || orangeCount > 0) {
                 summaryHtml = `<div class="summary-rarity-line">👑 <strong>Sở hữu phẩm hiếm:</strong> `;
