@@ -4,66 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🌸 Queenss Garden 👑</title>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght=400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Be Vietnam Pro', sans-serif; }
-        body { 
-            background: #fff0f3; 
-            background-image: radial-gradient(#ffccd5 1.5px, transparent 1.5px);
-            background-size: 20px 20px;
-            padding: 30px 20px; 
-            display: flex; 
-            justify-content: center; 
-            min-height: 100vh; 
-        }
+        body { background: #fff0f3; background-image: radial-gradient(#ffccd5 1.5px, transparent 1.5px); background-size: 20px 20px; padding: 30px 20px; display: flex; justify-content: center; min-height: 100vh; }
+        
+        .card { width: 100%; max-width: 500px; background: #ffffff; padding: 35px 25px; border-radius: 40px; box-shadow: 0 20px 45px rgba(255, 143, 163, 0.35); border: 5px double #ffb3c1; }
         .rank-content-box { display: none; padding: 18px; background: #fffdfd; border-top: 1px solid #fff0f2; }
-        .active-folder .rank-content-box { display: block !important; }
-        .active-folder .click-header-line { background: #fff0f3 !important; color: #ff4d6d !important; }
-        .active-folder.gentleman-card-style .click-header-line { background: #e0f2fe !important; color: #003049 !important; }
-        .active-folder.gentleman-card-style .rank-content-box { background: #fcfdfe !important; border-top-color: #bae6fd !important; }
+        .active-folder .rank-content-box { display: block; }
+        .active-folder .click-header-line { background: #fff0f3; color: #ff4d6d; }
+        
+        /* Màu sắc phẩm chất */
+        .tier-green { background: #cbf3d6; border: 1px solid #b7e4c7; color: #2d6a4f; }
+        .tier-purple { background: #eebefa; border: 1px solid #d0bfff; color: #5f3dc4; }
+        .tier-orange { background: #ffe0b2; border: 1.5px solid #ff9800; color: #e65100; }
+        .tier-pink { background: #ffdeeb; border: 2px solid #ff85a1; color: #a4133c; }
 
-        .tier-green { background: linear-gradient(135deg, #ebfbee 0%, #cbf3d6) !important; border: 1px solid #b7e4c7 !important; color: #2d6a4f !important; font-weight: 500; }
-        .tier-purple { background: linear-gradient(135deg, #f3f0ff 0%, #eebefa) !important; border: 1px solid #d0bfff !important; color: #5f3dc4 !important; font-weight: 500; }
-        .tier-orange { background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%) !important; border: 1.5px solid #ff9800 !important; color: #e65100 !important; font-weight: 600 !important; box-shadow: 0 2px 5px rgba(255, 152, 0, 0.15) !important; }
-        .tier-pink { background: linear-gradient(135deg, #fff0f6 0%, #ffdeeb 100%) !important; border: 2px solid #ff85a1 !important; color: #a4133c !important; font-weight: 700 !important; box-shadow: 0 3px 8px rgba(255, 133, 161, 0.3) !important; }
-
-        .flower-chip-item { display: inline-block; padding: 6px 12px; border-radius: 14px; font-size: 11.5px; margin: 3px; }
+        .flower-chip-item { display: inline-block; padding: 6px 12px; border-radius: 14px; font-size: 11.5px; margin: 3px; font-weight: 500; }
         .xu-missing-badge { display: inline-block; padding: 6px 12px; border-radius: 14px; font-size: 11.5px; background: #fff; border: 1px solid #ffccd5; color: #a4133c; font-weight: 500; margin: 3px; }
         .summary-rarity-line { font-size: 12px; padding: 8px 12px; margin-bottom: 12px; border-radius: 12px; background: #fff5f6; border-left: 4px solid #ff4d6d; color: #4a4a4a; font-weight: 500; }
     </style>
 </head>
 <body>
 
-<div style="width: 100%; max-width: 500px; background: rgba(255, 255, 255, 0.98); padding: 35px 25px; border-radius: 40px; box-shadow: 0 20px 45px rgba(255, 143, 163, 0.35); border: 5px double #ffb3c1;">
+<div class="card">
     <h2 style="text-align: center; color: #ff4d6d; margin-bottom: 20px;">🌸 Queenss Garden 👑</h2>
     
-    <div style="background: linear-gradient(135deg, #fff5f6, #fff0f3); border: 2.5px dashed #ff758f; padding: 18px; border-radius: 28px; margin-bottom: 25px;">
-        <input type="text" id="flowerSearch" style="width: 100%; padding: 14px 18px; font-size: 14px; border-radius: 20px; border: 2px solid #ffccd5; outline: none;" placeholder="Nhập tên hoa muốn tra cứu...">
+    <div style="background: #fff5f6; border: 2.5px dashed #ff758f; padding: 18px; border-radius: 28px; margin-bottom: 25px;">
+        <input type="text" id="flowerSearch" style="width: 100%; padding: 12px; border-radius: 15px; border: 2px solid #ffccd5;" placeholder="🔍 Tìm tên hoa...">
     </div>
     
-    <div id="defaultGardenWidgets" style="display: flex; flex-direction: column; gap: 18px;">
-        <button id="btnHelp" style="width: 100%; padding: 16px; font-weight: 700; color: #fff; border: none; border-radius: 25px; background: linear-gradient(135deg, #ffca3a, #ff9f1c);">📖 Hướng dẫn sử dụng vườn hoa</button>
-        <div id="helpBox" style="display: none; padding: 20px; border: 2px dashed #ffccd5; border-radius: 28px; font-size: 13px; line-height: 1.8;">Cách xem: Tìm hoa, Xếp hạng hoặc Kiểm tra hoa xu.</div>
+    <div id="defaultGardenWidgets" style="display: flex; flex-direction: column; gap: 15px;">
+        <button id="btnHelp" style="padding: 15px; border: none; border-radius: 20px; background: #ffca3a; color: #fff; font-weight: 700;">📖 Hướng dẫn</button>
+        <div id="helpBox" style="display: none; padding: 15px; border: 1px solid #ffccd5; border-radius: 20px; font-size: 13px;">Chào mừng đến với Queenss Garden! Bạn có thể tra cứu hoa, xem bảng xếp hạng thành viên và kiểm tra các loài hoa hội còn thiếu.</div>
         
-        <button id="btnRank" style="width: 100%; padding: 16px; font-weight: 700; color: #fff; border: none; border-radius: 25px; background: linear-gradient(135deg, #ff85a1, #ff4d6d);">🏆 Xem bảng xếp hạng & Hoa của thành viên</button>
-        <div id="rankBox" style="display: none; padding-top: 15px;"><div id="mainRankArea"></div></div>
+        <button id="btnRank" style="padding: 15px; border: none; border-radius: 20px; background: #ff4d6d; color: #fff; font-weight: 700;">🏆 Bảng xếp hạng</button>
+        <div id="rankBox" style="display: none;"><div id="mainRankArea"></div></div>
         
-        <button id="btnXu" style="width: 100%; padding: 16px; font-weight: 700; color: #fff; border: none; border-radius: 25px; background: linear-gradient(135deg, #9ef01a, #70e000);">✨ Xem các loại hoa xu hội chưa có</button>
-        <div id="missingBox" style="display: none; padding-top: 15px;"><div id="missingArea" style="display: flex; flex-wrap: wrap; gap: 6px;"></div></div>
+        <button id="btnXu" style="padding: 15px; border: none; border-radius: 20px; background: #70e000; color: #fff; font-weight: 700;">✨ Xem hoa xu hội thiếu</button>
+        <div id="missingBox" style="display: none;"><div id="missingArea" style="display: flex; flex-wrap: wrap; gap: 5px; padding-top: 10px;"></div></div>
     </div>
     <div id="searchViewArea" style="display: none;"><div id="searchResultArea"></div></div>
 </div>
 
 <script>
-    function cleanFormat(str) { return str ? str.trim().toLowerCase() : ''; }
-    function capitalizeFirstLetter(string) { return string.charAt(0).toUpperCase() + string.slice(1); }
+    const clean = str => str.trim().toLowerCase();
+    const cap = str => str.charAt(0).toUpperCase() + str.slice(1);
 
+    // Dữ liệu mảng và thành viên (đã cập nhật 18 người)
     const rawXuList = ["Thục quỳ đỏ", "Thục quỳ hồng", "Thục quỳ vàng", "Thanh cúc lam", "Mạch môn tím", "Hoa sao nhái trắng", "Hoa baby hồng", "Hoa baby lam", "Hoa lồng đèn đỏ", "Vạn tuế lá xanh", "Trúc đào đỏ tím", "Hải đường đỏ", "Hải đường vàng", "Đỗ quyên hồng", "Đỗ quyên vàng", "Đỗ quyên đỏ", "Tử linh lan hồng", "Tử linh lan đỏ", "Tử linh lan tím", "Hồng jacqueline trắng", "Hoa thúy châu tím", "Hoa thúy châu trắng", "Ghim cài lửa", "Ghim cài vàng mật", "Huệ hosta lam", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo tím nhạt", "Hoa anh thảo xanh nhạt", "Hoa anh thảo hồng nhạt", "Huệ hosta tím", "Nhài nhật", "Lan phượng vĩ đỏ", "Mạch môn hồng phấn", "Hoa lộ vi vàng", "Hoa lộ vi trắng", "Cúc thược dược cam", "Cúc thược dược đen", "Lan vũ nữ vàng", "Hoa poppy himalaya vàng", "Hoa poppy himalaya xanh", "Hoa phi yến tím", "Hoa anh thảo vàng", "Hồng lenten vàng", "Cây sống đời đỏ", "Cây sống đời vàng", "Mộc hương vàng", "Mộc hương trắng", "Thược dược đỏ", "Lay ơn tím", "Tường vi hồng", "Lay ơn trắng", "Hải quỳ cam", "San hô cam", "Hải quỳ đỏ", "Hoa hải quỳ tím", "Hoa hải quỳ hồng", "Hoa hải quỳ trắng", "Thược dược trắng", "Hồng môn phấn", "Thanh cúc tím", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Lạc tân phụ tím", "Tỏi trời", "Trúc đào hồng nhạt", "Địa lan trắng", "Hoa hành tím", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Mộc hương cam", "Vạn tuế lá lam", "Thanh cúc hồng", "Hoa baby trắng", "San hô tím"];
     const PINK_LIST = ["ngân hà chiếu nhụy", "chép vàng vượt sóng", "thiên cung", "thanh loan bích vũ", "có rồng ắt linh", "gia nguyệt neo thuyền câu cá", "mai nguyệt huyền âm", "đình hoa đêm mộng", "liễu nguyệt én hót bên đình", "hạnh nguyệt nghỉ dưới bóng hoa", "trái tim mộng ảo", "sắc xuân núi non"];
     const ORANGE_LIST = ["mộc lan ngọc ngà", "thuyền tiên sông ngân", "bóng quế cành ngọc", "tùng linh chiếu rọi", "hồng cecil lam", "hồng cecil phấn", "lạp mai hương phi", "lạp mai linh lung", "mẫu đơn ánh tím", "cá heo xanh", "cá heo hồng", "cá heo trắng", "sắc cam mùa xuân", "mẫu đơn ánh ngọc", "mẫu đơn ánh xanh", "tiên nữ rải hoa", "phù dung hồng hộp báu", "phù dung cam hộp báu", "phù dung tím hộp báu", "mưa bụi cô tô", "trúc ánh sắc vàng", "nguyệt quý mây hồng", "nguyệt quý ánh vàng", "nguyệt quý sắc cam", "thỏ ngọc ôm ánh sáng", "hạc gửi ngân hà", "tử linh phúc lộc", "chương hoa mộng điệp", "sách mai điệp ảnh", "hương hoa diên vĩ", "đế vương hồng tía", "đế vương lam lưu ly", "đế vương xích diễm", "cháo ngọt sương hoa", "hương lam đêm", "gấu hoa hồng", "cừu bông ngọt ngào", "cúc mẫu đơn tím nho", "trái tim tìm mật", "trái tim đá quý", "ngọc lan lưu hương", "diều giấy đón xuân"];
     const GREEN_LIST = ["thanh cúc lam", "thục quỳ đỏ", "thục quỳ vàng", "mạch môn tím", "hoa sao nhái trắng", "hoa baby trắng", "hoa baby lam", "hoa baby hồng", "hoa lồng đèn đỏ", "vạn tuế lá xanh", "trúc đào đỏ tím", "hải đường đỏ", "hải đường vàng", "đỗ quyên hồng", "đỗ quyên vàng", "đỗ quyên đỏ", "tử linh lan hồng", "tử linh lan đỏ", "tử linh lan tím", "hồng jacqueline trắng", "hoa thúy châu tím", "hoa thúy châu trắng", "ghim cài lửa", "ghim cài vàng mật", "huệ hosta lam", "hoa báo xuân hồng", "hoa huyên tím trắng", "hoa anh thảo tím nhạt", "hoa anh thảo xanh nhạt", "hoa anh thảo hồng nhạt", "huệ hosta tím", "thanh cúc tím", "lạc tân phụ lam", "lạc tân phụ đỏ", "thanh cúc hồng", "lạc tân phụ tím", "thục quỳ hồng", "tỏi trời", "trúc đào hồng nhạt"];
 
-    const rawMembers = [
+    const membersData = [
         { name: "Cá chiên (Anh Kiệt)", flowers: ["Dạ yến thảo lam", "Hoa anh thảo hồng", "Lạp mai đỏ", "Hồng champagne", "Hoa hành tím", "Vạn tuế lá lam", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Địa lan trắng", "Mộc hương cam", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Mộc lan ngọc ngà"] },
         { name: "Tinkerbell (Cẩm Tiên cute)", flowers: ["Đăng tiêu trắng tím", "Đông trùng thông vàng", "Sen trời đầy sao", "Tuyết mai hồng", "Thược duyệt hồng", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Nhụy linh ánh sao", "Hoa bồ câu tím", "Gừng sen bạch ngọc", "Gừng sen ban mai", "Hoa anh thảo vàng", "Hồng lenten đỏ", "Cúc thược dược cam", "Hoa poppy himalaya xanh", "Hồng môn phấn", "Mộc hương cam", "Tử đằng lam", "Cúc indo hồng", "Diên vĩ đức kem đỏ", "Đăng tiêu cam vàng", "Dạ yến thảo lam", "Hoa anh thảo hồng", "Hoa anh thảo xanh", "Hồng champagne", "Mạn châu sa", "San hô xanh", "Ngôi sao bethlehem", "Hoa phi yến tím", "Mộc lan ngọc ngà", "Lạp mai hương phi", "Phù dung tím hộp báu", "Thọ ngọc ôm ánh sáng", "Hạc gửi ngân hà", "Tử linh phúc lộc", "Đế vương xích diễm", "Gấu hoa hồng", "Có rồng ắt linh", "Hạnh nguyệt nghỉ dưới bóng hoa", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc hồng", "Lạc tân phụ tím", "Thục quỳ hồng", "Tỏi trời", "Thanh cúc lam", "Hoa baby trắng", "Trúc đào hồng nhạt", "Ghim cài vàng mật", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo xanh nhạt", "Nguyệt quý mây hồng", "trái tim đá quý"] },
         { name: "A Xa Ry (Bạch Yến)", flowers: ["Hoa anh thảo hồng", "Dạ yến thảo lam", "Hồng champagne", "Ngôi sao bethlehem", "Nhài nhật", "Lan phượng vĩ đỏ", "Diên vĩ đức trắng vàng", "Hồng môn phấn", "Mạn đà la", "Cúc indo hồng", "Hoa sao nhái tím", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Đông trùng thông vàng", "Hoa mặt rồng hồng phấn", "Mộc lan ngọc ngà", "Thỏ ngọc ôm ánh sáng", "Trái tim đá quý", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc hồng", "Lạc tân phụ tím", "Tỏi trời", "Thanh cúc lam", "Hoa baby trắng"] },
@@ -82,80 +76,45 @@
         { name: "Thời Khanh (Trúc Linh)", flowers: ["Ngân Hà Chiếu Nhụy", "Cúc mẫu đơn tím nho", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Dạ yến thảo lam", "Hồng champagne", "Ngôi sao bethlehem", "Gấu bông", "Ghim cài lửa", "Tử linh lan đỏ", "Lạc tân phụ tím", "Lạc tân phụ đỏ", "Thanh cúc tím", "Lạc tân phụ lam"] },
         { name: "Sun (Thắng)", flowers: ["Cúc indo cam", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Đông trùng thông vàng", "Hoa mặt rồng hồng phấn", "Dạ yến thảo lam", "Hoa anh thảo xanh", "Lạp mai đỏ", "Mạn châu sa", "San hô xanh", "Ngôi sao bethlehem", "Vạn tuế lá lam", "Hồng lenten vàng", "Hồng môn phấn", "Trái tim mộng ảo", "Mộc lan ngọc ngà", "Sách mai điệp ảnh", "Gấu hoa hồng", "Cừu bông ngọt ngào", "Trái tim tìm mật"] },
         { name: "Tiểu linh nhi (Gia Linh)", flowers: ["Cây holly vòng xanh", "Bụp hồng cận hồng", "Thục quỳ đỏ", "Lạc tân phụ đỏ", "Lạc tân phụ tím", "Thục quỳ hồng"] }
-    ];
+    ].map(m => ({ ...m, flowers: m.flowers.map(clean) }));
 
-    const xuFlowersList = rawXuList.map(item => cleanFormat(item));
-    const membersData = rawMembers.map(m => ({ name: m.name, flowers: m.flowers.map(f => cleanFormat(f)) }));
-
-    function getFlowerWeight(flowerName) {
-        const name = flowerName.toLowerCase().trim();
-        if (name.includes("sao nhái tím")) return { score: 2, className: 'tier-purple' };
-        if (PINK_LIST.includes(name)) return { score: 4, className: 'tier-pink' };
-        if (ORANGE_LIST.includes(name)) return { score: 3, className: 'tier-orange' };
-        if (GREEN_LIST.includes(name)) return { score: 1, className: 'tier-green' };
+    const getWeight = (name) => {
+        const n = name.toLowerCase().trim();
+        if (n.includes("sao nhái tím")) return { score: 2, className: 'tier-purple' };
+        if (PINK_LIST.includes(n)) return { score: 4, className: 'tier-pink' };
+        if (ORANGE_LIST.includes(n)) return { score: 3, className: 'tier-orange' };
+        if (GREEN_LIST.includes(n)) return { score: 1, className: 'tier-green' };
         return { score: 2, className: 'tier-purple' };
-    }
-
-    function initRenderRankList() {
-        const mainRankArea = document.getElementById('mainRankArea');
-        mainRankArea.innerHTML = `<div style="font-size: 12px; font-weight: 700; color: #40916c; margin-bottom: 14px; background: #d8f3dc; padding: 6px 14px; border-radius: 12px; display: inline-block; border: 1px solid #b7e4c7;">🌱 Tổng số: ${membersData.length} thành viên</div>`;
-        const container = document.createElement('div');
-        container.style.cssText = "display: flex; flex-direction: column; gap: 12px; width: 100%;";
-        membersData.map(m => {
-            const unique = [...new Set(m.flowers)].sort((a, b) => a.localeCompare(b, 'vi'));
-            return { name: m.name, rawFlowers: unique, count: unique.length };
-        }).sort((a, b) => b.count - a.count).forEach((item, index) => {
-            const collapseItem = document.createElement('div');
-            let isBoy = item.name.includes("Cá chiên") || item.name.includes("Sun (Thắng)");
-            collapseItem.className = isBoy ? "cute-rank-item gentleman-card-style" : "cute-rank-item";
-            collapseItem.style.cssText = "border: 1px solid #ffe3e8; border-radius: 20px; overflow: hidden; background: #fff; box-shadow: 0 4px 10px rgba(255, 182, 193, 0.08);";
-            
-            const sortedFlowers = item.rawFlowers.map(f => {
-                const info = getFlowerWeight(f);
-                return { name: f, score: info.score, className: info.className };
-            }).sort((a, b) => b.score - a.score || a.name.localeCompare(b.name, 'vi'));
-
-            let pink=0, orange=0, green=0, purple=0;
-            let chipsHtml = '';
-            sortedFlowers.forEach(f => {
-                if (f.score===4) pink++; if (f.score===3) orange++; if (f.score===2) purple++; if (f.score===1) green++;
-                chipsHtml += `<span class="flower-chip-item ${f.className}">${capitalizeFirstLetter(f.name)}</span>`;
-            });
-            
-            collapseItem.innerHTML = `
-                <div class="click-header-line" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 18px; cursor: pointer;">
-                    <div style="font-size: 13.5px; ${isBoy?"color:#003049; font-weight:700;":"color:#4a4a4a;"}">#${index+1} ${isBoy?'🎩':'👑'} ${item.name}</div>
-                    <span style="font-weight:700; padding:5px 12px; border-radius:20px; font-size:11px; ${isBoy?"color:#003049; background:#e0f2fe;":"color:#ff4d6d; background:#fff5f6;"}">${item.count} loại hoa</span>
-                </div>
-                <div class="rank-content-box">
-                    <div class="summary-rarity-line">👑 ${pink>0?pink+' Hồng | ':''}${orange>0?orange+' Cam | ':''}${purple>0?purple+' Tím | ':''}${green>0?green+' Xanh':''}</div>
-                    <div style="display: flex; flex-wrap: wrap; gap: 4px;">${chipsHtml}</div>
-                </div>
-            `;
-            collapseItem.querySelector('.click-header-line').onclick = () => collapseItem.classList.toggle('active-folder');
-            container.appendChild(collapseItem);
-        });
-        mainRankArea.appendChild(container);
-    }
-    
-    document.getElementById('btnRank').onclick = () => { document.getElementById('rankBox').style.display='block'; initRenderRankList(); };
-    document.getElementById('btnHelp').onclick = () => document.getElementById('helpBox').style.display = document.getElementById('helpBox').style.display === 'block' ? 'none' : 'block';
-    document.getElementById('btnXu').onclick = () => { 
-        document.getElementById('missingBox').style.display = 'block';
-        const owned = new Set(); membersData.forEach(m => m.flowers.forEach(f => owned.add(f)));
-        const missing = xuFlowersList.filter(x => !owned.has(x));
-        document.getElementById('missingArea').innerHTML = [...new Set(missing)].sort().map(f => `<span class="xu-missing-badge">${capitalizeFirstLetter(f)}</span>`).join('');
     };
-    document.getElementById('flowerSearch').oninput = function() {
-        const val = this.value.toLowerCase().trim();
-        if(!val) { document.getElementById('searchViewArea').style.display='none'; document.getElementById('defaultGardenWidgets').style.display='flex'; return; }
-        document.getElementById('defaultGardenWidgets').style.display='none'; document.getElementById('searchViewArea').style.display='block';
-        let res = '';
-        Array.from(new Set(membersData.flatMap(m => m.flowers).filter(f => f.includes(val)).concat(xuFlowersList.filter(f => f.includes(val))))).sort().forEach(f => {
-            const owners = membersData.filter(m => m.flowers.includes(f)).map(m => m.name);
-            res += `<div style="padding:15px; margin-bottom:10px; border-radius:20px; border:2px solid #ffccd5; background:#fff5f6;">🌸 ${capitalizeFirstLetter(f)}: ${owners.length>0 ? owners.join(', ') : 'Chưa ai có'}</div>`;
+
+    const toggle = (id, box) => {
+        const isOpen = document.getElementById(box).style.display === 'block';
+        ['helpBox', 'rankBox', 'missingBox'].forEach(b => document.getElementById(b).style.display = 'none');
+        document.getElementById(box).style.display = isOpen ? 'none' : 'block';
+    };
+
+    document.getElementById('btnHelp').onclick = () => toggle('btnHelp', 'helpBox');
+    document.getElementById('btnRank').onclick = () => {
+        toggle('btnRank', 'rankBox');
+        const area = document.getElementById('mainRankArea');
+        area.innerHTML = '';
+        membersData.map(m => ({ ...m, unique: [...new Set(m.flowers)] })).sort((a,b) => b.unique.length - a.unique.length).forEach((m, i) => {
+            const div = document.createElement('div');
+            div.className = (m.name.includes("Cá chiên") || m.name.includes("Sun")) ? 'active-folder gentleman-card-style' : 'active-folder';
+            const sorted = m.unique.map(f => ({ name: f, ...getWeight(f) })).sort((a,b) => b.score - a.score);
+            let pink=0, orange=0, purple=0, green=0;
+            sorted.forEach(f => { if(f.score==4) pink++; if(f.score==3) orange++; if(f.score==2) purple++; if(f.score==1) green++; });
+            div.innerHTML = `<div class="click-header-line" style="padding:15px; cursor:pointer;">#${i+1} ${m.name} (${m.unique.length})</div>
+                             <div class="rank-content-box"><div class="summary-rarity-line">👑 ${pink} Hồng | ${orange} Cam | ${purple} Tím | ${green} Xanh</div>
+                             ${sorted.map(f => `<span class="flower-chip-item ${f.className}">${cap(f.name)}</span>`).join('')}</div>`;
+            div.querySelector('.click-header-line').onclick = () => div.classList.toggle('active-folder');
+            area.appendChild(div);
         });
-        document.getElementById('searchResultArea').innerHTML = res || 'Không tìm thấy hoa...';
+    };
+    document.getElementById('btnXu').onclick = () => {
+        toggle('btnXu', 'missingBox');
+        const owned = new Set(membersData.flatMap(m => m.flowers));
+        document.getElementById('missingArea').innerHTML = [...new Set(rawXuList.map(clean))].filter(x => !owned.has(x)).sort().map(f => `<span class="xu-missing-badge">${cap(f)}</span>`).join('');
     };
 </script>
 </body>
