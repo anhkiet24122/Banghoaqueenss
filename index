@@ -22,7 +22,7 @@
         .active-folder .rank-content-box { display: block !important; }
         .active-folder .click-header-line { background: #fff0f3 !important; color: #ff4d6d !important; }
         
-        /* Đồng bộ trạng thái mở rộng riêng cho Cá Chiên và Sun (Nam tính) */
+        /* Đồng bộ trạng thái mở rộng riêng cho các bạn Nam */
         .active-folder.gentleman-card-style .click-header-line { background: #e0f2fe !important; color: #003049 !important; }
         .active-folder.gentleman-card-style .rank-content-box { background: #fcfdfe !important; border-top-color: #bae6fd !important; }
 
@@ -138,25 +138,15 @@
 </div>
 
 <script>
+    // Hàm chuẩn hóa căn bản bắt buộc phải giữ lại giúp máy nhận diện chữ viết thường và xóa dấu cách thừa
     function cleanFormat(str) {
-        if (!str) return '';
-        let txt = str.trim().toLowerCase();
-        if (txt === "dạ yến tháo lam") return "dạ yến thảo lam";
-        if (txt === "nhà nhật") return "nhài nhật";
-        if (txt === "địa lana xanh") return "địa lan xanh";
-        if (txt === "trái itm đá quý") return "trái tim đá quý";
-        if (txt === "ngân hà chúy nhụy") return "ngân hà chiếu nhụy";
-        if (txt === "cúc thược duyệt cam") return "cúc thược dược cam";
-        if (txt === "phu dung cam hộp báu") return "phù dung cam hộp báu";
-        if (txt === "thực quỳ hồng") return "thục quỳ hồng";
-        return txt;
+        return str ? str.trim().toLowerCase() : '';
     }
 
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    // ĐÃ LOẠI BỎ "SAN CORAL TÍM" KHỎI DANH SÁCH HOA XU
     const rawXuList = ["Thục quỳ đỏ", "Thục quỳ hồng", "Thục quỳ vàng", "Thanh cúc lam", "Mạch môn tím", "Hoa sao nhái trắng", "Hoa baby hồng", "Hoa baby lam", "Hoa lồng đèn đỏ", "Vạn tuế lá xanh", "Trúc đào đỏ tím", "Hải đường đỏ", "Hải đường vàng", "Đỗ quyên hồng", "Đỗ quyên vàng", "Đỗ quyên đỏ", "Tử linh lan hồng", "Tử linh lan đỏ", "Tử linh lan tím", "Hồng jacqueline trắng", "Hoa thúy châu tím", "Hoa thúy châu trắng", "Ghim cài lửa", "Ghim cài vàng mật", "Huệ hosta lam", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo tím nhạt", "Hoa anh thảo xanh nhạt", "Hoa anh thảo hồng nhạt", "Huệ hosta tím", "Nhài nhật", "Lan phượng vĩ đỏ", "Mạch môn hồng phấn", "Hoa lộ vi vàng", "Hoa lộ vi trắng", "Cúc thược dược cam", "Cúc thược dược đen", "Lan vũ nữ vàng", "Hoa poppy himalaya vàng", "Hoa poppy himalaya xanh", "Hoa phi yến tím", "Hoa anh thảo vàng", "Hồng lenten vàng", "Cây sống đời đỏ", "Cây sống đời vàng", "Mộc hương vàng", "Mộc hương trắng", "Thược dược đỏ", "Lay ơn tím", "Tường vi hồng", "Lay ơn trắng", "Hải quỳ cam", "San hô cam", "Hải quỳ đỏ", "Hoa hải quỳ tím", "Hoa hải quỳ hồng", "Hoa hải quỳ trắng", "Thược dược trắng", "Hồng môn phấn", "Thanh cúc tím", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Lạc tân phụ tím", "Tỏi trời", "Trúc đào hồng nhạt", "Địa lan trắng", "Hoa hành tím", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Mộc hương cam", "Vạn tuế lá lam", "Thanh cúc hồng", "Hoa baby trắng", "San hô tím"];
 
     // 1. DANH SÁCH PHẨM HỒNG
@@ -168,7 +158,7 @@
     // 3. DANH SÁCH PHẨM XANH LÁ
     const GREEN_LIST = ["thanh cúc lam", "thục quỳ đỏ", "thục quỳ vàng", "mạch môn tím", "hoa sao nhái tím", "hoa baby trắng", "hoa baby lam", "hoa baby hồng", "hoa lồng đèn đỏ", "vạn tuế lá xanh", "trúc đào đỏ tím", "hải đường đỏ", "hải đường vàng", "đỗ quyên hồng", "đỗ quyên vàng", "đỗ quyên đỏ", "tử linh lan hồng", "tử linh lan đỏ", "tử linh lan tím", "hồng jacqueline trắng", "hoa thúy châu tím", "hoa thúy châu trắng", "ghim cài lửa", "ghim cài vàng mật", "huệ hosta lam", "hoa báo xuân hồng", "hoa huyên tím trắng", "hoa anh thảo tím nhạt", "hoa anh thảo xanh nhạt", "hoa anh thảo hồng nhạt", "huệ hosta tím", "thanh cúc tím", "lạc tân phụ lam", "lạc tân phụ đỏ", "thanh cúc hồng", "lạc tân phụ tím", "thục quỳ hồng", "tỏi trời", "trúc đào hồng nhạt"];
 
-    // ĐẦY ĐỦ 17 THÀNH VIÊN TRONG HỘI 
+    // ĐẦY ĐỦ 18 THÀNH VIÊN TRONG HỘI (Đã cập nhật Mẫn Hoa, Sun và Tiểu Linh Nhi)
     const rawMembers = [
         { name: "Cá chiên (Anh Kiệt)", flowers: ["Dạ yến thảo lam", "Hoa anh thảo hồng", "Lạp mai đỏ", "Hồng champagne", "Hoa hành tím", "Vạn tuế lá lam", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Địa lan trắng", "Mộc hương cam", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Mộc lan ngọc ngà"] },
         { name: "Tinkerbell (Cẩm Tiên cute)", flowers: ["Đăng tiêu trắng tím", "Đông trùng thông vàng", "Sen trời đầy sao", "Tuyết mai hồng", "Thược duyệt hồng", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Nhụy linh ánh sao", "Hoa bồ câu tím", "Gừng sen bạch ngọc", "Gừng sen ban mai", "Hoa anh thảo vàng", "Hồng lenten đỏ", "Cúc thược dược cam", "Hoa poppy himalaya xanh", "Hồng môn phấn", "Mộc hương cam", "Tử đằng lam", "Cúc indo hồng", "Diên vĩ đức kem đỏ", "Đăng tiêu cam vàng", "Dạ yến thảo lam", "Hoa anh thảo hồng", "Hoa anh thảo xanh", "Hồng champagne", "Mạn châu sa", "San hô xanh", "Ngôi sao bethlehem", "Hoa phi yến tím", "Mộc lan ngọc ngà", "Lạp mai hương phi", "Phù dung tím hộp báu", "Thọ ngọc ôm ánh sáng", "Hạc gửi ngân hà", "Tử linh phúc lộc", "Đế vương xích diễm", "Gấu hoa hồng", "Có rồng ắt linh", "Hạnh nguyệt nghỉ dưới bóng hoa", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc hồng", "Lạc tân phụ tím", "Thục quỳ hồng", "Tỏi trời", "Thanh cúc lam", "Hoa baby trắng", "Trúc đào hồng nhạt", "Ghim cài vàng mật", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo xanh nhạt", "Nguyệt quý mây hồng", "trái tim đá quý"] },
@@ -186,7 +176,8 @@
         { name: "Hari (Hải Yến)", flowers: ["Mạn châu sa", "Dạ yến thảo lam", "Ngôi sao bethlehem", "Hoa poppy himalaya vàng", "San hô tím", "Mộc lan tím", "Thược dược hồng", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Hoa bồ câu tím", "Loa kèn peru xanh", "Gừng sen ban mai", "Đăng tiêu cam vàng", "Hoa mặt rồng hồng phấn", "Hồng cecil phấn", "Mẫu đơn ánh tím", "Mưa bụi cô tô", "Sách mai điệp ảnh", "Cừu bông ngọt ngào", "Cúc mẫu đơn tím nho", "Thanh cúc tím", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc hồng", "Thục quỳ hồng", "Tỏi trời"] },
         { name: "Henniken (Hương)", flowers: ["Hạc gửi ngân hà", "Hoa hành tím", "Lan phượng vĩ đỏ", "Hồng môn phấn", "Lay ơn trắng", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Dạ yến thảo lam", "Lạp mai đỏ", "Tường vi hồng"] },
         { name: "Thời Khanh (Trúc Linh)", flowers: ["Ngân Hà Chiếu Nhụy", "Cúc mẫu đơn tím nho", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Dạ yến thảo lam", "Hồng champagne", "Ngôi sao bethlehem", "Gấu bông", "Ghim cài lửa", "Tử linh lan đỏ", "Lạc tân phụ tím", "Lạc tân phụ đỏ", "Thanh cúc tím", "Lạc tân phụ lam"] },
-        { name: "Sun (Thắng)", flowers: ["Cúc indo cam", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Đông trùng thông vàng", "Hoa mặt rồng hồng phấn", "Dạ yến thảo lam", "Hoa anh thảo xanh", "Lạp mai đỏ", "Mạn châu sa", "San hô xanh", "Ngôi sao bethlehem", "Vạn tuế lá lam", "Hồng lenten vàng", "Hồng môn phấn", "Trái tim mộng ảo", "Mộc lan ngọc ngà", "Sách mai điệp ảnh", "Gấu hoa hồng", "Cừu bông ngọt ngào", "Trái tim tìm mật"] }
+        { name: "Sun (Thắng)", flowers: ["Cúc indo cam", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Đông trùng thông vàng", "Hoa mặt rồng hồng phấn", "Dạ yến thảo lam", "Hoa anh thảo xanh", "Lạp mai đỏ", "Mạn châu sa", "San hô xanh", "Ngôi sao bethlehem", "Vạn tuế lá lam", "Hồng lenten vàng", "Hồng môn phấn", "Trái tim mộng ảo", "Mộc lan ngọc ngà", "Sách mai điệp ảnh", "Gấu hoa hồng", "Cừu bông ngọt ngào", "Trái tim tìm mật"] },
+        { name: "Tiểu linh nhi (Gia Linh)", flowers: ["Cây holly vòng xanh", "Bụp hồng cận hồng", "Thục quỳ đỏ", "Lạc tân phụ đỏ", "Lạc tân phụ tím", "Thục quỳ hồng"] }
     ];
 
     const xuFlowersList = rawXuList.map(item => cleanFormat(item));
@@ -218,7 +209,7 @@
         return { score: 2, className: 'tier-purple' };
     }
 
-    // TỐI ƯU: Render bảng xếp hạng sẵn ngay từ đầu, chỉ thực hiện 1 lần duy nhất để tối ưu hiệu năng
+    // TỐI ƯU: Chỉ render bảng xếp hạng duy nhất một lần để tăng tốc độ tải trang
     function initRenderRankList() {
         mainRankArea.innerHTML = "";
         const totalMembers = membersData.length;
@@ -373,7 +364,6 @@
         missingArea.innerHTML = uniqueMissing.map(f => `<span class="xu-missing-badge">${capitalizeFirstLetter(f)}</span>`).join('');
     }
 
-    // TỐI ƯU: Chỉ ẩn/hiện hộp Box chứ không render đi render lại gây chậm máy
     document.getElementById('btnHelp').addEventListener('click', function() {
         if (helpBox.style.display === "block") {
             helpBox.style.display = "none";
@@ -407,7 +397,7 @@
         }
     });
 
-    // Kích hoạt chạy dữ liệu ngay khi tải trang
+    // Chạy render sẵn một lần khi mở trang
     initRenderRankList();
     flowerInput.addEventListener('input', searchFlowerLogic);
     updateMissingXu();
