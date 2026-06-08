@@ -55,6 +55,18 @@
 
         .flower-chip-item { display: inline-block; padding: 6px 12px; border-radius: 14px; font-size: 11.5px; margin: 3px; }
         .xu-missing-badge { display: inline-block; padding: 6px 12px; border-radius: 14px; font-size: 11.5px; background: #fff; border: 1px solid #b7e4c7; color: #2d6a4f; font-weight: 500; margin: 3px; }
+        
+        /* Dòng thống kê phẩm phẩm chất hiếm bên trong túi hoa */
+        .summary-rarity-line {
+            font-size: 12px;
+            padding: 4px 8px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            border-left: 3px solid #ff85a1;
+            color: #555;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -112,7 +124,6 @@
 </div>
 
 <script>
-    // Hàm chuẩn hóa và sửa lỗi nhập liệu tự động trong tìm kiếm
     function cleanFormat(str) {
         if (!str) return '';
         let txt = str.trim().toLowerCase();
@@ -135,10 +146,9 @@
 
     // DANH SÁCH PHÂN PHẨM CHÍNH XÁC DO BẠN CUNG CẤP
     const GOLD_LIST = ["mộc lan ngọc ngà", "thuyền tiên sông ngân", "bóng quế cành ngọc", "tùng linh chiếu rọi", "hồng cecil lam", "hồng cecil phấn", "lạp mai hương phi", "lạp mai linh lung", "mẫu đơn ánh tím", "cá heo xanh", "cá heo hồng", "cá heo trắng", "sắc cam mùa xuân", "mẫu đơn ánh ngọc", "mẫu đơn ánh xanh", "tiên nữ rải hoa", "phù dung hồng hộp báu", "phù dung cam hộp báu", "phù dung tím hộp báu", "mưa bụi cô tô", "trúc ánh sắc vàng", "nguyệt quý mây hồng", "nguyệt quý ánh vàng", "nguyệt quý sắc cam", "thỏ ngọc ôm ánh sáng", "hạc gửi ngân hà", "tử linh phúc lộc", "chương hoa mộng điệp", "sách mai điệp ảnh", "hương hoa diên vĩ", "đế vương hồng tía", "đế vương lam lưu ly", "đế vương xích diễm", "cháo ngọt sương hoa", "hương lam đêm", "gấu hoa hồng", "cừu bông ngọt ngào", "cúc mẫu đơn tím nho", "trái tim tìm mật", "trái tim đá quý", "ngọc lan lưu hương", "diều giấy đón xuân"];
-    
     const PINK_LIST = ["ngân hà chiếu nhụy", "chép vàng vượt sóng", "thiên cung", "thanh loan bích vũ", "có rồng ắt linh", "gia nguyệt neo thuyền câu cá", "mai nguyệt huyền âm", "đình hoa đêm mộng", "liễu nguyệt én hót bên đình", "hạnh nguyệt nghỉ dưới bóng hoa", "trái tim mộng ảo", "sắc xuân núi non"];
 
-    // ĐẦY ĐỦ 16 THÀNH VIÊN TRONG HỘI (Đã sửa lỗi chữ "linh" cho Tinkerbell)
+    // ĐẦY ĐỦ 16 THÀNH VIÊN TRONG HỘI
     const rawMembers = [
         { name: "Cá chiên (Anh Kiệt)", flowers: ["Dạ yến thảo lam", "Hoa anh thảo hồng", "Lạp mai đỏ", "Hồng champagne", "Hoa hành tím", "Vạn tuế lá lam", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Địa lan trắng", "Mộc hương cam", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Mộc lan ngọc ngà"] },
         { name: "Tinkerbell (Cẩm Tiên cute)", flowers: ["Đăng tiêu trắng tím", "Đông trùng thông vàng", "Sen trời đầy sao", "Tuyết mai hồng", "Thược dược hồng", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Nhụy linh ánh sao", "Hoa bồ câu tím", "Gừng sen bạch ngọc", "Gừng sen ban mai", "Hoa anh thảo vàng", "Hồng lenten đỏ", "Cúc thược dược cam", "Hoa poppy himalaya xanh", "Hồng môn phấn", "Mộc hương cam", "Tử đằng lam", "Cúc indo hồng", "Diên vĩ đức kem đỏ", "Đăng tiêu cam vàng", "Dạ yến thảo lam", "Hoa anh thảo hồng", "Hoa anh thảo xanh", "Hồng champagne", "Mạn châu sa", "San hô xanh", "Ngôi sao bethlehem", "Hoa phi yến tím", "Mộc lan ngọc ngà", "Lạp mai hương phi", "Phù dung tím hộp báu", "Thọ ngọc ôm ánh sáng", "Hạc gửi ngân hà", "Tử linh phúc lộc", "Đế vương xích diễm", "Gấu hoa hồng", "Có rồng ắt linh", "Hạnh nguyệt nghỉ dưới bóng hoa", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc hồng", "Lạc tân phụ tím", "Thục quỳ hồng", "Tỏi trời", "Thanh cúc lam", "Hoa baby trắng", "Trúc đào hồng nhạt", "Ghim cài vàng mật", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo xanh nhạt", "Nguyệt quý mây hồng", "trái tim đá quý"] },
@@ -178,12 +188,12 @@
         return membersData.filter(m => m.flowers.includes(lowerFlowerName)).map(m => m.name);
     }
 
-    // Hàm kiểm tra và gán class màu phẩm chất chính xác tuyệt đối
-    function getTierClass(flowerName) {
+    // Hàm trả về mã điểm số phẩm chất để phục vụ việc sắp xếp
+    function getFlowerWeight(flowerName) {
         const name = flowerName.toLowerCase().trim();
-        if (PINK_LIST.includes(name)) return 'tier-pink';
-        if (GOLD_LIST.includes(name)) return 'tier-gold';
-        return 'tier-white'; // Các hoa còn lại mặc định nền trắng viền nhạt
+        if (PINK_LIST.includes(name)) return { score: 3, className: 'tier-pink' };
+        if (GOLD_LIST.includes(name)) return { score: 2, className: 'tier-gold' };
+        return { score: 1, className: 'tier-white' };
     }
 
     function buildRankList() {
@@ -213,11 +223,37 @@
                 collapseItem.className = "cute-rank-item";
             }
 
-            let chipsHtml = '';
-            item.rawFlowers.forEach(f => {
-                const tierClass = getTierClass(f);
-                chipsHtml += `<span class="flower-chip-item ${tierClass}">${capitalizeFirstLetter(f)}</span>`;
+            // Sắp xếp hoa phẩm cao xuống phẩm thấp
+            const sortedFlowersWithTier = item.rawFlowers.map(f => {
+                const info = getFlowerWeight(f);
+                return { name: f, score: info.score, className: info.className };
+            }).sort((a, b) => {
+                if (b.score !== a.score) return b.score - a.score; // Ưu tiên xếp theo phẩm (3 -> 2 -> 1)
+                return a.name.localeCompare(b.name, 'vi'); // Nếu trùng phẩm thì xếp theo A-Z
             });
+
+            // Đếm số lượng phẩm hiếm để làm dòng Thống kê
+            let pinkCount = 0;
+            let goldCount = 0;
+            let chipsHtml = '';
+
+            sortedFlowersWithTier.forEach(f => {
+                if (f.score === 3) pinkCount++;
+                if (f.score === 2) goldCount++;
+                chipsHtml += `<span class="flower-chip-item ${f.className}">${capitalizeFirstLetter(f.name)}</span>`;
+            });
+
+            // Tạo dòng thống kê phẩm hiếm
+            let summaryHtml = '';
+            if (pinkCount > 0 || goldCount > 0) {
+                summaryHtml = `<div class="summary-rarity-line">👑 <strong>Sở hữu phẩm hiếm:</strong> `;
+                let parts = [];
+                if (pinkCount > 0) parts.push(`<span style="color:#a4133c; font-weight:700;">${pinkCount} Phẩm Hồng</span>`);
+                if (goldCount > 0) parts.push(`<span style="color:#856404; font-weight:700;">${goldCount} Phẩm Vàng</span>`);
+                summaryHtml += parts.join(' và ') + `</div>`;
+            } else {
+                summaryHtml = `<div class="summary-rarity-line" style="border-left-color: #dee2e6;">🌱 Chưa sở hữu vật phẩm truyền thuyết nào.</div>`;
+            }
 
             let icon = isBoy ? '🎩' : '👑';
             let nameColorStyle = isBoy ? "color: #003049; font-weight:700;" : "color: #4a4a4a;";
@@ -237,6 +273,7 @@
                     <span class="rank-badge-pill" style="font-weight: 700; padding: 5px 12px; border-radius: 20px; font-size: 11px; ${badgeColorStyle}">${item.count} loại hoa</span>
                 </div>
                 <div class="rank-content-box">
+                    ${summaryHtml}
                     <div style="display: flex; flex-wrap: wrap; gap: 4px;">${chipsHtml}</div>
                 </div>
             `;
