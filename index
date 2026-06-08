@@ -138,7 +138,6 @@
 </div>
 
 <script>
-    // Hàm chuẩn hóa căn bản bắt buộc phải giữ lại giúp máy nhận diện chữ viết thường và xóa dấu cách thừa
     function cleanFormat(str) {
         return str ? str.trim().toLowerCase() : '';
     }
@@ -158,7 +157,7 @@
     // 3. DANH SÁCH PHẨM XANH LÁ
     const GREEN_LIST = ["thanh cúc lam", "thục quỳ đỏ", "thục quỳ vàng", "mạch môn tím", "hoa sao nhái tím", "hoa baby trắng", "hoa baby lam", "hoa baby hồng", "hoa lồng đèn đỏ", "vạn tuế lá xanh", "trúc đào đỏ tím", "hải đường đỏ", "hải đường vàng", "đỗ quyên hồng", "đỗ quyên vàng", "đỗ quyên đỏ", "tử linh lan hồng", "tử linh lan đỏ", "tử linh lan tím", "hồng jacqueline trắng", "hoa thúy châu tím", "hoa thúy châu trắng", "ghim cài lửa", "ghim cài vàng mật", "huệ hosta lam", "hoa báo xuân hồng", "hoa huyên tím trắng", "hoa anh thảo tím nhạt", "hoa anh thảo xanh nhạt", "hoa anh thảo hồng nhạt", "huệ hosta tím", "thanh cúc tím", "lạc tân phụ lam", "lạc tân phụ đỏ", "thanh cúc hồng", "lạc tân phụ tím", "thục quỳ hồng", "tỏi trời", "trúc đào hồng nhạt"];
 
-    // ĐẦY ĐỦ 18 THÀNH VIÊN TRONG HỘI (Đã cập nhật Mẫn Hoa, Sun và Tiểu Linh Nhi)
+    // ĐẦY ĐỦ ĐÚNG 18 THÀNH VIÊN TRONG HỘI (Tiểu Linh Nhi đã có mặt!)
     const rawMembers = [
         { name: "Cá chiên (Anh Kiệt)", flowers: ["Dạ yến thảo lam", "Hoa anh thảo hồng", "Lạp mai đỏ", "Hồng champagne", "Hoa hành tím", "Vạn tuế lá lam", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Địa lan trắng", "Mộc hương cam", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Mộc lan ngọc ngà"] },
         { name: "Tinkerbell (Cẩm Tiên cute)", flowers: ["Đăng tiêu trắng tím", "Đông trùng thông vàng", "Sen trời đầy sao", "Tuyết mai hồng", "Thược duyệt hồng", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Nhụy linh ánh sao", "Hoa bồ câu tím", "Gừng sen bạch ngọc", "Gừng sen ban mai", "Hoa anh thảo vàng", "Hồng lenten đỏ", "Cúc thược dược cam", "Hoa poppy himalaya xanh", "Hồng môn phấn", "Mộc hương cam", "Tử đằng lam", "Cúc indo hồng", "Diên vĩ đức kem đỏ", "Đăng tiêu cam vàng", "Dạ yến thảo lam", "Hoa anh thảo hồng", "Hoa anh thảo xanh", "Hồng champagne", "Mạn châu sa", "San hô xanh", "Ngôi sao bethlehem", "Hoa phi yến tím", "Mộc lan ngọc ngà", "Lạp mai hương phi", "Phù dung tím hộp báu", "Thọ ngọc ôm ánh sáng", "Hạc gửi ngân hà", "Tử linh phúc lộc", "Đế vương xích diễm", "Gấu hoa hồng", "Có rồng ắt linh", "Hạnh nguyệt nghỉ dưới bóng hoa", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc hồng", "Lạc tân phụ tím", "Thục quỳ hồng", "Tỏi trời", "Thanh cúc lam", "Hoa baby trắng", "Trúc đào hồng nhạt", "Ghim cài vàng mật", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo xanh nhạt", "Nguyệt quý mây hồng", "trái tim đá quý"] },
@@ -200,7 +199,7 @@
         return membersData.filter(m => m.flowers.includes(lowerFlowerName)).map(m => m.name);
     }
 
-    // Trọng số phân phẩm chuẩn xác: Xanh lá (1) -> Tím (2) -> Cam (3) -> Hồng (4)
+    // Thứ tự phân tầng: Xanh lá (1) -> Tím (2) -> Cam (3) -> Hồng (4)
     function getFlowerWeight(flowerName) {
         const name = flowerName.toLowerCase().trim();
         if (PINK_LIST.includes(name)) return { score: 4, className: 'tier-pink' };
@@ -209,7 +208,6 @@
         return { score: 2, className: 'tier-purple' };
     }
 
-    // TỐI ƯU: Chỉ render bảng xếp hạng duy nhất một lần để tăng tốc độ tải trang
     function initRenderRankList() {
         mainRankArea.innerHTML = "";
         const totalMembers = membersData.length;
@@ -260,7 +258,7 @@
                 chipsHtml += `<span class="flower-chip-item ${f.className}">${capitalizeFirstLetter(f.name)}</span>`;
             });
 
-            // Thống kê toàn bộ 4 phẩm chất sức mạnh
+            // Thống kê sức mạnh
             let summaryHtml = `<div class="summary-rarity-line">👑 <strong>Đội hình sức mạnh:</strong> `;
             let parts = [];
             if (pinkCount > 0) parts.push(`<span style="color:#a4133c; font-weight:700;">${pinkCount} Hồng</span>`);
@@ -397,7 +395,6 @@
         }
     });
 
-    // Chạy render sẵn một lần khi mở trang
     initRenderRankList();
     flowerInput.addEventListener('input', searchFlowerLogic);
     updateMissingXu();
