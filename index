@@ -228,11 +228,11 @@
         }
 
         searchResultArea.innerHTML = sortedMatches.map(lowerFlowerName => {
-            // TỐI ƯU: Tìm các thành viên sở hữu và sắp xếp theo tổng số hoa TĂNG DẦN (ít nhất -> nhiều nhất)
+            // SẮP XẾP ẨN: Vẫn sort theo tổng số hoa tăng dần, nhưng map chỉ lấy tên (bỏ phần hiển thị con số)
             const owners = membersData
                 .filter(m => m.flowers.includes(lowerFlowerName))
                 .sort((a, b) => a.totalCount - b.totalCount)
-                .map(m => `${m.name} (${m.totalCount} hoa)`);
+                .map(m => m.name);
 
             let displayTitle = capitalizeFirstLetter(lowerFlowerName);
             if (displayTitle.toLowerCase().startsWith("hoa ")) displayTitle = capitalizeFirstLetter(displayTitle.slice(4));
