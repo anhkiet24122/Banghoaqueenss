@@ -152,9 +152,10 @@
 
     const ORANGE_LIST = ["mộc lan ngọc ngà", "thuyền tiên sông ngân", "bóng quế cành ngọc", "tùng linh chiếu rọi", "hồng cecil lam", "hồng cecil phấn", "lạp mai hương phi", "lạp mai linh lung", "mẫu đơn ánh tím", "cá heo xanh", "cá heo hồng", "cá heo trắng", "sắc cam mùa xuân", "mẫu đơn ánh ngọc", "mẫu đơn ánh xanh", "tiên nữ rải hoa", "phù dung hồng hộp báu", "phù dung cam hộp báu", "phù dung tím hộp báu", "mưa bụi cô tô", "trúc ánh sắc vàng", "nguyệt quý mây hồng", "nguyệt quý ánh vàng", "nguyệt quý sắc cam", "thỏ ngọc ôm ánh sáng", "hạc gửi ngân hà", "tử linh phúc lộc", "chương hoa mộng điệp", "sách mai điệp ảnh", "hương hoa diên vĩ", "đế vương hồng tía", "đế vương lam lưu ly", "đế vương xích diễm", "cháo ngọt sương hoa", "hương lam đêm", "gấu hoa hồng", "cừu bông ngọt ngào", "cúc mẫu đơn tím nho", "trái tim tìm mật", "trái tim đá quý", "ngọc lan lưu hương", "diều giấy đón xuân", "lạp mai lung linh", "lung linh bóng trăng", "ngót nghẻo đỏ lửa", "mộc lan vàng", "cúc thược dược cam"];
 
-    const GREEN_LIST = ["thanh cúc lam", "lê bạch ngọc", "thục quỳ đỏ", "thục quỳ vàng", "mạch môn tím", "hoa sao nhái trắng", "hoa baby trắng", "hoa baby lam", "hoa baby hồng", "hoa lồng đèn đỏ", "vạn tuế lá xanh", "trúc đào đỏ tím", "hải đường đỏ", "hải đường vàng", "đỗ quyên hồng", "đỗ quyên vàng", "đỗ quyên đỏ", "tử linh lan hồng", "tử linh lan đỏ", "tử linh lan tím", "hồng jacqueline trắng", "hoa thúy châu tím", "hoa thúy châu trắng", "ghim cài lửa", "ghim cài vàng mật", "huệ hosta lam", "hoa báo xuân hồng", "hoa huyên tím trắng", "hoa anh thảo tím nhạt", "hoa anh thảo xanh nhạt", "hoa anh thảo hồng nhạt", "huệ hosta tím", "thanh cúc tím", "lạc tân phụ lam", "lạc tân phụ đỏ", "thanh cúc hồng", "lạc tân phụ tím", "thục quỳ hồng", "tỏi trời", "trúc đào hồng nhạt", "trúc đào xanh", "mộc hương vàng", "tường vi vàng", "thược dược hồng", "thược dược đỏ"];
+    // 3. DANH SÁCH PHẨM XANH LÁ - ĐÃ LOẠI BỎ THƯỢC DƯỢC ĐỎ
+    const GREEN_LIST = ["thanh cúc lam", "lê bạch ngọc", "thục quỳ đỏ", "thục quỳ vàng", "mạch môn tím", "hoa sao nhái trắng", "hoa baby trắng", "hoa baby lam", "hoa baby hồng", "hoa lồng đèn đỏ", "vạn tuế lá xanh", "trúc đào đỏ tím", "hải đường đỏ", "hải đường vàng", "đỗ quyên hồng", "đỗ quyên vàng", "đỗ quyên đỏ", "tử linh lan hồng", "tử linh lan đỏ", "tử linh lan tím", "hồng jacqueline trắng", "hoa thúy châu tím", "hoa thúy châu trắng", "ghim cài lửa", "ghim cài vàng mật", "huệ hosta lam", "hoa báo xuân hồng", "hoa huyên tím trắng", "hoa anh thảo tím nhạt", "hoa anh thảo xanh nhạt", "hoa anh thảo hồng nhạt", "huệ hosta tím", "thanh cúc tím", "lạc tân phụ lam", "lạc tân phụ đỏ", "thanh cúc hồng", "lạc tân phụ tím", "thục quỳ hồng", "tỏi trời", "trúc đào hồng nhạt", "trúc đào xanh", "mộc hương vàng", "tường vi vàng", "thược dược hồng"];
 
-    // DANH SÁCH THÀNH VIÊN - ĐÃ ĐỒNG BỘ HOÀN TOÀN CHỮ THƯỢC DƯỢC ĐỎ
+    // DANH SÁCH THÀNH VIÊN
     const rawMembers = [
         { name: "Cá chiên (Anh Kiệt)", flowers: ["Dạ yến thảo lam", "Hoa anh thảo hồng", "Lạp mai đỏ", "Hồng champagne", "Hoa hành tím", "Vạn tuế lá lam", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Địa lan trắng", "Mộc hương cam", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Mộc lan ngọc ngà", "Lay ơn tím"] },
         { name: "Tinkerbell (Cẩm Tiên cute)", flowers: ["Đăng tiêu trắng tím", "Đông trùng thông vàng", "Sen trời đầy sao", "Tuyết mai hồng", "Thược dược hồng", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Nhụy linh ánh sao", "Hoa bồ câu tím", "Gừng sen bạch ngọc", "Gừng sen ban mai", "Hoa anh thảo vàng", "Hồng lenten đỏ", "Cúc thược dược cam", "Hoa poppy himalaya xanh", "Hồng môn phấn", "Mộc hương cam", "Tử đằng lam", "Cúc indo hồng", "Diên vĩ đức kem đỏ", "Đăng tiêu cam vàng", "Dạ yến thảo lam", "Hoa anh thảo hồng", "Hoa anh thảo xanh", "Hồng champagne", "Mạn châu sa", "San hô xanh", "Ngôi sao bethlehem", "Hoa phi yến tím", "Mộc lan ngọc ngà", "Lạp mai hương phi", "Phù dung tím hộp báu", "Thỏ ngọc ôm ánh sáng", "Hạc gửi ngân hà", "Tử linh phúc lộc", "Đế vương xích diễm", "Gấu hoa hồng", "Có rồng ắt linh", "Hạnh nguyệt nghỉ dưới bóng hoa", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc hồng", "Lạc tân phụ tím", "Thục quỳ hồng", "Tỏi trời", "Thanh cúc lam", "Hoa baby trắng", "Trúc đào hồng nhạt", "Ghim cài vàng mật", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo xanh nhạt", "Nguyệt quý mây hồng", "trái tim đá quý", "Hoa thụy hương trắng tuyết", "Hồng Jacqueline trắng", "Hải đường vàng", "Trái tim tìm mật", "Trái tim mộng ảo", "Hoa mặt rồng đỏ tươi", "Hoa Lập kim xanh sẫm", "Huệ hosta lam"] },
@@ -181,11 +182,10 @@
         { name: "Zishang(Naaa)", flowers: ["dạ yến thảo lam", "hoa anh thảo hồng", "hoa anh thảo xanh", "lạp mai đỏ", "hồng champagne", "hoa hải quỳ trắng", "hoa hành tím", "vạn tuế lá lam", "hoa poppy himalaya xanh", "hải quỳ đỏ", "thược dược đỏ", "thược dược trắng", "cây holly vòng xanh", "bụp hồng cận hồng"] }
     ];
 
-    // Sử dụng logic quét tự động ép đổi để triệt tiêu lỗi cache
-    const xuFlowersList = rawXuList.map(item => cleanFormat(item).replace(/thược duyệt/g, 'thược dược'));
+    const xuFlowersList = rawXuList.map(item => cleanFormat(item));
     const membersData = rawMembers.map(m => ({
         name: m.name,
-        flowers: m.flowers.map(f => cleanFormat(f).replace(/thược duyệt/g, 'thược dược'))
+        flowers: m.flowers.map(f => cleanFormat(f))
     }));
 
     const mainRankArea = document.getElementById('mainRankArea');
@@ -199,17 +199,15 @@
     const searchViewArea = document.getElementById('searchViewArea');
 
     function getOwnersOfFlower(lowerFlowerName) {
-        // Ép kiểu chuẩn hóa để loại bỏ chữ sai chính tả khi người dùng tìm kiếm
-        const cleanSearchKey = lowerFlowerName.replace(/thược duyệt/g, 'thược dược');
-        return membersData.filter(m => m.flowers.includes(cleanSearchKey)).map(m => m.name);
+        return membersData.filter(m => m.flowers.includes(lowerFlowerName)).map(m => m.name);
     }
 
     function getFlowerWeight(flowerName) {
-        const name = flowerName.toLowerCase().trim().replace(/thược duyệt/g, 'thược dược');
+        const name = flowerName.toLowerCase().trim();
         if (PINK_LIST.includes(name)) return { score: 4, className: 'tier-pink' };
         if (ORANGE_LIST.includes(name)) return { score: 3, className: 'tier-orange' };
         if (GREEN_LIST.includes(name)) return { score: 1, className: 'tier-green' };
-        return { score: 2, className: 'tier-purple' };
+        return { score: 2, className: 'tier-purple' }; // thược dược đỏ tự động rơi vào đây
     }
 
     function initRenderRankList() {
@@ -308,10 +306,9 @@
     }
 
     function searchFlowerLogic() {
-        // Tự động chuẩn hóa từ khoá tìm kiếm của người dùng đầu vào
-        const fKey = flowerInput.value.toLowerCase().trim().replace(/thược duyệt/g, 'thược dược');
+        const fKey = flowerInput.value.toLowerCase().trim();
         
-        if (flowerInput.value.trim() !== "") {
+        if (fKey !== "") {
             defaultGardenWidgets.style.display = "none";
             searchViewArea.style.display = "block";
             
