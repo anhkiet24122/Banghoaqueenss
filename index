@@ -87,7 +87,6 @@
 <script>
     const cleanFormat = str => str ? str.trim().toLowerCase() : '';
 
-    // Đug chuẩn chính tả "thược dược" trực tiếp trong mảng hoa xu gốc
     const rawXuList = ["Thục quỳ đỏ", "Thục quỳ hồng", "Thục quỳ vàng", "Thanh cúc lam", "Mạch môn tím", "Hoa sao nhái trắng", "Hoa baby hồng", "Hoa baby lam", "Hoa lồng đèn đỏ", "Vạn tuế lá xanh", "Trúc đào đỏ tím", "Hải đường đỏ", "Hải đường vàng", "Đỗ quyên hồng", "Đỗ quyên vàng", "Đỗ quyên đỏ", "Tử linh lan hồng", "Tử linh lan đỏ", "Tử linh lan tím", "Hồng jacqueline trắng", "Hoa thuý châu tím", "Hoa thuý châu trắng", "Ghim cài lửa", "Ghim cài vàng mật", "Huệ hosta lam", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo tím nhạt", "Hoa anh thảo xanh nhạt", "Hoa anh thảo hồng nhạt", "Huệ hosta tím", "Nhài nhật", "Lan phượng vĩ đỏ", "Mạch môn hồng phấn", "Hoa lộ vi vàng", "Hoa lộ vi trắng", "Cúc thược dược cam", "Cúc thược dược đen", "Lan vũ nữ vàng", "Hoa poppy himalaya vàng", "Hoa poppy himalaya xanh", "Hoa phi yến tím", "Hoa anh thảo vàng", "Hồng lenten vàng", "Cây sống đời đỏ", "Cây sống đời vàng", "Mộc hương vàng", "Mộc hương trắng", "Thược dược đỏ", "Lay ơn tím", "Tường vi hồng", "Lay ơn trắng", "Hải quỳ cam", "San hô cam", "Hải quỳ đỏ", "Hoa hải quỳ tím", "Hoa hải quỳ hồng", "Hoa hải quỳ trắng", "Thược dược trắng", "Hồng môn phấn", "Thanh cúc tím", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Lạc tân phụ tím", "Tỏi trời", "Trúc đào hồng nhạt", "Địa lan trắng", "Hoa hành tím", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Mộc hương cam", "Vạn tuế lá lam", "Thanh cúc hồng", "Hoa baby trắng", "San hô tím"];
 
     const flowerTierMap = {
@@ -253,6 +252,7 @@
         }).join('');
     }
 
+    // ĐÃ TỐI ƯU GỐC: Đảm bảo đồng bộ so sánh chữ thường và render chữ chuẩn từ mảng rawXuList ban đầu
     function updateMissingXu() {
         const ownedSet = new Set();
         membersData.forEach(m => m.allFlowers.forEach(f => ownedSet.add(f)));
@@ -270,7 +270,6 @@
             showBox.style.display = "block";
             hideBox1.style.display = "none";
             hideBox2.style.display = "none";
-            setTimeout(() => { showBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 80);
         }
     };
 
@@ -278,6 +277,7 @@
     document.getElementById('btnRank').addEventListener('click', () => toggleBox(rankBox, helpBox, missingBox));
     document.getElementById('btnXu').addEventListener('click', () => toggleBox(missingBox, helpBox, rankBox));
 
+    // Khởi tạo chạy kết xuất ngay khi tải trang xong
     initRenderRankList();
     flowerInput.addEventListener('input', searchFlowerLogic);
     updateMissingXu();
