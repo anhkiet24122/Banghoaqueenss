@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -86,18 +86,21 @@
 
 <script>
     // --- 1. KHAI BÁO DỮ LIỆU GỐC ---
-    const rawXuList = ["Thục quỳ đỏ", "Thục quỳ hồng", "Thục quỳ vàng", "Thanh cúc lam", "Mạch môn tím", "Hoa sao nhái trắng", "Hoa baby hồng", "Hoa baby lam", "Hoa lồng đèn đỏ", "Vạn tuế lá xanh", "Trúc đào đỏ tím", "Hải đường đỏ", "Hải đường vàng", "Đỗ quyên hồng", "Đỗ quyên vàng", "Đỗ quyên đỏ", "Tử linh lan hồng", "Tử linh lan đỏ", "Tử linh lan tím", "Hồng jacqueline trắng", "Hoa thuý châu tím", "Hoa thuý châu trắng", "Ghim cài lửa", "Ghim cài vàng mật", "Huệ hosta lam", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo tím nhạt", "Hoa anh thảo xanh nhạt", "Hoa anh thảo hồng nhạt", "Huệ hosta tím", "Nhài nhật", "Lan phượng vĩ đỏ", "Mạch môn hồng phấn", "Hoa lộ vi vàng", "Hoa lộ vi trắng", "Cúc thược dược cam", "Cúc thược dược đen", "Lan vũ nữ vàng", "Hoa poppy himalaya vàng", "Hoa poppy himalaya xanh", "Hoa phi yến tím", "Hoa anh thảo vàng", "Hồng lenten vàng", "Cây sống đời đỏ", "Cây sống đời vàng", "Mộc hương vàng", "Mộc hương trắng", "Thược dược đỏ", "Lay ơn tím", "Tường vi hồng", "Lay ơn trắng", "Hải quỳ cam", "San hô cam", "Hải quỳ đỏ", "Hoa hải quỳ tím", "Hoa hải quỳ hồng", "Hoa hải quỳ trắng", "Thược dược trắng", "Hồng môn phấn", "Thanh cúc tím", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Lạc tân phụ tím", "Tỏi trời", "Trúc đào hồng nhạt", "Địa lan trắng", "Hoa hành tím", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Mộc hương cam", "Vạn tuế lá lam", "Thanh cúc hồng", "Hoa baby trắng", "San hô tím"];
+    // Cập nhật thêm 5 hoa xu mới vào danh sách gốc
+    const rawXuList = ["Thục quỳ đỏ", "Thục quỳ hồng", "Thục quỳ vàng", "Thanh cúc lam", "Mạch môn tím", "Hoa sao nhái trắng", "Hoa baby hồng", "Hoa baby lam", "Hoa lồng đèn đỏ", "Vạn tuế lá xanh", "Trúc đào đỏ tím", "Hải đường đỏ", "Hải đường vàng", "Đỗ quyên hồng", "Đỗ quyên vàng", "Đỗ quyên đỏ", "Tử linh lan hồng", "Tử linh lan đỏ", "Tử linh lan tím", "Hồng jacqueline trắng", "Hoa thuý châu tím", "Hoa thuý châu trắng", "Ghim cài lửa", "Ghim cài vàng mật", "Huệ hosta lam", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo tím nhạt", "Hoa anh thảo xanh nhạt", "Hoa anh thảo hồng nhạt", "Huệ hosta tím", "Nhài nhật", "Lan phượng vĩ đỏ", "Mạch môn hồng phấn", "Hoa lộ vi vàng", "Hoa lộ vi trắng", "Cúc thược dược cam", "Cúc thược dược đen", "Lan vũ nữ vàng", "Hoa poppy himalaya vàng", "Hoa poppy himalaya xanh", "Hoa phi yến tím", "Hoa anh thảo vàng", "Hồng lenten vàng", "Cây sống đời đỏ", "Cây sống đời vàng", "Mộc hương vàng", "Mộc hương trắng", "Thược dược đỏ", "Lay ơn tím", "Tường vi hồng", "Lay ơn trắng", "Hải quỳ cam", "San hô cam", "Hải quỳ đỏ", "Hoa hải quỳ tím", "Hoa hải quỳ hồng", "Hoa hải quỳ trắng", "Thược dược trắng", "Hồng môn phấn", "Thanh cúc tím", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Lạc tân phụ tím", "Tỏi trời", "Trúc đào hồng nhạt", "Địa lan trắng", "Hoa hành tím", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Mộc hương cam", "Vạn tuế lá lam", "Thanh cúc hồng", "Hoa baby trắng", "San hô tím", "Hoa báo xuân vàng", "Me đất cam vàng", "Thược dược dương xỉ hồng đào", "Thược dược dương xỉ đỏ tươi", "Ghim cài hồng hạnh"];
 
     const flowerTierMap = {
         // TIER 4: PHẨM HỒNG (12 loại)
         "Ngân hà chiếu nhụy": 4, "Chép vàng vượt sóng": 4, "Thiên cung": 4, "Thanh loan bích vũ": 4, "Có rồng ắt linh": 4, "Gia nguyệt neo thuyền câu cá": 4, "Mai nguyệt huyền âm": 4, "Đình hoa đêm mộng": 4, "Liễu nguyệt én hót bên đình": 4, "Hạnh nguyệt nghỉ dưới bóng hoa": 4, "Trái tim mộng ảo": 4, "Sắc xuân núi non": 4,
         
-        // TIER 3: PHẨM CAM (43 loại)
-        "Mộc lan ngọc ngà": 3, "Thuyền tiên sông ngân": 3, "Bóng quế cành ngọc": 3, "Tùng linh chiếu rọi": 3, "Hồng cecil lam": 3, "Hồng cecil phấn": 3, "Lạp mai hương phi": 3, "Lạp mai linh lung": 3, "Mẫu đơn ánh tím": 3, "Cá heo xanh": 3, "Cá heo hồng": 3, "Cá heo trắng": 3, "Sắc cam mùa xuân": 3, "Mẫu đơn ánh ngọc": 3, "Mẫu đơn ánh xanh": 3, "Tiên nữ rải hoa": 3, "Phù dung hồng hộp báu": 3, "Phù dung cam hộp báu": 3, "Phù dung tím hộp báu": 3, "Mưa bụi cô tô": 3, "Trúc ánh sắc vàng": 3, "Nguyệt quý mây hồng": 3, "Nguyệt quý ánh vàng": 3, "Nguyệt quý sắc cam": 3, "Thỏ ngọc ôm ánh sáng": 3, "Hạc gửi ngân hà": 3, "Tử linh phúc lộc": 3, "Chương hoa mộng điệp": 3, "Sách mai điệp ảnh": 3, "Hương hoa diên vĩ": 3, "Đế vương hồng tía": 3, "Đế vương lam lưu ly": 3, "Đế vương xích diễm": 3, "Cháo ngọt sương hoa": 3, "Hương lam đêm": 3, "Gấu hoa hồng": 3, "Cừu bông ngọt ngào": 3, "Cúc mẫu đơn tím nho": 3, "Trái tim tìm mật": 3, "Trái tim đá quý": 3, "Ngọc lan lưu hương": 3, "Diều giấy đón xuân": 3, "Lạp mai lung linh": 3,
+        // TIER 3: PHẨM CAM (46 loại - Cập nhật thêm 3 loại mới)
+        "Mộc lan ngọc ngà": 3, "Thuyền tiên sông ngân": 3, "Bóng quế cành ngọc": 3, "Tùng linh chiếu rọi": 3, "Hồng cecil lam": 3, "Hồng cecil phấn": 3, "Lạp mai hương phi": 3, "Lạp mai linh lung": 3, "Mẫu đơn ánh tím": 3, "Cá heo xanh": 3, "Cá heo hồng": 3, "Cá heo trắng": 3, "Sắc cam mùa xuân": 3, "Mẫu đơn ánh ngọc": 3, "Mẫu đơn ánh xanh": 3, "Tiên nữ rải hoa": 3, "Phù dung hồng hộp báu": 3, "Phù dung cam hộp báu": 3, "Phù dung tím hộp báu": 3, "Mưa bụi cô tô": 3, "Trúc ánh sắc vàng": 3, "Nguyệt quý mây hồng": 3, "Nguyệt quý ánh vàng": 3, "Nguyệt quý sắc cam": 3, "Thỏ ngọc ôm ánh sáng": 3, "Hạc gửi ngân hà": 3, "Tử linh phúc lộc": 3, "Chương hoa mộng điệp": 3, "Sách mai điệp ảnh": 3, "Hương hoa diên vĩ": 3, "Đế vương hồng tía": 3, "Đế vương lam lưu ly": 3, "Đế vương xích diễm": 3, "Cháo ngọt sương hoa": 3, "Hương lam đêm": 3, "Gấu hoa hồng": 3, "Cừu bông ngọt ngào": 3, "Cúc mẫu đơn tím nho": 3, "Trái tim tìm mật": 3, "Trái tim đá quý": 3, "Ngọc lan lưu hương": 3, "Diều giấy đón xuân": 3, "Lạp mai lung linh": 3, "Cúc mẫu đơn cam ráng chiều": 3, "Hoa lung toả hương": 3, "Tiếng sáo hoa lung": 3,
         
-        // TIER 1: PHẨM XANH LÁ (41 loại - ĐÃ XÓA TRÚC ĐÀO XANH KHỎI ĐÂY)
-        "Hoa thuý châu trắng": 1, "Thanh cúc lam": 1, "Lê bạch ngọc": 1, "Thục quỳ đỏ": 1, "Thục quỳ vàng": 1, "Mạch môn tím": 1, "Hoa sao nhái trắng": 1, "Hoa baby trắng": 1, "Hoa baby lam": 1, "Hoa baby hồng": 1, "Hoa lồng đèn đỏ": 1, "Vạn tuế lá xanh": 1, "Trúc đào đỏ tím": 1, "Hải đường đỏ": 1, "Hải đường vàng": 1, "Đỗ quyên hồng": 1, "Đỗ quyên vàng": 1, "Đỗ quyên đỏ": 1, "Tử linh lan hồng": 1, "Tử linh lan đỏ": 1, "Tử linh lan tím": 1, "Hồng jacqueline trắng": 1, "Hoa thuý châu tím": 1, "Ghim cài lửa": 1, "Ghim cài vàng mật": 1, "Huệ hosta lam": 1, "Hoa báo xuân hồng": 1, "Hoa huyên tím trắng": 1, "Hoa anh thảo tím nhạt": 1, "Hoa anh thảo xanh nhạt": 1, "Hoa anh thảo hồng nhạt": 1, "Huệ hosta tím": 1, "Thanh cúc tím": 1, "Lạc tân phụ lam": 1, "Lạc tân phụ đỏ": 1, "Thanh cúc hồng": 1, "Lạc tân phụ tím": 1, "Thục quỳ hồng": 1, "Tỏi trời": 1, "Trúc đào hồng nhạt": 1, "Mộc hương vàng": 1
+        // TIER 1: PHẨM XANH LÁ (46 loại - Cập nhật thêm 5 hoa xu mới)
+        "Hoa thuý châu trắng": 1, "Thanh cúc lam": 1, "Lê bạch ngọc": 1, "Thục quỳ đỏ": 1, "Thục quỳ vàng": 1, "Mạch môn tím": 1, "Hoa sao nhái trắng": 1, "Hoa baby trắng": 1, "Hoa baby lam": 1, "Hoa baby hồng": 1, "Hoa lồng đèn đỏ": 1, "Vạn tuế lá xanh": 1, "Trúc đào đỏ tím": 1, "Hải đường đỏ": 1, "Hải đường vàng": 1, "Đỗ quyên hồng": 1, "Đỗ quyên vàng": 1, "Đỗ quyên đỏ": 1, "Tử linh lan hồng": 1, "Tử linh lan đỏ": 1, "Tử linh lan tím": 1, "Hồng jacqueline trắng": 1, "Hoa thuý châu tím": 1, "Ghim cài lửa": 1, "Ghim cài vàng mật": 1, "Huệ hosta lam": 1, "Hoa báo xuân hồng": 1, "Hoa huyên tím trắng": 1, "Hoa anh thảo tím nhạt": 1, "Hoa anh thảo xanh nhạt": 1, "Hoa anh thảo hồng nhạt": 1, "Huệ hosta tím": 1, "Thanh cúc tím": 1, "Lạc tân phụ lam": 1, "Lạc tân phụ đỏ": 1, "Thanh cúc hồng": 1, "Lạc tân phụ tím": 1, "Thục quỳ hồng": 1, "Tỏi trời": 1, "Trúc đào hồng nhạt": 1, "Mộc hương vàng": 1, "Hoa báo xuân vàng": 1, "Me đất cam vàng": 1, "Thược dược dương xỉ hồng đào": 1, "Thược dược dương xỉ đỏ tươi": 1, "Ghim cài hồng hạnh": 1
     };
+
+    // Note: 6 hoa phẩm tím mới (Cẩm chướng gấm tím, Nhài dây trắng mây, Từ cô hồng nhạt, Cẩm chướng gấm đỏ, Từ cô tím mây, Nhài dây sắc sao) không cần điền vào flowerTierMap, hệ thống tự hiểu thuộc nhóm Phẩm Tím (2 điểm).
 
     const rawMembers = [
         { name: "Cá chiên (Anh Kiệt)", flowers: ["Dạ yến thảo lam", "Hoa anh thảo hồng", "Lạp mai đỏ", "Hồng champagne", "Hoa hành tím", "Vạn tuế lá lam", "Diên đức vĩ trắng vàng", "Hồng lenten đỏ", "Địa lan trắng", "Mộc hương cam", "Gấu Bông", "Cây Holly Vòng Xanh", "Bụp Hồng Cận Hồng", "Mộc lan ngọc ngà", "Lay ơn tím", "Hồng môn phấn"] },
@@ -141,7 +144,7 @@
         const uniqueCleanFlowers = [...new Set(m.flowers.map(f => cleanFormat(f)))];
         const totalCount = uniqueCleanFlowers.filter(cf => {
             const originalName = displayNameMap.get(cf);
-            // LOGIC "CÒN LẠI": Nếu không phải Hồng (4) hay Cam (3) hay Xanh Lá (1) thì mặc định tính là Tím (2)
+            // LOGIC "CÒN LẠI": Không phải Hồng (4) hay Cam (3) hay Xanh Lá (1) thì mặc định tính là Tím (2)
             return (flowerTierMap[originalName] || 2) >= 2;
         }).length;
         return { name: m.name, allFlowers: uniqueCleanFlowers, totalCount };
@@ -168,7 +171,6 @@
 
     function getFlowerWeight(cf) {
         const originalName = displayNameMap.get(cf);
-        // Mặc định trả về giá trị 2 (Phẩm Tím) nếu không nằm trong danh sách map sẵn
         const score = flowerTierMap[originalName] || 2; 
         const tierClasses = { 1: 'tier-green', 2: 'tier-purple', 3: 'tier-orange', 4: 'tier-pink' };
         return { score, className: tierClasses[score] };
