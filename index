@@ -1,29 +1,3 @@
-Dưới đây là các bước mình đã thực hiện để cập nhật khu vườn theo đúng yêu cầu của bạn:
-
-### 📋 Các bước thực hiện:
-
-1. **Kiểm tra chính tả tên hoa:**
-Mình đã đối chiếu các loại hoa bạn yêu cầu với dữ liệu gốc của vườn. Tuyệt vời là tất cả tên hoa đều chuẩn xác 100%, không bị sai chính tả hay sai dấu!
-* *Tử linh lan hồng, Mộc hương vàng, Hoa hải quỳ tím* (Nằm trong danh sách hoa Xu).
-* *Trái tim đá quý, Cúc mẫu đơn cam ráng chiều* (Nằm trong danh sách hoa Cam).
-* *Từ cô tím mây, Nhài dây trắng mây* (Nằm trong danh sách hoa Tím).
-
-
-2. **Khớp tên thành viên:**
-Mình đã ánh xạ tên gọi bạn đưa ra với tên hiển thị trong mã nguồn để bổ sung hoa cho đúng người:
-* **Mỹ anh** -> Thêm vào dữ liệu của `Mina (Mỹ Anh)`.
-* **Quốc toàn** -> Thêm vào dữ liệu của `ChồgcủaHạDi (Quốc Toàn)`.
-* Các thành viên còn lại (Thời Khanh, Hari, Mẫn hoa, HạDi) đều khớp tên chính xác.
-
-
-3. **Cập nhật mã nguồn:**
-Tiến hành chèn thêm các hoa mới vào cuối danh sách của từng thành viên tương ứng. Hệ thống tự động gỡ trùng lặp và phân loại điểm số sẽ lo phần còn lại.
-
----
-
-Và đây là toàn bộ mã nguồn đã được cập nhật mới nhất. Bạn chỉ cần copy và dán đè lên file cũ là các thành viên sẽ nhận được hoa mới ngay nhé! 🌸
-
-```html
 <!DOCTYPE html>
 <html lang="vi">
 <head>
