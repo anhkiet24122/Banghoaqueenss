@@ -3,184 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌸 Queenss Garden 👑</title>
+    <title>🌴 Bảng hoa Queens - Hè là phải đi biển 🐚</title>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght=400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ----- HỆ THỐNG BIẾN MÀU THÔNG MINH ----- */
+        /* ----- HỆ THỐNG BIẾN MÀU ĐẢO NHIỆT ĐỚI ----- */
         :root {
-            --pink-light: #fff0f3;
-            --pink-dot: #ffccd5;
-            --pink-border: #ffb3c1;
-            --pink-main: #ff4d6d;
-            --pink-dark: #c9184a;
-            
-            --text-dark: #4a4a4a;
-            --text-gray: #5c677d;
-            
-            --boy-bg: #e0f2fe;
-            --boy-border: #bae6fd;
-            --boy-text: #003049;
-            
-            --box-bg: rgba(255, 255, 255, 0.98);
+            --sea-main: #0077b6;
+            --sea-dark: #023e8a;
+            --text-dark: #1d3557;
+            --text-gray: #457b9d;
+            --boy-bg: rgba(224, 251, 252, 0.85);
+            --boy-border: #48cae4;
+            --boy-text: #0077b6;
+            /* Kính trong suốt (Glassmorphism) */
+            --glass-bg: rgba(255, 255, 255, 0.55);
+            --glass-border: rgba(255, 255, 255, 0.7);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Be Vietnam Pro', sans-serif; }
         
         body { 
-            background: var(--pink-light); 
-            background-image: radial-gradient(var(--pink-dot) 1.5px, transparent 1.5px);
-            background-size: 20px 20px;
+            /* Background dải màu Bầu trời -> Biển -> Cát (Đậm chất biển 200%) */
+            background: linear-gradient(180deg, #90e0ef 0%, #00b4d8 25%, #0077b6 65%, #e9c46a 100%);
+            background-attachment: fixed;
             padding: 30px 20px; 
             display: flex; 
             justify-content: center; 
             min-height: 100vh; 
         }
 
-        /* ----- HIỆU ỨNG CHUYỂN ĐỘNG (ANIMATIONS) ----- */
+        /* ----- HIỆU ỨNG CHUYỂN ĐỘNG ----- */
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-10px); }
+            from { opacity: 0; transform: translateY(-15px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
-        @keyframes scaleUp {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+        @keyframes floating {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(8deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
         }
 
-        /* ----- MAIN UI STYLES ----- */
+        /* ----- MAIN UI STYLES (GLASSMORPHISM) ----- */
         .garden-container { 
             width: 100%; max-width: 500px; 
-            background: var(--box-bg); 
+            background: var(--glass-bg); 
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             padding: 35px 25px; border-radius: 40px; 
-            box-shadow: 0 20px 45px rgba(255, 143, 163, 0.25); 
-            border: 5px double var(--pink-border); 
+            box-shadow: 0 30px 60px rgba(2, 62, 138, 0.25); 
+            border: 2px solid var(--glass-border); 
             display: flex; flex-direction: column; position: relative; 
             animation: fadeInDown 0.6s ease-out;
         }
         
-        .decor-ribbon { position: absolute; top: -16px; font-size: 24px; transition: transform 0.3s; }
-        .decor-ribbon:hover { transform: scale(1.2) rotate(10deg); }
-        .decor-ribbon.left { left: 30px; }
-        .decor-ribbon.right { right: 30px; }
+        /* Icon bồng bềnh */
+        .decor-float { position: absolute; top: -20px; font-size: 38px; animation: floating 3s ease-in-out infinite; cursor: pointer; text-shadow: 0 5px 10px rgba(0,0,0,0.2); }
+        .decor-float.left { left: 10px; }
+        .decor-float.right { right: 10px; animation-delay: 1.5s; top: -15px; }
         
         .search-box { 
-            background: linear-gradient(135deg, #fff5f6, var(--pink-light)); 
-            border: 2.5px dashed #ff758f; padding: 18px; border-radius: 28px; margin-bottom: 25px; 
-            box-shadow: inset 0 4px 10px rgba(255, 117, 143, 0.05); 
+            background: rgba(255, 255, 255, 0.85); 
+            border: 2px dashed #00b4d8; padding: 18px; border-radius: 28px; margin-bottom: 25px; 
+            box-shadow: inset 0 4px 10px rgba(0, 119, 182, 0.05); 
         }
-        .search-box-title { font-size: 12px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--pink-dark); display: flex; align-items: center; gap: 6px; }
+        .search-box-title { font-size: 13px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--sea-dark); display: flex; align-items: center; gap: 6px; }
         .search-input { 
             width: 100%; padding: 14px 18px; font-size: 14px; border-radius: 20px; 
-            border: 2px solid var(--pink-dot); outline: none; background: #fff; color: var(--text-dark); 
-            transition: border-color 0.3s, box-shadow 0.3s;
+            border: 2px solid #caf0f8; outline: none; background: #fff; color: var(--text-dark); 
+            transition: all 0.3s;
         }
-        .search-input:focus { border-color: var(--pink-main); box-shadow: 0 0 10px rgba(255, 77, 109, 0.2); }
+        .search-input:focus { border-color: var(--sea-main); box-shadow: 0 0 15px rgba(0, 180, 216, 0.4); }
 
         .btn-main { 
-            width: 100%; padding: 16px 20px; font-size: 14px; font-weight: 700; border: none; 
+            width: 100%; padding: 16px 20px; font-size: 14.5px; font-weight: 700; border: none; 
             border-radius: 25px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; 
             user-select: none; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
-        .btn-main:hover { transform: translateY(-3px); filter: brightness(1.05); }
+        .btn-main:hover { transform: translateY(-4px); filter: brightness(1.1); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
         .btn-main:active { transform: translateY(1px); }
         
-        .btn-help { color: #fff; background: linear-gradient(135deg, #ffca3a, #ff9f1c); box-shadow: 0 6px 15px rgba(255, 159, 28, 0.3); }
-        .btn-rank { color: #fff; background: linear-gradient(135deg, #ff85a1, var(--pink-main)); box-shadow: 0 6px 15px rgba(255, 77, 109, 0.3); }
-        .btn-xu { color: #245500; background: linear-gradient(135deg, #9ef01a, #70e000); box-shadow: 0 6px 15px rgba(112, 224, 0, 0.3); }
+        .btn-help { color: #664100; background: linear-gradient(135deg, #ffe066, #f4a261); }
+        .btn-rank { color: #fff; background: linear-gradient(135deg, #00b4d8, #023e8a); }
+        .btn-xu { color: #fff; background: linear-gradient(135deg, #2a9d8f, #1d3557); }
 
         .info-box { 
-            margin-top: 8px; padding: 20px; background: rgba(255, 253, 253, 0.95); 
-            border: 2px dashed var(--pink-dot); border-radius: 28px; display: none; 
-            animation: scaleUp 0.3s ease-out;
+            margin-top: 8px; padding: 20px; background: rgba(255, 255, 255, 0.95); 
+            border: 2px dashed #00b4d8; border-radius: 28px; display: none; 
         }
-        .help-content { color: var(--text-gray); font-size: 13px; line-height: 1.8; }
-        .help-content p { margin-bottom: 4px; }
-        .help-content .help-title { margin-bottom: 10px; font-weight: 500; color: var(--pink-main); }
+        .help-content { color: var(--text-gray); font-size: 13.5px; line-height: 1.8; }
+        .help-content p { margin-bottom: 6px; }
+        .help-content .help-title { margin-bottom: 12px; font-weight: 700; color: var(--sea-main); font-size: 15px;}
 
         /* ----- RANKING LIST STYLES ----- */
-        .total-badge { font-size: 12px; font-weight: 700; color: #40916c; margin-bottom: 14px; background: #d8f3dc; padding: 6px 14px; border-radius: 12px; display: inline-block; border: 1px solid #b7e4c7; }
+        .total-badge { font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 14px; background: var(--sea-main); padding: 6px 14px; border-radius: 15px; display: inline-block; box-shadow: 0 4px 10px rgba(0, 119, 182, 0.3); text-transform: uppercase;}
         .rank-list-container { display: flex; flex-direction: column; gap: 12px; width: 100%; }
         
-        .cute-rank-item { border: 1px solid #ffe3e8; border-radius: 20px; overflow: hidden; background: #fff; box-shadow: 0 4px 10px rgba(255, 182, 193, 0.08); transition: all 0.3s ease; }
-        .gentleman-card-style.cute-rank-item { border-color: var(--boy-border); box-shadow: 0 4px 10px rgba(0, 48, 73, 0.04); }
+        .cute-rank-item { border: 1px solid rgba(255,255,255,0.9); border-radius: 20px; overflow: hidden; background: rgba(255,255,255,0.85); box-shadow: 0 4px 12px rgba(2, 62, 138, 0.08); transition: all 0.3s ease; }
+        .gentleman-card-style.cute-rank-item { border-color: var(--boy-border); background: var(--boy-bg); }
 
-        .click-header-line { display: flex; justify-content: space-between; align-items: center; padding: 15px 18px; cursor: pointer; user-select: none; transition: background 0.3s; }
-        .click-header-line:hover { background: #fffafb; }
+        .click-header-line { display: flex; justify-content: space-between; align-items: center; padding: 16px 18px; cursor: pointer; user-select: none; transition: background 0.3s; }
+        .click-header-line:hover { background: rgba(255,255,255,1); }
         
-        .active-folder .click-header-line { background: var(--pink-light) !important; color: var(--pink-main) !important; }
-        .active-folder.gentleman-card-style .click-header-line { background: var(--boy-bg) !important; color: var(--boy-text) !important; }
+        .active-folder .click-header-line { background: #e0fbfc !important; color: var(--sea-dark) !important; }
+        .active-folder.gentleman-card-style .click-header-line { background: #caf0f8 !important; }
 
-        .header-left { display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: var(--text-dark); transition: color 0.3s; }
-        .gentleman-card-style .header-left { color: var(--boy-text); font-weight: 700; }
-        .rank-number { font-weight: 700; width: 24px; text-align: center; }
+        .header-left { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-dark); font-weight: 600; }
+        .rank-number { font-weight: 800; width: 24px; text-align: center; }
 
-        .count-badge { font-weight: 700; padding: 5px 12px; border-radius: 20px; font-size: 11px; color: var(--pink-main); background: #fff5f6; border: 1px solid var(--pink-dot); transition: all 0.3s; }
-        .gentleman-card-style .count-badge { color: var(--boy-text); background: var(--boy-bg); border: 1px solid var(--boy-border); }
+        .count-badge { font-weight: 700; padding: 5px 12px; border-radius: 20px; font-size: 11px; color: #fff; background: var(--sea-main); box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
+        .gentleman-card-style .count-badge { color: #fff; background: var(--sea-dark); }
 
-        .rank-content-box { display: none; padding: 18px; background: #fffdfd; border-top: 1px solid #fff0f2; animation: fadeInDown 0.3s ease-out; }
+        .rank-content-box { display: none; padding: 18px; background: rgba(255,255,255,0.95); border-top: 1px solid #e0fbfc; }
         .active-folder .rank-content-box { display: block !important; }
-        .active-folder.gentleman-card-style .rank-content-box { background: #fcfdfe !important; border-top-color: var(--boy-border) !important; }
 
-        .summary-rarity-line { font-size: 12px; padding: 8px 12px; margin-bottom: 12px; border-radius: 12px; background: #fff5f6; border-left: 4px solid var(--pink-main); color: var(--text-dark); font-weight: 500; line-height: 1.5; }
-        .gentleman-card-style .summary-rarity-line { background: #f0f9ff !important; border-left-color: #3b82f6 !important; }
+        .summary-rarity-line { font-size: 12px; padding: 10px 14px; margin-bottom: 12px; border-radius: 12px; background: #f0fafd; border-left: 5px solid var(--sea-main); color: var(--text-dark); font-weight: 500; line-height: 1.5; }
 
-        .flower-chip-container { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
-        .flower-chip-item { display: inline-block; padding: 6px 12px; border-radius: 14px; font-size: 11.5px; margin: 3px; transition: transform 0.2s; }
-        .flower-chip-item:hover { transform: scale(1.05); }
+        .flower-chip-container { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+        .flower-chip-item { display: inline-block; padding: 6px 12px; border-radius: 14px; font-size: 11.5px; margin: 3px; transition: transform 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .flower-chip-item:hover { transform: scale(1.08) translateY(-2px); box-shadow: 0 5px 10px rgba(0,0,0,0.1); }
         
-        .xu-missing-badge { display: inline-block; padding: 6px 12px; border-radius: 14px; font-size: 11.5px; background: #fff; border: 1px solid var(--pink-dot); color: #a4133c; font-weight: 500; margin: 3px; transition: transform 0.2s; }
-        .xu-missing-badge:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(255, 182, 193, 0.2); }
+        .xu-missing-badge { display: inline-block; padding: 6px 12px; border-radius: 14px; font-size: 11.5px; background: #fff; border: 1.5px solid #e76f51; color: #e76f51; font-weight: 600; margin: 3px; transition: transform 0.2s; }
+        .xu-missing-badge:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(231, 111, 81, 0.15); background: #fff5f3;}
 
-        /* ----- TIERS ----- */
-        .tier-green { background: linear-gradient(135deg, #ebfbee 0%, #cbf3d6) !important; border: 1px solid #b7e4c7 !important; color: #2d6a4f !important; font-weight: 500; }
-        .tier-purple { background: linear-gradient(135deg, #f3f0ff 0%, #eebefa) !important; border: 1px solid #d0bfff !important; color: #5f3dc4 !important; font-weight: 500; }
-        .tier-orange { background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%) !important; border: 1.5px solid #ff9800 !important; color: #e65100 !important; font-weight: 600 !important; box-shadow: 0 2px 5px rgba(255, 152, 0, 0.15) !important; }
-        .tier-pink { background: linear-gradient(135deg, #fff0f6 0%, #ffdeeb 100%) !important; border: 2px solid #ff85a1 !important; color: #a4133c !important; font-weight: 700 !important; box-shadow: 0 3px 8px rgba(255, 133, 161, 0.3) !important; }
+        /* ----- TIERS PHẨM CHẤT HOA ----- */
+        .tier-green { background: linear-gradient(135deg, #e8f5e9, #c8e6c9) !important; border: 1px solid #81c784 !important; color: #2e7d32 !important; font-weight: 500; }
+        .tier-purple { background: linear-gradient(135deg, #f3e5f5, #e1bee7) !important; border: 1px solid #ba68c8 !important; color: #6a1b9a !important; font-weight: 500; }
+        .tier-orange { background: linear-gradient(135deg, #fff3e0, #ffe0b2) !important; border: 1px solid #ffb74d !important; color: #e65100 !important; font-weight: 600 !important; }
+        .tier-pink { background: linear-gradient(135deg, #ffe0e6, #ffb3c1) !important; border: 1.5px solid #ff4d6d !important; color: #c9184a !important; font-weight: 700 !important; box-shadow: 0 2px 6px rgba(255, 77, 109, 0.15) !important; }
 
         /* ----- SEARCH AREA ----- */
-        .search-title { font-size: 13px; font-weight: 700; color: var(--text-gray); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 4px; }
-        .single-flower-block { padding: 18px; border-radius: 24px; font-size: 13.5px; line-height: 1.6; margin-bottom: 14px; animation: fadeInDown 0.3s ease-out; }
-        .flower-found { border: 2.5px solid var(--pink-dot); background: #fff5f6; color: #b7094c; box-shadow: 0 6px 15px rgba(255,182,193,0.12); }
-        .flower-empty { border: 2.5px solid #dee2e6; background: #fafafa; color: #888; }
-        .flower-not-found { border: 2.5px solid #dee2e6; background: #fafafa; color: #999; text-align: center; }
+        .search-title { font-size: 13px; font-weight: 700; color: var(--sea-dark); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 4px; }
+        .single-flower-block { padding: 18px; border-radius: 24px; font-size: 13.5px; line-height: 1.6; margin-bottom: 14px; }
+        .flower-found { border: 2.5px solid #00b4d8; background: #fff; color: var(--sea-dark); box-shadow: 0 6px 15px rgba(0, 119, 182, 0.1); }
+        .flower-empty { border: 2.5px dashed #90e0ef; background: rgba(255,255,255,0.7); color: var(--sea-main); }
+        .flower-not-found { border: 2.5px dashed #e76f51; background: rgba(255,255,255,0.7); color: #e76f51; text-align: center; font-weight: 600;}
     </style>
 </head>
 <body>
 
 <div class="garden-container">
-    <span class="decor-ribbon left">🎀</span>
-    <span class="decor-ribbon right">🎀</span>
+    <span class="decor-float left">🐠</span>
+    <span class="decor-float right">⛵</span>
 
-    <h2 style="text-align: center; color: var(--pink-main); margin-bottom: 20px;">🌸 Queenss Garden 👑</h2>
+    <h2 style="text-align: center; color: var(--sea-dark); margin-bottom: 20px; font-size: 24px; text-shadow: 2px 2px 4px rgba(255,255,255,0.8);">🌴 Bảng hoa Queens - Hè là phải đi biển 🐚</h2>
     
     <div class="search-box">
-        <div class="search-box-title">🌱 Tìm theo tên hoa:</div>
-        <input type="text" id="flowerSearch" class="search-input" placeholder="Nhập tên hoa muốn tra cứu...">
+        <div class="search-box-title">🔍 Tìm hoa ở bãi biển:</div>
+        <input type="text" id="flowerSearch" class="search-input" placeholder="Nhập tên loài hoa bạn muốn tìm...">
     </div>
     
     <div style="flex-grow: 1;">
         <div id="defaultGardenWidgets" style="display: flex; flex-direction: column; gap: 18px;">
             <div>
-                <button id="btnHelp" class="btn-main btn-help">📖 Hướng dẫn sử dụng vườn hoa</button>
+                <button id="btnHelp" class="btn-main btn-help">🗺️ Hướng dẫn khám phá các loại hoa</button>
                 <div id="helpBox" class="info-box">
                     <div class="help-content">
-                        <p class="help-title">Chào mừng các nàng và các chàng đến với mảnh vườn <strong>Queenss Garden</strong>!</p>
-                        <p>🌸 <strong>Tìm ai có hoa gì:</strong> Gõ từ khóa tên hoa vào ô tìm kiếm ở trên.</p>
-                        <p>🌸 <strong>Xem bảng xếp hạng:</strong> Bấm nút màu hồng bên dưới (chỉ tính từ phẩm tím trở lên).</p>
-                        <p>🌸 <strong>Kiểm tra hoa xu:</strong> Bấm nút xanh lục để biết loài hoa nào cả hội đang thiếu.</p>
+                        <p class="help-title">Aloha! Chào mừng tới Đảo Hoa Mùa Hè 🏝️</p>
+                        <p>🐚 <strong>Tìm hoa ở bãi biển:</strong> Gõ tên hoa vào ô tìm kiếm ở trên để xem thành viên nào đang sở hữu nhé.</p>
+                        <p>🏄‍♀️ <strong>Bảng xếp hạng hoa các thành viên:</strong> Bấm nút màu xanh dương để xem độ giàu có của từng người (tính từ phẩm tím trở lên).</p>
+                        <p>🦀 <strong>Các loại hoa xu chưa nhặt trên bờ cát:</strong> Bấm nút xanh ngọc để xem danh sách các loài hoa xu mà cả hội chưa ai vớt được.</p>
                     </div>
                 </div>
             </div>
 
             <div>
-                <button id="btnRank" class="btn-main btn-rank">🏆 Xem bảng xếp hạng</button>
+                <button id="btnRank" class="btn-main btn-rank">🏄‍♀️ Bảng xếp hạng hoa các thành viên</button>
                 <div id="rankBox" class="info-box">
                     <div id="mainRankArea"></div>
                 </div>
             </div>
 
             <div>
-                <button id="btnXu" class="btn-main btn-xu">✨ Xem các loại hoa xu chưa có</button>
+                <button id="btnXu" class="btn-main btn-xu">🦀 Các loại hoa xu chưa nhặt trên bờ cát</button>
                 <div id="missingBox" class="info-box">
                     <div id="missingArea" style="display: flex; flex-wrap: wrap; gap: 6px;"></div>
                 </div>
@@ -188,7 +183,7 @@
         </div>
         
         <div id="searchViewArea" style="display: none;">
-            <div class="search-title">📋 Kết quả tìm kiếm:</div>
+            <div class="search-title">🪸 Lưới thu hoạch:</div>
             <div id="searchResultArea"></div>
         </div>
     </div>
@@ -199,11 +194,9 @@
     const standardizeName = str => {
         if (!str) return '';
         let s = str.normalize('NFC').trim().toLowerCase();
-        
         s = s.replace(/oà/g, 'òa').replace(/oá/g, 'óa').replace(/oả/g, 'ỏa').replace(/oã/g, 'õa').replace(/oạ/g, 'ọa')
              .replace(/oè/g, 'òe').replace(/oé/g, 'óe').replace(/oẻ/g, 'ỏe').replace(/oẽ/g, 'õe').replace(/oẹ/g, 'ọe')
              .replace(/([^q]|^)uý/g, '$1úy').replace(/([^q]|^)uỳ/g, '$1ùy').replace(/([^q]|^)uỷ/g, '$1ủy').replace(/([^q]|^)uỹ/g, '$1ũy').replace(/([^q]|^)uỵ/g, '$1ụy');
-
         return s.charAt(0).toUpperCase() + s.slice(1);
     };
 
@@ -293,12 +286,12 @@
     const searchViewArea = document.getElementById('searchViewArea');
 
     function initRenderRankList() {
-        mainRankArea.innerHTML = `<div class="total-badge">🌱 Tổng số: ${finalMembersData.length} thành viên</div>`;
+        mainRankArea.innerHTML = `<div class="total-badge">⚓ Tổng số: ${finalMembersData.length} thành viên</div>`;
         const container = document.createElement('div');
         container.className = "rank-list-container";
 
         const sortedRank = [...finalMembersData].sort((a, b) => b.totalCount - a.totalCount);
-        const rankColors = ["#ffb703", "#fb8500", "#219ebc", "#d6ccc2"];
+        const rankColors = ["#e76f51", "#f4a261", "#e9c46a", "#2a9d8f"];
 
         sortedRank.forEach((item, index) => {
             const collapseItem = document.createElement('div');
@@ -315,10 +308,9 @@
                 return `<span class="flower-chip-item ${f.className}">${f.name}</span>`;
             }).join('');
             
-            const summaryHtml = `<div class="summary-rarity-line">👑 <strong>Đội hình tính điểm:</strong> ${tierCounts[4]} Hồng | ${tierCounts[3]} Cam | ${tierCounts[2]} Tím</div>`;
-            const numColor = index < 3 ? rankColors[index] : rankColors[3];
+            const summaryHtml = `<div class="summary-rarity-line">🌊 <strong>Kho báu:</strong> ${tierCounts[4]} Hồng | ${tierCounts[3]} Cam | ${tierCounts[2]} Tím</div>`;
+            const numColor = index < 3 ? rankColors[index] : "#1d3557";
 
-            // Tối ưu hóa: Đặt chuỗi tên textContent trực tiếp qua biến an toàn để giữ nguyên dấu ngoặc đơn
             collapseItem.innerHTML = `
                 <div class="click-header-line">
                     <div class="header-left">
@@ -333,7 +325,7 @@
                 </div>
             `;
 
-            // Gán chữ cứng trực tiếp để vượt qua màng lọc tự động cắt chuỗi của innerHTML
+            // Dùng textContent bảo đảm không bị mất dấu ngoặc () của Đạo Chích (Trúc Linh)
             collapseItem.querySelector('.member-display-name').textContent = (isBoy ? '🎩 ' : '👑 ') + item.name;
 
             collapseItem.querySelector('.click-header-line').addEventListener('click', () => collapseItem.classList.toggle('active-folder'));
@@ -361,7 +353,7 @@
             .sort((a, b) => a.localeCompare(b, 'vi'));
 
         if (!sortedMatches.length) {
-            searchResultArea.innerHTML = `<div class="single-flower-block flower-not-found">❌ Không tìm thấy loại hoa nào chứa từ khóa "${rawInput}"</div>`;
+            searchResultArea.innerHTML = `<div class="single-flower-block flower-not-found">❌ Rạn san hô này chưa có loài hoa "${rawInput}"</div>`;
             return;
         }
 
@@ -371,8 +363,8 @@
                 .map(m => m.name);
 
             return owners.length 
-                ? `<div class="single-flower-block flower-found">🌸 <strong>${name}</strong> hiện có <strong>${owners.length}</strong> thành viên sở hữu (Xếp từ ít hoa nhất 👇):<br>👉 <em>${owners.join(', ')}</em></div>`
-                : `<div class="single-flower-block flower-empty">🌸 <strong>${name}</strong>: Hiện chưa có thành viên nào sở hữu.</div>`;
+                ? `<div class="single-flower-block flower-found">🌸 <strong>${name}</strong> có <strong>${owners.length}</strong> thành viên vớt được (Xếp từ ít hoa nhất 👇):<br>👉 <em>${owners.join(', ')}</em></div>`
+                : `<div class="single-flower-block flower-empty">🌸 <strong>${name}</strong>: Cả đảo chưa ai vớt được.</div>`;
         }).join('');
     }
 
