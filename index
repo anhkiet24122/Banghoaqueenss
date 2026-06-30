@@ -196,7 +196,6 @@
 
 <script>
     // --- 1. KHAI BÁO VÀ CHUẨN HÓA DỮ LIỆU GỐC ---
-    // Hàm chuẩn hóa tự động đã được làm gọn
     const standardizeName = str => {
         if (!str) return '';
         let s = str.normalize('NFC').trim().toLowerCase();
@@ -243,7 +242,6 @@
     ];
 
     // --- 2. HỆ THỐNG TRA CỨU TỐI ƯU ---
-    // Khởi tạo các mảng đã được chuẩn hóa tự động một lần duy nhất
     const xuList = [...new Set(rawXuList.map(standardizeName))];
     const pinkList = rawPinkList.map(standardizeName);
     const orangeList = rawOrangeList.map(standardizeName);
@@ -255,7 +253,6 @@
         flowers: [...new Set(m.flowers.map(standardizeName))]
     }));
 
-    // Gán hạng cho từng loài hoa
     const flowerTierMap = new Map();
     pinkList.forEach(f => flowerTierMap.set(f, 4));
     orangeList.forEach(f => flowerTierMap.set(f, 3));
@@ -268,7 +265,6 @@
         return { score, className: tierClasses[score] };
     }
 
-    // Mapping danh sách người sở hữu hoa
     const flowerOwnersMap = new Map();
     const allKnownFlowers = new Set([...xuList, ...pinkList, ...orangeList, ...purpleList, ...greenList]);
     allKnownFlowers.forEach(f => flowerOwnersMap.set(f, []));
@@ -307,7 +303,7 @@
         sortedRank.forEach((item, index) => {
             const collapseItem = document.createElement('div');
             
-            // Nhận diện nam chuẩn
+            // Đã trả lại danh tính nữ hiệp cho Đạo Chích (chỉ còn Kiệt và Toàn là nam)
             const isBoy = item.name === "Cá chiên (Anh Kiệt)" || item.name === "ChồgcủaHạDi (Quốc Toàn)";
             collapseItem.className = isBoy ? "cute-rank-item gentleman-card-style" : "cute-rank-item";
 
@@ -343,7 +339,6 @@
         mainRankArea.appendChild(container);
     }
 
-    // Cơ chế Debounce (Chống lag khi gõ)
     let debounceTimer;
     function searchFlowerLogic() {
         const rawInput = flowerInput.value.trim();
@@ -380,7 +375,7 @@
 
     flowerInput.addEventListener('input', () => {
         clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(searchFlowerLogic, 300); // Máy sẽ đợi 0.3s mới chạy lệnh tìm
+        debounceTimer = setTimeout(searchFlowerLogic, 300);
     });
 
     function updateMissingXu() {
