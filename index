@@ -219,7 +219,7 @@
         { name: "Tinkerbell (Cẩm Tiên cute)", flowers: ["Đăng tiêu trắng tím", "Đông trùng thông vàng", "Sen trời đầy sao", "Tuyết mai hồng", "Thược dược hồng", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Nhụy linh ánh sao", "Hoa bồ câu tím", "Gừng sen bạch ngọc", "Gừng sen ban mai", "Hoa anh thảo vàng", "Hồng lenten đỏ", "Cúc thược dược cam", "Hoa poppy himalaya xanh", "Hồng môn phấn", "Mộc hương cam", "Tử đằng lam", "Cúc indo hồng", "Diên vĩ đức kem đỏ", "Đăng tiêu cam vàng", "Dạ yến thảo lam", "Hoa anh thảo hồng", "Hoa anh thảo xanh", "Hồng champagne", "Mạn châu sa", "San hô xanh", "Ngôi sao bethlehem", "Hoa phi yến tím", "Mộc lan ngọc ngà", "Lạp mai hương phi", "Phù dung tím hộp báu", "Thỏ ngọc ôm ánh sáng", "Hạc gửi ngân hà", "Tử linh phúc lộc", "Đế vương xích diễm", "Gấu hoa hồng", "Có rồng ắt linh", "Hạnh nguyệt nghỉ dưới bóng hoa", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc hồng", "Lạc tân phụ tím", "Thục quỳ hồng", "Tỏi trời", "Thanh cúc lam", "Hoa baby trắng", "Trúc đào hồng nhạt", "Ghim cài vàng mật", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo xanh nhạt", "Nguyệt quý mây hồng", "Trái tim đá quý", "Hoa thụy hương trắng tuyết", "Hồng jacqueline trắng", "Hải đường vàng", "Trái tim tìm mật", "Trái tim mộng ảo", "Hoa mặt rồng đỏ tươi", "Hoa lập kim xanh sẫm", "Huệ hosta lam", "Hoa báo xuân vàng", "Ghim cài hồng hạnh", "Hoa lửa thanh ly", "Hoa hồng sa mạc hồng nhạt", "Thanh loan bích vũ"] },
         { name: "A Xa Ry (Bạch Yến)", flowers: ["Hoa anh thảo hồng", "Dạ yến thảo lam", "Hồng champagne", "Ngôi sao bethlehem", "Nhài nhật", "Lan phượng vĩ đỏ", "Diên vĩ đức trắng vàng", "Hồng môn phấn", "Mạn đà la", "Cúc indo hồng", "Hoa sao nhái tím", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Đông trùng thông vàng", "Hoa mặt rồng hồng phấn", "Mộc lan ngọc ngà", "Thỏ ngọc ôm ánh sáng", "Trái tim đá quý", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc hồng", "Lạc tân phụ tím", "Tỏi trời", "Thanh cúc lam", "Hoa baby trắng", "Vạn tuế lá lam", "Hoa lửa thanh ly", "Thược dược đỏ"] },
         { name: "Mộng dâu (Hi Mỹ)", flowers: ["Hồng cecil phấn", "Phù dung cam hộp báu", "Dạ yến thảo lam", "Hoa anh thảo hồng", "Hoa anh thảo xanh", "Hồng champagne", "Mạch môn hồng phấn", "Hoa lộ vi trắng", "Mộc hương trắng", "Tử đằng hồng", "Diên vĩ đức hồng tím", "Hoa lộ vi hồng", "Tuyết mai trắng", "Hoa loa kèn đỏ", "Gấu bông", "Cây holly vòng xanh", "Mộc lan ngọc ngà", "Nguyệt quý mây hồng", "Hạc gửi ngân hà", "Sách mai điệp ảnh", "Lạp mai đỏ", "Mạn châu sa", "San hô xanh", "Ngôi sao bethlehem", "Hoa phi yến tím", "Hồng lenten đỏ", "Hoa poppy himalaya vàng", "Hoa hải quỳ tím", "Hoa poppy cam", "Hoa loa kèn cam", "Rosa banksiae trắng", "Bụp hồng cận hồng", "Loa kèn peru đỏ", "Mao lương kem vàng", "Gừng sen hồng đào", "Đăng tiêu đỏ chu", "Đông trùng thông vàng", "Ngót nghẻo hồng phấn", "Ngót nghẻo đỏ lửa", "Thanh cúc lam", "Thục quỳ đỏ", "Trúc đào hồng nhạt", "Ghim cài vàng mật", "Hoa anh thảo tím nhạt", "Mạch môn hồng phấn", "Hoa poppy tím", "Hải quỳ đỏ", "Hoa mặt rồng đỏ tươi", "Hoa thụy hương trắng tuyết", "Hoa lập kim hồng san hô", "Loa kèn peru xanh", "Thược dược dương xỉ đỏ tươi", "Nguyệt quý sắc cam", "Trái tim đá quý"] },
-        { name: "A Ân Diệu (Quanh Thịnh Hoàng)", flowers: ["Hoa anh thảo hồng", "Hồng lenten vàng", "Hoa poppy himalaya vàng", "Hải quỳ đỏ", "Cây sống đời đỏ", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Dạ yến thảo lam", "San hô tím", "Thược dược đỏ", "Hạc gửi ngân hà", "Hoa anh thảo xanh", "Hồng champagne", "Trái tim đá quý", "Ngân hà chiếu nhụy"] },
+        { name: "A Ân Diệu (Quanh Thịnh Hoàng)", flowers: ["Hoa anh thảo hồng", "Dạ yến thảo lam", "San hô tím", "Thược dược đỏ", "Thược dược trắng", "Lay ơn tím", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc tím", "Thanh cúc hồng", "Lạc tân phụ tím", "Tỏi trời", "Cúc thược dược đen", "Nhài nhật", "Trái tim đá quý", "Ngân hà chiếu nhụy"] },
         { name: "Nọng xinh (Thanh Nga)", flowers: ["Thược dược trắng", "Dạ yến thảo lam", "Hoa anh thảo hồng", "Lạp mai đỏ", "Ngôi sao bethlehem", "Hoa hành tím", "Diên vĩ đức trắng vàng", "Hồng lenten đỏ", "Cây sống đời vàng", "Mạch môn hồng phấn", "Hoa lộ vi trắng", "Cúc thược dược cam", "Lan vũ nữ vàng", "Hoa poppy himalaya xanh", "Mạn đà la", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Ngân hà chiếu nhụy", "Lạc tân phụ đỏ", "Thanh cúc hồng", "Lạc tân phụ tím", "Thục quỳ hồng", "Tỏi trời", "Thanh cúc lam", "Hoa sao nhái trắng", "Thanh cúc tím", "Lạc tân phụ lam", "Hoa mặt rồng đỏ tươi", "Cúc thược dược đen", "Hoa lửa thanh ly", "Hoa hồng sa mạc hồng nhạt", "Hồng môn phấn"] },
         { name: "Mộng khiết (Yến Ly)", flowers: ["Cây holly vòng xanh", "Dạ yến thảo lam", "Hoa anh thảo hồng", "Hồng champagne", "Mạch môn hồng phấn", "Hoa lộ vi trắng", "Hồng môn phấn", "Mạn đà la", "Hải quỳ cam", "Mộc hương trắng", "San hô cam", "Lay ơn trắng", "Gấu bông", "Bụp hồng cận hồng", "Mộc lan ngọc ngà", "Cá heo xanh", "Trái tim đá quý", "Hoa phi yến hồng", "Cúc indo cam", "Hoa sao nhái hồng", "Ngôi sao bethlehem", "Vạn tuế lá lam"] },
         { name: "Hải Đường (Thanh Ngân)", flowers: ["Trái tim đá quý", "Mộc lan ngọc ngà", "Cá heo hồng", "Hoa hành tím", "Lan phượng vĩ đỏ", "Hoa poppy himalaya xanh", "San hô tím", "Hoa poppy tím", "Hoa lồng đèn cam", "Lan vũ nữ cam", "Dạ yến thảo lam", "Hồng champagne", "Cúc thược dược cam", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Hoa anh thảo hồng", "Hoa anh thảo xanh", "Ngôi sao bethlehem", "Hoa sao nhái trắng", "Thục quỳ hồng", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc tím", "Mạn châu sa", "Tiên nữ rải hoa", "Hoa mặt rồng đỏ tươi", "Hoa hồng sa mạc hồng nhạt", "Diên vĩ đức hồng tím", "Hoa poppy cam", "Hoa phi yến tím"] },
@@ -318,11 +318,12 @@
             const summaryHtml = `<div class="summary-rarity-line">👑 <strong>Đội hình tính điểm:</strong> ${tierCounts[4]} Hồng | ${tierCounts[3]} Cam | ${tierCounts[2]} Tím</div>`;
             const numColor = index < 3 ? rankColors[index] : rankColors[3];
 
+            // Tối ưu hóa: Đặt chuỗi tên textContent trực tiếp qua biến an toàn để giữ nguyên dấu ngoặc đơn
             collapseItem.innerHTML = `
                 <div class="click-header-line">
                     <div class="header-left">
                         <span class="rank-number" style="color: ${numColor};">#${index + 1}</span>
-                        <span>${isBoy ? '🎩' : '👑'} ${item.name}</span>
+                        <span class="member-display-name"></span>
                     </div>
                     <span class="count-badge">${item.totalCount} loại hoa</span>
                 </div>
@@ -331,6 +332,9 @@
                     <div class="flower-chip-container">${chipsHtml}</div>
                 </div>
             `;
+
+            // Gán chữ cứng trực tiếp để vượt qua màng lọc tự động cắt chuỗi của innerHTML
+            collapseItem.querySelector('.member-display-name').textContent = (isBoy ? '🎩 ' : '👑 ') + item.name;
 
             collapseItem.querySelector('.click-header-line').addEventListener('click', () => collapseItem.classList.toggle('active-folder'));
             container.appendChild(collapseItem);
@@ -352,7 +356,6 @@
         defaultGardenWidgets.style.display = "none";
         searchViewArea.style.display = "block";
         
-        // Sửa logic mapping: dùng phương thức duyệt Set thay vì Regex để tránh lỗi dấu ngoặc đơn ()
         const sortedMatches = Array.from(flowerOwnersMap.keys())
             .filter(name => name.toLowerCase().includes(fKey))
             .sort((a, b) => a.localeCompare(b, 'vi'));
