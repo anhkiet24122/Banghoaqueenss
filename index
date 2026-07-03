@@ -216,13 +216,21 @@
         return s.charAt(0).toUpperCase() + s.slice(1);
     };
 
-    // Hàm tối ưu cắt dấu tiếng Việt hoàn toàn (Đồng bộ mọi ký tự về không dấu, chữ thường)
+    // Hàm "nồi đồng cối đá" để xóa dấu tiếng Việt, tương thích với mọi loại trình duyệt/ứng dụng cũ
     const removeVietnameseTones = str => {
         if (!str) return '';
-        return str.normalize('NFD')
-                  .replace(/[\u0300-\u036f]/g, '')
-                  .replace(/đ/g, 'd')
-                  .replace(/Đ/g, 'd'); // Ép buộc 'Đ' thành 'd' thường
+        str = str.toLowerCase();
+        str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+        str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+        str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+        str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+        str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+        str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+        str = str.replace(/đ/g, "d");
+        // Xử lý các dấu tổ hợp (nếu bộ gõ sinh ra)
+        str = str.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, ""); 
+        str = str.replace(/\u02C6|\u0306|\u031B/g, "");
+        return str.trim();
     };
 
     const rawRedList = ["Đào Nguyệt Vân tịch chước hoa", "Ngân hà chiếu nhụy", "Chép vàng vượt sóng", "Thiên cung", "Thanh loan bích vũ", "Có rồng ắt linh", "Gia nguyệt neo thuyền câu cá", "Mai nguyệt huyền âm", "Đình hoa đêm mộng", "Liễu nguyệt én hót bên đình", "Hạnh nguyệt nghỉ dưới bóng hoa", "Trái tim mộng ảo", "Sắc xuân núi non", "Hươu thần chín màu"];
@@ -372,15 +380,14 @@
             return;
         }
 
-        // TỐI ƯU HÓA: Chuyển toàn bộ chuỗi tìm kiếm về chữ thường trước khi loại bỏ dấu
-        let fKeyNoTone = removeVietnameseTones(rawInput.toLowerCase());
+        // TỐI ƯU HÓA ĐẢM BẢO CHẠY MỌI TRÌNH DUYỆT CŨ/MỚI
+        let fKeyNoTone = removeVietnameseTones(rawInput);
 
         defaultGardenWidgets.style.display = "none";
         searchViewArea.style.display = "block";
         
-        // TỐI ƯU HÓA: Chuyển tên hoa trong bộ nhớ về chữ thường rồi bỏ dấu để đối chiếu ngầm
         const sortedMatches = Array.from(flowerOwnersMap.keys())
-            .filter(name => removeVietnameseTones(name.toLowerCase()).includes(fKeyNoTone))
+            .filter(name => removeVietnameseTones(name).includes(fKeyNoTone))
             .sort((a, b) => a.localeCompare(b, 'vi'));
 
         if (!sortedMatches.length) {
@@ -388,7 +395,6 @@
             return;
         }
 
-        // Vẫn bốc tên có dấu gốc đầy đủ để in ra màn hình
         searchResultArea.innerHTML = sortedMatches.map(name => {
             const owners = (flowerOwnersMap.get(name) || [])
                 .sort((a, b) => a.totalCount - b.totalCount)
