@@ -172,6 +172,7 @@
                     <button id="btnXu" class="btn-main btn-xu">🦀 Các loại hoa xu chưa nhặt trên bờ cát</button>
                     <div id="missingBox" class="info-box">
                         <div id="missingArea" style="display: flex; flex-wrap: wrap; gap: 6px;"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -184,9 +185,9 @@
 </div>
 
 <script>
-   // Link kết nối xuất bản trực tiếp dạng CSV (Thay thế để chạy 100% không lỗi)
-const URL_THANH_VIEN = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQr1KQPnC9HtYDxhsdwMI4oMVGXsXtphgYVsRKk5ikcxMFWhgdStwsm8sPc0bsVgqfctJmLnXQSL5V-/pub?gid=0&single=true&output=csv";
-const URL_PHAM_MAU = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQr1KQPnC9HtYDxhsdwMI4oMVGXsXtphgYVsRKk5ikcxMFWhgdStwsm8sPc0bsVgqfctJmLnXQSL5V-/pub?gid=2019890526&single=true&output=csv";
+    // Link kết nối xuất bản trực tiếp dạng CSV (Đã tối ưu hóa chống chặn bảo mật cấu trúc)
+    const URL_THANH_VIEN = "https://docs.google.com/spreadsheets/d/1tEoux6IzG80zh2oMIWLYasYziOH3bv37EGKG3UVA9WY/export?format=csv&gid=0";
+    const URL_PHAM_MAU = "https://docs.google.com/spreadsheets/d/1tEoux6IzG80zh2oMIWLYasYziOH3bv37EGKG3UVA9WY/export?format=csv&gid=2019890526";
 
     const standardizeName = str => {
         if (!str) return '';
@@ -246,7 +247,7 @@ const URL_PHAM_MAU = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQr1KQPnC9
 
     async function loadDataFromGoogleSheets() {
         try {
-            // Tải dữ liệu song song từ 2 Sheet
+            // Tải dữ liệu song song từ 2 Sheet chống nghẽn bảo mật CORS
             const [resThanhVien, resPhamMau] = await Promise.all([
                 fetch(URL_THANH_VIEN).then(res => res.text()),
                 fetch(URL_PHAM_MAU).then(res => res.text())
@@ -304,7 +305,7 @@ const URL_PHAM_MAU = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQr1KQPnC9
             updateMissingXu();
 
         } catch (error) {
-            document.getElementById('loadingArea').innerHTML = "❌ Lỗi kết nối API Google Sheets. Hãy chắc chắn bạn đã bấm 'Xuất bản lên trang web' trên file Sheets nhé!";
+            document.getElementById('loadingArea').innerHTML = "❌ Lỗi kết nối API Google Sheets. Hãy chắc chắn bạn đã bật quyền 'Bất kỳ ai có đường liên kết đều có thể xem' trên file Sheets nhé!";
             console.error(error);
         }
     }
