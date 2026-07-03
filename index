@@ -6,9 +6,9 @@
     <title>🌴 Bảng hoa Queens - Hè là phải đi biển 🐚</title>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght=400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ----- HỆ THỐNG BIẾN MÀU TƯƠI MÁT (SÁNG VÀ TRONG TRẺO HƠN) ----- */
+        /* ----- HỆ THỐNG BIẾN MÀU TƯƠI MÁT ----- */
         :root {
-            --sea-main: #0096c7; 
+            --sea-main: #0096c7;
             --sea-dark: #0077b6;
             --text-dark: #1d3557;
             --text-gray: #457b9d;
@@ -32,7 +32,7 @@
             padding: 30px 15px; 
             display: flex; 
             justify-content: center; 
-            min-height: 100vh; 
+            min-height: 100vh;
         }
 
         @keyframes fadeInDown {
@@ -51,31 +51,41 @@
             100% { transform: translateY(0px) rotate(0deg); }
         }
 
-        .fade-in-box { animation: fadeInSoft 0.4s ease-out forwards; }
+        .fade-in-box { animation: fadeInSoft 0.3s ease-out forwards; }
 
         .garden-container { 
-            width: 100%; max-width: 520px; 
+            width: 100%;
+            max-width: 520px; 
             background: var(--glass-bg); 
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            padding: 35px 25px; border-radius: 40px; 
+            padding: 35px 25px; 
+            border-radius: 40px;
             box-shadow: 0 25px 50px rgba(0, 150, 199, 0.15); 
             border: 2px solid var(--glass-border); 
-            display: flex; flex-direction: column; position: relative; 
-            animation: fadeInDown 0.6s ease-out;
-            will-change: transform, opacity; 
+            display: flex; 
+            flex-direction: column; 
+            position: relative;
+            animation: fadeInDown 0.5s ease-out;
         }
         
-        .decor-float { position: absolute; top: -20px; font-size: 38px; animation: floating 3s ease-in-out infinite; cursor: pointer; text-shadow: 0 5px 15px rgba(0, 180, 216, 0.3); will-change: transform; transform: translateZ(0); }
-        .decor-float.left { left: 10px; }
-        .decor-float.right { right: 10px; animation-delay: 1.5s; top: -15px; }
+        .decor-float { 
+            position: absolute; top: -20px; font-size: 38px; 
+            animation: floating 3s ease-in-out infinite; user-select: none;
+            text-shadow: 0 5px 15px rgba(0, 180, 216, 0.3);
+        }
+        .decor-float.left { left: 15px; }
+        .decor-float.right { right: 15px; animation-delay: 1.5s; top: -15px; }
         
         .search-box { 
-            background: rgba(255, 255, 255, 0.95); 
+            background: rgba(255, 255, 255, 0.95);
             border: 2px dashed #48cae4; padding: 18px; border-radius: 28px; margin-bottom: 25px; 
-            box-shadow: inset 0 4px 10px rgba(0, 180, 216, 0.05); 
+            box-shadow: inset 0 4px 10px rgba(0, 180, 216, 0.05);
         }
-        .search-box-title { font-size: 13px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--sea-dark); display: flex; align-items: center; gap: 6px; }
+        .search-box-title { 
+            font-size: 13px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; 
+            letter-spacing: 0.8px; color: var(--sea-dark); display: flex; align-items: center; gap: 6px; 
+        }
         .search-input { 
             width: 100%; padding: 14px 18px; font-size: 14px; border-radius: 20px; 
             border: 2px solid #caf0f8; outline: none; background: #fff; color: var(--text-dark); 
@@ -85,12 +95,11 @@
 
         .btn-main { 
             width: 100%; padding: 16px 20px; font-size: 14.5px; font-weight: 700; border: none; 
-            border-radius: 25px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; 
-            user-select: none; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            will-change: transform; transform: translateZ(0);
+            border-radius: 25px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+            gap: 8px; user-select: none; transition: all 0.25s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
-        .btn-main:hover { transform: translateY(-4px); filter: brightness(1.08); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+        .btn-main:hover { transform: translateY(-3px); filter: brightness(1.06); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
         .btn-main:active { transform: translateY(1px); }
         
         .btn-help { color: #855b00; background: linear-gradient(135deg, #ffe066, #ffb703); }
@@ -98,28 +107,38 @@
         .btn-xu { color: #fff; background: linear-gradient(135deg, #2a9d8f, #264653); }
 
         .info-box { 
-            margin-top: 8px; padding: 20px; background: rgba(255, 255, 255, 0.95); 
-            border: 2px dashed #48cae4; border-radius: 28px; display: none; 
+            margin-top: 10px; padding: 20px; background: rgba(255, 255, 255, 0.95); 
+            border: 2px dashed #48cae4; border-radius: 28px; display: none;
         }
         .help-content { color: var(--text-gray); font-size: 13.5px; line-height: 1.8; }
-        .help-content p { margin-bottom: 6px; }
+        .help-content p { margin-bottom: 8px; }
         .help-content .help-title { margin-bottom: 12px; font-weight: 700; color: var(--sea-main); font-size: 15px;}
 
-        .total-badge { font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 14px; background: var(--sea-main); padding: 6px 14px; border-radius: 15px; display: inline-block; box-shadow: 0 4px 10px rgba(0, 150, 199, 0.3); text-transform: uppercase;}
+        .total-badge { 
+            font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 14px;
+            background: var(--sea-main); padding: 6px 14px; border-radius: 15px; 
+            display: inline-block; box-shadow: 0 4px 10px rgba(0, 150, 199, 0.3); text-transform: uppercase;
+        }
         .rank-list-container { display: flex; flex-direction: column; gap: 12px; width: 100%; }
         
-        .cute-rank-item { border: 1.5px solid rgba(255,255,255,0.9); border-radius: 22px; overflow: hidden; background: rgba(255,255,255,0.95); box-shadow: 0 4px 15px rgba(0, 150, 199, 0.08); transition: all 0.3s ease; }
+        .cute-rank-item { 
+            border: 1.5px solid rgba(255,255,255,0.9); border-radius: 22px; overflow: hidden; 
+            background: rgba(255,255,255,0.95); box-shadow: 0 4px 15px rgba(0, 150, 199, 0.08); transition: all 0.3s ease;
+        }
         .cute-rank-item:hover { box-shadow: 0 8px 25px rgba(0, 150, 199, 0.15); }
         .gentleman-card-style.cute-rank-item { border-color: var(--boy-border); background: var(--boy-bg); }
 
-        .click-header-line { display: flex; justify-content: space-between; align-items: center; padding: 16px 18px; cursor: pointer; user-select: none; transition: background 0.3s; }
+        .click-header-line { 
+            display: flex; justify-content: space-between; align-items: center; padding: 16px 18px;
+            cursor: pointer; user-select: none; transition: background 0.3s; 
+        }
         .click-header-line:hover { background: rgba(255,255,255,1); }
         
         .active-folder .click-header-line { background: #e0fbfc !important; color: var(--sea-dark) !important; }
         .active-folder.gentleman-card-style .click-header-line { background: #caf0f8 !important; }
 
         .header-left { display: flex; align-items: center; gap: 10px; font-size: 14.5px; color: var(--text-dark); font-weight: 700; }
-        .rank-number { font-weight: 800; width: 24px; text-align: center; }
+        .rank-number { font-weight: 800; width: 26px; text-align: center; }
 
         .count-badge { font-weight: 700; padding: 5px 12px; border-radius: 20px; font-size: 11px; color: #fff; background: var(--sea-main); box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
         .gentleman-card-style .count-badge { color: #fff; background: var(--sea-dark); }
@@ -127,22 +146,29 @@
         .rank-content-box { display: none; padding: 18px; background: rgba(255,255,255,0.98); border-top: 1px solid #e0fbfc; }
         .active-folder .rank-content-box { display: block !important; animation: fadeInSoft 0.3s ease-out; }
 
-        .summary-rarity-line { font-size: 12px; padding: 10px 14px; margin-bottom: 12px; border-radius: 12px; background: #f0fafd; border-left: 5px solid var(--sea-main); color: var(--text-dark); font-weight: 500; line-height: 1.5; }
+        .summary-rarity-line { 
+            font-size: 12px; padding: 10px 14px; margin-bottom: 12px; border-radius: 12px; 
+            background: #f0fafd; border-left: 5px solid var(--sea-main); color: var(--text-dark); font-weight: 500; line-height: 1.6;
+        }
 
         .flower-chip-container { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
-        .flower-chip-item { display: inline-block; padding: 6px 12px; border-radius: 14px; font-size: 11.5px; margin: 3px; transition: transform 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .flower-chip-item:hover { transform: scale(1.08) translateY(-2px); box-shadow: 0 5px 10px rgba(0,0,0,0.1); z-index: 2; }
+        .flower-chip-item { 
+            display: inline-block; padding: 6px 12px; border-radius: 14px; font-size: 11.5px;
+            margin: 3px; transition: transform 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .flower-chip-item:hover { transform: scale(1.06) translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 2; }
         
-        .xu-missing-badge { display: inline-block; padding: 6px 12px; border-radius: 14px; font-size: 11.5px; background: #fff; border: 1.5px solid #e76f51; color: #e76f51; font-weight: 600; margin: 3px; transition: transform 0.2s; box-shadow: 0 2px 5px rgba(231,111,81,0.08); }
-        .xu-missing-badge:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(231, 111, 81, 0.18); background: #fff5f3;}
-        
-        .all-cleared-msg { width: 100%; text-align: center; padding: 18px; color: var(--sea-main); font-weight: 700; font-size: 14.5px; border: 2.5px dashed #90e0ef; border-radius: 18px; background: rgba(255,255,255,0.85); box-shadow: 0 4px 12px rgba(0,119,182,0.1); }
+        .all-cleared-msg { 
+            width: 100%; text-align: center; padding: 18px; color: var(--sea-main); font-weight: 700; 
+            font-size: 14.5px; border: 2.5px dashed #90e0ef; border-radius: 18px; background: rgba(255,255,255,0.85);
+            box-shadow: 0 4px 12px rgba(0,119,182,0.1); 
+        }
 
         /* ----- TIERS PHẨM CHẤT HOA ----- */
         .tier-blue { background: linear-gradient(135deg, #e0f2fe, #bae6fd) !important; border: 1px solid #7dd3fc !important; color: #0284c7 !important; font-weight: 500; }
         .tier-purple { background: linear-gradient(135deg, #f3e5f5, #e1bee7) !important; border: 1px solid #ba68c8 !important; color: #6a1b9a !important; font-weight: 500; }
         .tier-orange { background: linear-gradient(135deg, #fff3e0, #ffe0b2) !important; border: 1px solid #ffb74d !important; color: #e65100 !important; font-weight: 600 !important; }
-        .tier-red { background: linear-gradient(135deg, #fff0f2, #ffccd5) !important; border: 2px solid #e63946 !important; color: #d90429 !important; font-weight: 700 !important; box-shadow: 0 2px 6px rgba(230, 57, 70, 0.2) !important; }
+        .tier-red { background: linear-gradient(135deg, #fff0f2, #ffccd5) !important; border: 1.5px solid #e63946 !important; color: #d90429 !important; font-weight: 700 !important; box-shadow: 0 2px 6px rgba(230, 57, 70, 0.15) !important; }
 
         /* ----- SEARCH AREA ----- */
         .search-title { font-size: 13px; font-weight: 700; color: var(--sea-dark); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 4px; }
@@ -163,15 +189,15 @@
     <span class="decor-float left">🐠</span>
     <span class="decor-float right">⛵</span>
 
-    <h2 style="text-align: center; color: var(--sea-dark); margin-bottom: 20px; font-size: 24px; text-shadow: 2px 2px 4px rgba(255,255,255,0.8);">🌴 Bảng hoa Queens - Hè là phải đi biển 🐚</h2>
+    <h2 style="text-align: center; color: var(--sea-dark); margin-bottom: 20px; font-size: 23px; text-shadow: 2px 2px 4px rgba(255,255,255,0.8);">🌴 Bảng hoa Queens - Hè là phải đi biển 🐚</h2>
     
     <div class="search-box">
         <div class="search-box-title">🔍 Tìm hoa ở bãi biển:</div>
         <input type="text" id="flowerSearch" class="search-input" placeholder="Nhập tên loài hoa bạn muốn tìm...">
     </div>
-    
+   
     <div style="flex-grow: 1;">
-        <div id="defaultGardenWidgets" style="display: flex; flex-direction: column; gap: 18px;">
+        <div id="defaultGardenWidgets" style="display: flex; flex-direction: column; gap: 16px;">
             <div>
                 <button id="btnHelp" class="btn-main btn-help">🗺️ Hướng dẫn khám phá các loại hoa</button>
                 <div id="helpBox" class="info-box">
@@ -179,7 +205,7 @@
                         <p class="help-title">Aloha! Chào mừng tới Đảo Hoa Mùa Hè 🏝️</p>
                         <p>🐚 <strong>Tìm hoa ở bãi biển:</strong> Gõ tên hoa vào ô tìm kiếm ở trên để xem thủy thủ nào đang sở hữu nhé.</p>
                         <p>🏄‍♀️ <strong>Bảng xếp hạng hoa các thành viên:</strong> Bấm nút màu xanh dương để xem độ giàu có của từng người (tính từ phẩm tím trở lên).</p>
-                        <p>🦀 <strong>Các loại hoa xu chưa nhặt trên bờ cát:</strong> Bấm nút xanh ngọc để xem danh sách các loài hoa xu mà cả hội chưa ai vớt được.</p>
+                        <p>🦀 <strong>Các loại hoa xu chưa nhặt trên bờ cát:</strong> Bấm nút xanh ngọc để xem danh sách các loài hoa xu (bao gồm phẩm xanh dương & phẩm tím) mà cả hội chưa ai vớt được.</p>
                     </div>
                 </div>
             </div>
@@ -194,7 +220,7 @@
             <div>
                 <button id="btnXu" class="btn-main btn-xu">🦀 Các loại hoa xu chưa nhặt trên bờ cát</button>
                 <div id="missingBox" class="info-box">
-                    <div id="missingArea" style="display: flex; flex-wrap: wrap; gap: 6px;"></div>
+                    <div id="missingArea" style="display: flex; flex-wrap: wrap; gap: 4px;"></div>
                 </div>
             </div>
         </div>
@@ -218,31 +244,31 @@
 
     const removeVietnameseTones = str => {
         if (!str) return '';
-        str = str.toLowerCase();
-        str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
-        str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
-        str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
-        str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
-        str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
-        str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
-        str = str.replace(/đ/g, "d");
-        str = str.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, ""); 
-        str = str.replace(/[\u02C6\u0306\u031B]/g, "");
-        return str.trim();
+        return str.toLowerCase()
+            .replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a")
+            .replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e")
+            .replace(/ì|í|ị|ỉ|ĩ/g, "i")
+            .replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o")
+            .replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u")
+            .replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y")
+            .replace(/đ/g, "d")
+            .replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, "")
+            .replace(/[\u02C6\u0306\u031B]/g, "").trim();
     };
 
+    // ----- DANH SÁCH PHẨM CHẤT HOA GỐC -----
     const rawRedList = ["Đào Nguyệt Vân tịch chước hoa", "Ngân hà chiếu nhụy", "Chép vàng vượt sóng", "Thiên cung", "Thanh loan bích vũ", "Có rồng ắt linh", "Gia nguyệt neo thuyền câu cá", "Mai nguyệt huyền âm", "Đình hoa đêm mộng", "Liễu nguyệt én hót bên đình", "Hạnh nguyệt nghỉ dưới bóng hoa", "Trái tim mộng ảo", "Sắc xuân núi non", "Hươu thần chín màu"];
     const rawOrangeList = ["Mộc lan ngọc ngà", "Thuyền tiên sông ngân", "Bóng quế cành ngọc", "Tùng linh chiếu rọi", "Hồng cecil lam", "Hồng cecil phấn", "Lạp mai hương phi", "Lạp mai linh lung", "Mẫu đơn ánh tím", "Cá heo xanh", "Cá heo hồng", "Cá heo trắng", "Sắc cam mùa xuân", "Mẫu đơn ánh ngọc", "Mẫu đơn ánh xanh", "Tiên nữ rải hoa", "Phù dung hồng hộp báu", "Phù dung cam hộp báu", "Phù dung tím hộp báu", "Mưa bụi cô tô", "Trúc ánh sắc vàng", "Nguyệt quý mây hồng", "Nguyệt quý ánh vàng", "Nguyệt quý sắc cam", "Thỏ ngọc ôm ánh sáng", "Hạc gửi ngân hà", "Tử linh phúc lộc", "Chương hoa mộng điệp", "Sách mai điệp ảnh", "Hương hoa diên vĩ", "Đế vương hồng tía", "Đế vương lam lưu ly", "Đế vương xích diễm", "Cháo ngọt sương hoa", "Hương lam đêm", "Gấu hoa hồng", "Cừu bông ngọt ngào", "Cúc mẫu đơn tím nho", "Trái tim tìm mật", "Trái tim đá quý", "Ngọc lan lưu hương", "Diều giấy đón xuân", "Lạp mai lung linh", "Cúc mẫu đơn cam ráng chiều", "Hoa lung toả hương", "Tiếng sao hoa lung", "Hoa lửa thanh ly", "Hoa lửa ráng đỏ"];
     
-    // Đã chuyển "Mộc hương vàng" lên phẩm Tím
-    const rawPurpleList = ["Hoa sao sáng bạc", "Hoa tử đằng cánh kép", "Cúc thược dược cam", "Cúc thược dược đen", "Vạn tuế lá lam", "Hoa hải quỳ trắng", "Hải quỳ trắng (không hoa)", "Hồng môn phấn", "Tường vi vàng", "Đại nham đồng hồng sẫm", "Mộc lan vàng", "Lung linh bóng trăng", "Thược dược hồng", "Ngót nghẻo đỏ lửa", "Ngót nghẻo hồng phấn", "Gừng sen ban mai", "Gừng sen bạch ngọc", "Gừng sen hồng đào", "Cẩm chướng gấm tím", "Nhài dây trắng mây", "Từ cô hồng nhạt", "Cẩm chướng gấm đỏ", "Từ cô tím mây", "San hô tím", "San hô cam", "Hải quỳ cam", "Hải quỳ đỏ", "Hoa hải quỳ tím", "Hoa hải quỳ hồng", "Hoa hành tím", "Diên vĩ đức trắng vàng", "Hồng lenten đỏ", "Hồng lenten vàng", "Cây sống đời đỏ", "Cây sống đời vàng", "Mộc hương cam", "Mộc hương vàng", "Lay ơn tím", "Tường vi hồng", "Lay ơn trắng", "Hoa phi yến tím", "Trúc đào xanh", "Tử đằng hồng", "Tử đằng lam", "Hoa anh thảo vàng", "Hoa lộ vi vàng"];
+    // Danh sách hoa Phẩm Tím
+    const rawPurpleList = ["Hoa sao sáng bạc", "Hoa tử đằng cánh kép", "Cúc thược dược cam", "Cúc thược dược đen", "Vạn tuế lá lam", "Hoa hải quỳ trắng", "Hải quỳ trắng (không hoa)", "Hồng môn phấn", "Tường vi vàng", "Đại nham đồng hồng sẫm", "Mộc lan vàng", "Lung linh bóng trăng", "Thược dược hồng", "Ngót nghẻo đỏ lửa", "Ngót nghẻo hồng phấn", "Gừng sen ban mai", "Gừng sen bạch ngọc", "Gừng sen hồng đào", "Cẩm chướng gấm tím", "Nhài dây trắng mây", "Từ cô hồng nhạt", "Cẩm chướng gấm đỏ", "Từ cô tím mây", "San hô tím", "San hô cam", "Hải quỳ cam", "Hải quỳ đỏ", "Hoa hải quỳ tím", "Hoa hải quỳ hồng", "Hoa hành tím", "Diên vĩ đức trắng vàng", "Hồng lenten đỏ", "Hồng lenten vàng", "Cây sống đời đỏ", "Cây sống đời vàng", "Mộc hương cam", "Mộc hương vàng", "Lay ơn tím", "Tường vi hồng", "Lay ơn trắng", "Hoa phi yến tím", "Trúc đào xanh", "Tử đằng hồng", "Tử đằng lam", "Hoa anh thảo vàng", "Hoa lộ vi vàng", "Hoa lộ vi trắng", "Lan vũ nữ vàng", "Hoa poppy himalaya vàng", "Hoa poppy himalaya xanh", "Mộc hương trắng", "Thược dược đỏ", "Thược dược trắng", "Địa lan trắng"];
     
-    // Đã xóa "Mộc hương vàng" khỏi phẩm Xanh Dương
-    const rawBlueList = ["Hoa thuý châu trắng", "Thanh cúc lam", "Lê bạch ngọc", "Thục quỳ đỏ", "Thục quỳ vàng", "Mạch môn tím", "Hoa sao nhái trắng", "Hoa baby trắng", "Hoa baby lam", "Hoa baby hồng", "Hoa lồng đèn đỏ", "Vạn tuế lá xanh", "Trúc đào đỏ tím", "Hải đường đỏ", "Hải đường vàng", "Đỗ quyên hồng", "Đỗ quyên vàng", "Đỗ quyên đỏ", "Tử linh lan hồng", "Tử linh lan đỏ", "Tử linh lan tím", "Hồng jacqueline trắng", "Hoa thuý châu tím", "Ghim cài lửa", "Ghim cài vàng mật", "Huệ hosta lam", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo tím nhạt", "Hoa anh thảo xanh nhạt", "Hoa anh thảo hồng nhạt", "Huệ hosta tím", "Thanh cúc tím", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc hồng", "Lạc tân phụ tím", "Thục quỳ hồng", "Tỏi trời", "Trúc đào hồng nhạt", "Hoa báo xuân vàng", "Me đất cam vàng", "Thược dược dương xỉ hồng đào", "Thược dược dương xỉ đỏ tươi", "Ghim cài hồng hạnh", "Hoa hồng sa mạc hồng nhạt"];
-
+    // Danh sách hoa Phẩm Xanh Dương
+    const rawBlueList = ["Hoa thuý châu trắng", "Thanh cúc lam", "Lê bạch ngọc", "Thục quỳ đỏ", "Thục quỳ vàng", "Mạch môn tím", "Hoa sao nhái trắng", "Hoa baby trắng", "Hoa baby lam", "Hoa baby hồng", "Hoa lồng đèn đỏ", "Vạn tuế lá xanh", "Trúc đào đỏ tím", "Hải đường đỏ", "Hải đường vàng", "Đỗ quyên hồng", "Đỗ quyên vàng", "Đỗ quyên đỏ", "Tử linh lan hồng", "Tử linh lan đỏ", "Tử linh lan tím", "Hồng jacqueline trắng", "Hoa thuý châu tím", "Ghim cài lửa", "Ghim cài vàng mật", "Huệ hosta lam", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo tím nhạt", "Hoa anh thảo xanh nhạt", "Hoa anh thảo hồng nhạt", "Huệ hosta tím", "Thanh cúc tím", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc hồng", "Lạc tân phụ tím", "Thục quỳ hồng", "Tỏi trời", "Trúc đào hồng nhạt", "Hoa báo xuân vàng", "Me đất cam vàng", "Thược dược dương xỉ hồng đào", "Thược dược dương xỉ đỏ tươi", "Ghim cài hồng hạnh", "Hoa hồng sa mạc hồng nhạt", "Nhài nhật", "Lan phượng vĩ đỏ", "Mạch môn hồng phấn"];
+    
+    // Danh sách hoa Xu gốc (Bao gồm cả hoa xanh dương & hoa tím)
     const rawXuList = ["Thục quỳ đỏ", "Thục quỳ hồng", "Thục quỳ vàng", "Thanh cúc lam", "Mạch môn tím", "Hoa sao nhái trắng", "Hoa baby hồng", "Hoa baby lam", "Hoa lồng đèn đỏ", "Vạn tuế lá xanh", "Trúc đào đỏ tím", "Hải đường đỏ", "Hải đường vàng", "Đỗ quyên hồng", "Đỗ quyên vàng", "Đỗ quyên đỏ", "Tử linh lan hồng", "Tử linh lan đỏ", "Tử linh lan tím", "Hồng jacqueline trắng", "Hoa thuý châu tím", "Hoa thuý châu trắng", "Ghim cài lửa", "Ghim cài vàng mật", "Huệ hosta lam", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo tím nhạt", "Hoa anh thảo xanh nhạt", "Hoa anh thảo hồng nhạt", "Huệ hosta tím", "Nhài nhật", "Lan phượng vĩ đỏ", "Mạch môn hồng phấn", "Hoa lộ vi vàng", "Hoa lộ vi trắng", "Cúc thược dược cam", "Cúc thược dược đen", "Lan vũ nữ vàng", "Hoa poppy himalaya vàng", "Hoa poppy himalaya xanh", "Hoa phi yến tím", "Hoa anh thảo vàng", "Hồng lenten vàng", "Cây sống đời đỏ", "Cây sống đời vàng", "Mộc hương vàng", "Mộc hương trắng", "Thược dược đỏ", "Lay ơn tím", "Tường vi hồng", "Lay ơn trắng", "Hải quỳ cam", "San hô cam", "Hải quỳ đỏ", "Hoa hải quỳ tím", "Hoa hải quỳ hồng", "Hoa hải quỳ trắng", "Thược dược trắng", "Hồng môn phấn", "Thanh cúc tím", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Lạc tân phụ tím", "Tỏi trời", "Trúc đào hồng nhạt", "Địa lan trắng", "Hoa hành tím", "Diên vĩ đức trắng vàng", "Hồng lenten đỏ", "Mộc hương cam", "Vạn tuế lá lam", "Thanh cúc hồng", "Hoa baby trắng", "San hô tím", "Hoa báo xuân vàng", "Me đất cam vàng", "Thược dược dương xỉ hồng đào", "Thược dược dương xỉ đỏ tươi", "Ghim cài hồng hạnh", "Hoa hồng sa mạc hồng nhạt"];
 
-    // Đã xóa "Hoa poppy tím" và "Gấu bông" khỏi Mộng dâu (Hi Mỹ)
     const rawMembers = [
         { name: "Cá chiên (Anh Kiệt)", flowers: ["Dạ yến thảo lam", "Hoa anh thảo hồng", "Lạp mai đỏ", "Hồng champagne", "Hoa hành tím", "Vạn tuế lá lam", "Diên vĩ đức trắng vàng", "Hồng lenten đỏ", "Địa lan trắng", "Mộc hương cam", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Mộc lan ngọc ngà", "Lay ơn tím", "Hồng môn phấn", "Trái tim đá quý", "Cây sống đời đỏ", "Hoa lộ vi vàng"] },
         { name: "Cá kho (lh cá chin)", flowers: ["Dạ yến thảo lam", "Hoa anh thảo xanh", "Lạp mai đỏ", "Mạn châu sa", "Hoa hải quỳ trắng", "Ngôi sao bethlehem", "Diên vĩ đức trắng vàng", "San hô tím", "Hải quỳ đỏ", "Hoa poppy đỏ", "Hoa phi yến lam", "Hoa lồng đèn tím", "Lan vũ nữ đỏ", "Hải đường hồng", "Tường vi xanh", "Gấu bông", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Loa kèn peru đỏ", "Đông trùng thông vàng", "Đông trùng thông tím", "Ngót nghẻo hồng phấn", "Hoa thụy hương trắng tuyết", "Hoa lập kim hồng san hô", "Hoa mặt rồng đỏ tươi", "Hoa sao nhái trắng", "Thục quỳ đỏ", "Thục quỳ vàng", "Hải đường vàng", "Hoa thuý châu tím", "Ghim cài lửa", "Ghim cài vàng mật", "Hoa anh thảo hồng nhạt", "Mộc lan ngọc ngà", "Mẫu đơn ánh tím", "Cá heo trắng", "Nguyệt quý mây hồng", "Gấu hoa hồng", "Cừu bông ngọt ngào", "San hô xanh", "Hoa lồng đèn đỏ", "Vạn tuế lá xanh", "Hoa baby trắng", "Hoa baby lam"] },
@@ -271,34 +297,38 @@
         { name: "Yine (Thúy An)", flowers: ["Dạ yến thảo lam", "Nhài nhật", "Hoa lộ vi vàng", "Lay ơn trắng", "Cây holly vòng xanh", "Bụp hồng cận hồng", "Hoa anh thảo xanh nhạt"] }
     ];
 
+    // ----- CHUẨN HÓA DỮ LIỆU & TÁCH BIỆT TRẠNG THÁI PHẨM CHẤT -----
     const redList = rawRedList.map(standardizeName);
-    const xuList = [...new Set(rawXuList.map(standardizeName))];
     const orangeList = rawOrangeList.map(standardizeName);
     const purpleList = rawPurpleList.map(standardizeName);
     const blueList = rawBlueList.map(standardizeName);
+    const xuList = [...new Set(rawXuList.map(standardizeName))];
 
-    const membersDataProcessed = rawMembers.map(m => ({
-        name: m.name,
-        flowers: [...new Set(m.flowers.map(standardizeName))]
-    }));
-
+    // Tạo bộ ánh xạ phẩm chất hoa
     const flowerTierMap = new Map();
     redList.forEach(f => flowerTierMap.set(f, 4));
     orangeList.forEach(f => flowerTierMap.set(f, 3));
     purpleList.forEach(f => flowerTierMap.set(f, 2));
     blueList.forEach(f => flowerTierMap.set(f, 1));
 
+    // LƯU Ý QUAN TRỌNG: Hoa nào chưa có trong tra cứu sẽ tự động là Phẩm Tím (điểm = 2)
     function getFlowerWeight(name) {
-        const score = flowerTierMap.get(name) || 2; 
+        const score = flowerTierMap.get(name) || 2; // Mặc định trả về 2 (Phẩm Tím)
         const tierClasses = { 1: 'tier-blue', 2: 'tier-purple', 3: 'tier-orange', 4: 'tier-red' };
         return { score, className: tierClasses[score] };
     }
+
+    const membersDataProcessed = rawMembers.map(m => ({
+        name: m.name,
+        flowers: [...new Set(m.flowers.map(standardizeName))]
+    }));
 
     const flowerOwnersMap = new Map();
     const allKnownFlowers = new Set([...xuList, ...redList, ...orangeList, ...purpleList, ...blueList]);
     allKnownFlowers.forEach(f => flowerOwnersMap.set(f, []));
 
     const finalMembersData = membersDataProcessed.map(item => {
+        // Chỉ đếm số hoa có phẩm chất từ Tím trở lên (score >= 2)
         const totalCount = item.flowers.filter(f => (flowerTierMap.get(f) || 2) >= 2).length;
         const memberObj = { name: item.name, allFlowers: item.flowers, totalCount };
         
@@ -310,6 +340,7 @@
         return memberObj;
     });
 
+    // ----- DOM ELEMENTS -----
     const mainRankArea = document.getElementById('mainRankArea');
     const searchResultArea = document.getElementById('searchResultArea');
     const missingArea = document.getElementById('missingArea');
@@ -320,6 +351,7 @@
     const defaultGardenWidgets = document.getElementById('defaultGardenWidgets');
     const searchViewArea = document.getElementById('searchViewArea');
 
+    // ----- RENDER BẢNG XẾP HẠNG -----
     function initRenderRankList() {
         mainRankArea.innerHTML = `<div class="total-badge">⚓ Tổng số: ${finalMembersData.length} thành viên</div>`;
         const container = document.createElement('div');
@@ -330,11 +362,11 @@
 
         sortedRank.forEach((item, index) => {
             const collapseItem = document.createElement('div');
-            
             const isBoy = item.name === "Cá chiên (Anh Kiệt)" || item.name === "ChồgcủaHạDi (Quốc Toàn)";
             collapseItem.className = isBoy ? "cute-rank-item gentleman-card-style" : "cute-rank-item";
 
-            const sortedFlowersWithTier = item.allFlowers.map(f => ({ name: f, ...getFlowerWeight(f) }))
+            const sortedFlowersWithTier = item.allFlowers
+                .map(f => ({ name: f, ...getFlowerWeight(f) }))
                 .sort((a, b) => b.score - a.score || a.name.localeCompare(b.name, 'vi'));
 
             let tierCounts = { 4: 0, 3: 0, 2: 0, 1: 0 };
@@ -343,48 +375,43 @@
                 return `<span class="flower-chip-item ${f.className}">${f.name}</span>`;
             }).join('');
             
-            const summaryHtml = `<div class="summary-rarity-line">🌊 <strong>Kho báu:</strong> ${tierCounts[4]} Đỏ | ${tierCounts[3]} Cam | ${tierCounts[2]} Tím | <strong>${tierCounts[1]} Xanh</strong></div>`;
+            const summaryHtml = `<div class="summary-rarity-line">🌊 <strong>Kho báu:</strong> ${tierCounts[4]} Đỏ | ${tierCounts[3]} Cam | <strong>${tierCounts[2]} Tím</strong> | ${tierCounts[1]} Xanh</div>`;
             const numColor = index < 3 ? rankColors[index] : "#1d3557";
-
+            
             collapseItem.innerHTML = `
                 <div class="click-header-line">
                     <div class="header-left">
                         <span class="rank-number" style="color: ${numColor};">#${index + 1}</span>
-                        <span class="member-display-name"></span>
+                        <span class="member-display-name">${(isBoy ? '🎩 ' : '👑 ') + item.name}</span>
                     </div>
-                    <span class="count-badge">${item.totalCount} loại hoa</span>
+                    <span class="count-badge">${item.totalCount} loại hoa (từ Tím)</span>
                 </div>
                 <div class="rank-content-box">
                     ${summaryHtml}
                     <div class="flower-chip-container">${chipsHtml}</div>
                 </div>
             `;
-
-            collapseItem.querySelector('.member-display-name').textContent = (isBoy ? '🎩 ' : '👑 ') + item.name;
             container.appendChild(collapseItem);
         });
-        
+
         container.addEventListener('click', (e) => {
             const headerBtn = e.target.closest('.click-header-line');
-            if (headerBtn) {
-                headerBtn.parentElement.classList.toggle('active-folder');
-            }
+            if (headerBtn) headerBtn.parentElement.classList.toggle('active-folder');
         });
-        
         mainRankArea.appendChild(container);
     }
 
+    // ----- TÌM KIẾM HOA -----
     let debounceTimer;
     function searchFlowerLogic() {
         const rawInput = flowerInput.value.trim();
-        if (rawInput === "") {
+        if (!rawInput) {
             searchViewArea.style.display = "none";
             defaultGardenWidgets.style.display = "flex";
             return;
         }
 
-        let fKeyNoTone = removeVietnameseTones(rawInput);
-
+        const fKeyNoTone = removeVietnameseTones(rawInput);
         defaultGardenWidgets.style.display = "none";
         searchViewArea.style.display = "block";
         
@@ -410,33 +437,42 @@
 
     flowerInput.addEventListener('input', () => {
         clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(searchFlowerLogic, 300);
+        debounceTimer = setTimeout(searchFlowerLogic, 250);
     });
 
+    // ----- DANH SÁCH HOA XU CHƯA NHẶT -----
     function updateMissingXu() {
         const ownedSet = new Set();
         finalMembersData.forEach(m => m.allFlowers.forEach(f => ownedSet.add(f)));
         
-        const uniqueMissing = xuList.filter(f => !ownedSet.has(f)).sort((a, b) => a.localeCompare(b, 'vi'));
-        
+        const uniqueMissing = xuList
+            .filter(f => !ownedSet.has(f))
+            .sort((a, b) => {
+                const weightA = getFlowerWeight(a).score;
+                const weightB = getFlowerWeight(b).score;
+                return weightB - weightA || a.localeCompare(b, 'vi');
+            });
+
         if (uniqueMissing.length === 0) {
-            missingArea.innerHTML = `<div class="all-cleared-msg fade-in-box">🎉 Đã đổi hết hoa xu đến hiện tại, mọi người cần thì trade hoa với nhau nhé ^^ 🌸</div>`;
+            missingArea.innerHTML = `<div class="all-cleared-msg fade-in-box">🎉 Đã vớt hết hoa xu đến hiện tại, mọi người cần thì trade hoa với nhau nhé ^^ 🌸</div>`;
         } else {
-            missingArea.innerHTML = uniqueMissing.map(item => `<span class="xu-missing-badge">${item}</span>`).join('');
+            missingArea.innerHTML = uniqueMissing.map(item => {
+                const { className } = getFlowerWeight(item);
+                return `<span class="flower-chip-item ${className}">${item}</span>`;
+            }).join('');
         }
     }
 
+    // ----- CHUYỂN TAB THÔNG TIN -----
     const toggleBox = (showBox, hideBox1, hideBox2) => {
-        if (showBox.style.display === "block") {
-            showBox.style.display = "none";
-            showBox.classList.remove("fade-in-box");
-        } else {
+        const isShowing = showBox.style.display === "block";
+        [showBox, hideBox1, hideBox2].forEach(box => {
+            box.style.display = "none";
+            box.classList.remove("fade-in-box");
+        });
+        if (!isShowing) {
             showBox.style.display = "block";
             showBox.classList.add("fade-in-box");
-            hideBox1.style.display = "none";
-            hideBox1.classList.remove("fade-in-box");
-            hideBox2.style.display = "none";
-            hideBox2.classList.remove("fade-in-box");
         }
     };
 
@@ -444,6 +480,7 @@
     document.getElementById('btnRank').addEventListener('click', () => toggleBox(rankBox, helpBox, missingBox));
     document.getElementById('btnXu').addEventListener('click', () => toggleBox(missingBox, helpBox, rankBox));
 
+    // Khởi chạy
     initRenderRankList();
     updateMissingXu();
 </script>
