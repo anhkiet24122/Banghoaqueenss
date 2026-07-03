@@ -239,7 +239,7 @@
 
 <script>
     // ===== LINK API MỚI =====
-    const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbzIXm6ehul4_l-hu49qrxi6QtYrFEe2Zo8jSX2OXwE57S9GYLFSSv21qWCIqI-iu_tKRg/exec";
+    const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbzhl46GAMe4fRfI6PUj2kqwwP8kYE56f8r72Dl5Qji4ds3bFzWlowSQCSzIAYjnxGgG9w/exec";
     
     // Tiện ích chuẩn hóa chuỗi
     const standardizeName = str => {
