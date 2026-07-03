@@ -216,13 +216,13 @@
         return s.charAt(0).toUpperCase() + s.slice(1);
     };
 
-    // Hàm xóa dấu tiếng Việt phục vụ tìm kiếm thông minh không dấu
+    // Hàm tối ưu cắt dấu tiếng Việt hoàn toàn (Đồng bộ mọi ký tự về không dấu, chữ thường)
     const removeVietnameseTones = str => {
         if (!str) return '';
         return str.normalize('NFD')
                   .replace(/[\u0300-\u036f]/g, '')
                   .replace(/đ/g, 'd')
-                  .replace(/Đ/g, 'D');
+                  .replace(/Đ/g, 'd'); // Ép buộc 'Đ' thành 'd' thường
     };
 
     const rawRedList = ["Đào Nguyệt Vân tịch chước hoa", "Ngân hà chiếu nhụy", "Chép vàng vượt sóng", "Thiên cung", "Thanh loan bích vũ", "Có rồng ắt linh", "Gia nguyệt neo thuyền câu cá", "Mai nguyệt huyền âm", "Đình hoa đêm mộng", "Liễu nguyệt én hót bên đình", "Hạnh nguyệt nghỉ dưới bóng hoa", "Trái tim mộng ảo", "Sắc xuân núi non", "Hươu thần chín màu"];
@@ -372,15 +372,15 @@
             return;
         }
 
-        // Loại bỏ dấu của từ khóa tìm kiếm để so sánh ngầm
-        let fKeyNoTone = removeVietnameseTones(standardizeName(rawInput)).toLowerCase();
+        // TỐI ƯU HÓA: Chuyển toàn bộ chuỗi tìm kiếm về chữ thường trước khi loại bỏ dấu
+        let fKeyNoTone = removeVietnameseTones(rawInput.toLowerCase());
 
         defaultGardenWidgets.style.display = "none";
         searchViewArea.style.display = "block";
         
-        // Lọc danh sách hoa bằng cách so sánh chuỗi không dấu
+        // TỐI ƯU HÓA: Chuyển tên hoa trong bộ nhớ về chữ thường rồi bỏ dấu để đối chiếu ngầm
         const sortedMatches = Array.from(flowerOwnersMap.keys())
-            .filter(name => removeVietnameseTones(name).toLowerCase().includes(fKeyNoTone))
+            .filter(name => removeVietnameseTones(name.toLowerCase()).includes(fKeyNoTone))
             .sort((a, b) => a.localeCompare(b, 'vi'));
 
         if (!sortedMatches.length) {
@@ -388,7 +388,7 @@
             return;
         }
 
-        // Kết quả hiển thị ra màn hình (name) vẫn giữ nguyên là chuỗi có dấu gốc đầy đủ
+        // Vẫn bốc tên có dấu gốc đầy đủ để in ra màn hình
         searchResultArea.innerHTML = sortedMatches.map(name => {
             const owners = (flowerOwnersMap.get(name) || [])
                 .sort((a, b) => a.totalCount - b.totalCount)
