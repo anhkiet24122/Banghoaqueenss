@@ -184,10 +184,9 @@
 </div>
 
 <script>
-    // Link kết nối trực tiếp đến 2 Sheet thanhvien và phammau của Tiên
-    const SPREADSHEET_ID = "1tEoux6IzG80zh2oMIWLYasYziOH3bv37EGKG3UVA9WY";
-    const URL_THANH_VIEN = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=thanhvien`;
-    const URL_PHAM_MAU = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=phammau`;
+   // Link kết nối xuất bản trực tiếp dạng CSV (Thay thế để chạy 100% không lỗi)
+const URL_THANH_VIEN = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQr1KQPnC9HtYDxhsdwMI4oMVGXsXtphgYVsRKk5ikcxMFWhgdStwsm8sPc0bsVgqfctJmLnXQSL5V-/pub?gid=0&single=true&output=csv";
+const URL_PHAM_MAU = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQr1KQPnC9HtYDxhsdwMI4oMVGXsXtphgYVsRKk5ikcxMFWhgdStwsm8sPc0bsVgqfctJmLnXQSL5V-/pub?gid=2019890526&single=true&output=csv";
 
     const standardizeName = str => {
         if (!str) return '';
