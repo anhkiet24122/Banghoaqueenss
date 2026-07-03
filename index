@@ -169,6 +169,7 @@
         .tier-purple { background: linear-gradient(135deg, #f3e5f5, #e1bee7) !important; border: 1px solid #ba68c8 !important; color: #6a1b9a !important; font-weight: 500; }
         .tier-orange { background: linear-gradient(135deg, #fff3e0, #ffe0b2) !important; border: 1px solid #ffb74d !important; color: #e65100 !important; font-weight: 600 !important; }
         .tier-red { background: linear-gradient(135deg, #fff0f2, #ffccd5) !important; border: 1.5px solid #e63946 !important; color: #d90429 !important; font-weight: 700 !important; box-shadow: 0 2px 6px rgba(230, 57, 70, 0.15) !important; }
+        .tier-default { background: #f1f5f9 !important; border: 1px solid #cbd5e1 !important; color: #475569 !important; }
 
         /* ----- SEARCH AREA ----- */
         .search-title { font-size: 13px; font-weight: 700; color: var(--sea-dark); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 4px; }
@@ -206,15 +207,15 @@
                     <div class="help-content">
                         <p class="help-title">Aloha! Chào mừng tới Đảo Hoa Mùa Hè 🏝️</p>
                         <p>🐚 <strong>Tìm hoa ở bãi biển:</strong> Gõ tên hoa vào ô tìm kiếm ở trên để xem thủy thủ nào đang sở hữu nhé.</p>
-                        <p>🏄‍♀️ <strong>Bảng xếp hạng hoa các thành viên:</strong> Bấm nút màu xanh dương để xem độ giàu có của từng người (tính từ phẩm tím trở lên).</p>
-                        <p>🦀 <strong>Các loại hoa xu chưa nhặt trên bờ cát:</strong> Bấm nút xanh ngọc để xem danh sách các loài hoa xu (bao gồm phẩm xanh dương & phẩm tím) mà cả hội chưa ai vớt được.</p>
+                        <p>🏄‍♀️ <strong>Bảng xếp hạng:</strong> Bấm nút màu xanh dương để xem độ giàu có của từng người (tính từ phẩm tím trở lên).</p>
+                        <p>🦀 <strong>Hoa xu chưa nhặt:</strong> Bấm nút xanh ngọc để xem danh sách các loài hoa xu mà cả hội chưa ai vớt được.</p>
                     </div>
                 </div>
             </div>
 
             <div>
                 <button id="btnRank" class="btn-main btn-rank">🏄‍♀️ Bảng xếp hạng hoa các thành viên</button>
-                <div id="rankBox" class="info-box" style="display: block;"> <!-- Bật sẵn rank box để hiển thị loading -->
+                <div id="rankBox" class="info-box" style="display: block;">
                     <div id="mainRankArea">
                         <div class="loading-text">🌊 Đang tải kho báu từ bãi biển...</div>
                     </div>
@@ -237,10 +238,10 @@
 </div>
 
 <script>
-    // ===== BẠN HÃY DÁN LINK API VÀO ĐÂY =====
+    // ===== LINK API MỚI =====
     const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbzIXm6ehul4_l-hu49qrxi6QtYrFEe2Zo8jSX2OXwE57S9GYLFSSv21qWCIqI-iu_tKRg/exec";
-    // ========================================
-
+    
+    // Tiện ích chuẩn hóa chuỗi
     const standardizeName = str => {
         if (!str) return '';
         let s = str.normalize('NFC').trim().toLowerCase();
@@ -264,35 +265,20 @@
             .replace(/[\u02C6\u0306\u031B]/g, "").trim();
     };
 
-    // ----- GIỮ NGUYÊN DANH SÁCH MÀU HOA ĐỂ PHÂN LOẠI -----
-    const rawRedList = ["Đào Nguyệt Vân tịch chước hoa", "Ngân hà chiếu nhụy", "Chép vàng vượt sóng", "Thiên cung", "Thanh loan bích vũ", "Có rồng ắt linh", "Gia nguyệt neo thuyền câu cá", "Mai nguyệt huyền âm", "Đình hoa đêm mộng", "Liễu nguyệt én hót bên đình", "Hạnh nguyệt nghỉ dưới bóng hoa", "Trái tim mộng ảo", "Sắc xuân núi non", "Hươu thần chín màu"];
-    const rawOrangeList = ["Mộc lan ngọc ngà", "Thuyền tiên sông ngân", "Bóng quế cành ngọc", "Tùng linh chiếu rọi", "Hồng cecil lam", "Hồng cecil phấn", "Lạp mai hương phi", "Lạp mai linh lung", "Mẫu đơn ánh tím", "Cá heo xanh", "Cá heo hồng", "Cá heo trắng", "Sắc cam mùa xuân", "Mẫu đơn ánh ngọc", "Mẫu đơn ánh xanh", "Tiên nữ rải hoa", "Phù dung hồng hộp báu", "Phù dung cam hộp báu", "Phù dung tím hộp báu", "Mưa bụi cô tô", "Trúc ánh sắc vàng", "Nguyệt quý mây hồng", "Nguyệt quý ánh vàng", "Nguyệt quý sắc cam", "Thỏ ngọc ôm ánh sáng", "Hạc gửi ngân hà", "Tử linh phúc lộc", "Chương hoa mộng điệp", "Sách mai điệp ảnh", "Hương hoa diên vĩ", "Đế vương hồng tía", "Đế vương lam lưu ly", "Đế vương xích diễm", "Cháo ngọt sương hoa", "Hương lam đêm", "Gấu hoa hồng", "Cừu bông ngọt ngào", "Cúc mẫu đơn tím nho", "Trái tim tìm mật", "Trái tim đá quý", "Ngọc lan lưu hương", "Diều giấy đón xuân", "Lạp mai lung linh", "Cúc mẫu đơn cam ráng chiều", "Hoa lung toả hương", "Tiếng sao hoa lung", "Hoa lửa thanh ly", "Hoa lửa ráng đỏ"];
-    const rawPurpleList = ["Hoa sao sáng bạc", "Hoa tử đằng cánh kép", "Cúc thược dược cam", "Cúc thược dược đen", "Vạn tuế lá lam", "Hoa hải quỳ trắng", "Hải quỳ trắng (không hoa)", "Hồng môn phấn", "Tường vi vàng", "Đại nham đồng hồng sẫm", "Mộc lan vàng", "Lung linh bóng trăng", "Thược dược hồng", "Ngót nghẻo đỏ lửa", "Ngót nghẻo hồng phấn", "Gừng sen ban mai", "Gừng sen bạch ngọc", "Gừng sen hồng đào", "Cẩm chướng gấm tím", "Nhài dây trắng mây", "Từ cô hồng nhạt", "Cẩm chướng gấm đỏ", "Từ cô tím mây", "San hô tím", "San hô cam", "Hải quỳ cam", "Hải quỳ đỏ", "Hoa hải quỳ tím", "Hoa hải quỳ hồng", "Hoa hành tím", "Diên vĩ đức trắng vàng", "Hồng lenten đỏ", "Hồng lenten vàng", "Cây sống đời đỏ", "Cây sống đời vàng", "Mộc hương cam", "Mộc hương vàng", "Lay ơn tím", "Tường vi hồng", "Lay ơn trắng", "Hoa phi yến tím", "Trúc đào xanh", "Tử đằng hồng", "Tử đằng lam", "Hoa anh thảo vàng", "Hoa lộ vi vàng", "Hoa lộ vi trắng", "Lan vũ nữ vàng", "Hoa poppy himalaya vàng", "Hoa poppy himalaya xanh", "Mộc hương trắng", "Thược dược đỏ", "Thược dược trắng", "Địa lan trắng", "Nhài nhật", "Lan phượng vĩ đỏ", "Mạch môn hồng phấn"];
-    const rawBlueList = ["Hoa thuý châu trắng", "Thanh cúc lam", "Lê bạch ngọc", "Thục quỳ đỏ", "Thục quỳ vàng", "Mạch môn tím", "Hoa sao nhái trắng", "Hoa baby trắng", "Hoa baby lam", "Hoa baby hồng", "Hoa lồng đèn đỏ", "Vạn tuế lá xanh", "Trúc đào đỏ tím", "Hải đường đỏ", "Hải đường vàng", "Đỗ quyên hồng", "Đỗ quyên vàng", "Đỗ quyên đỏ", "Tử linh lan hồng", "Tử linh lan đỏ", "Tử linh lan tím", "Hồng jacqueline trắng", "Hoa thuý châu tím", "Ghim cài lửa", "Ghim cài vàng mật", "Huệ hosta lam", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo tím nhạt", "Hoa anh thảo xanh nhạt", "Hoa anh thảo hồng nhạt", "Huệ hosta tím", "Thanh cúc tím", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Thanh cúc hồng", "Lạc tân phụ tím", "Thục quỳ hồng", "Tỏi trời", "Trúc đào hồng nhạt", "Hoa báo xuân vàng", "Me đất cam vàng", "Thược dược dương xỉ hồng đào", "Thược dược dương xỉ đỏ tươi", "Ghim cài hồng hạnh", "Hoa hồng sa mạc vàng nhạt", "Hoa hồng sa mạc hồng nhạt"];
-    const rawXuList = ["Thục quỳ đỏ", "Thục quỳ hồng", "Thục quỳ vàng", "Thanh cúc lam", "Mạch môn tím", "Hoa sao nhái trắng", "Hoa baby hồng", "Hoa baby lam", "Hoa lồng đèn đỏ", "Vạn tuế lá xanh", "Trúc đào đỏ tím", "Hải đường đỏ", "Hải đường vàng", "Đỗ quyên hồng", "Đỗ quyên vàng", "Đỗ quyên đỏ", "Tử linh lan hồng", "Tử linh lan đỏ", "Tử linh lan tím", "Hồng jacqueline trắng", "Hoa thuý châu tím", "Hoa thuý châu trắng", "Ghim cài lửa", "Ghim cài vàng mật", "Huệ hosta lam", "Hoa báo xuân hồng", "Hoa huyên tím trắng", "Hoa anh thảo tím nhạt", "Hoa anh thảo xanh nhạt", "Hoa anh thảo hồng nhạt", "Huệ hosta tím", "Nhài nhật", "Lan phượng vĩ đỏ", "Mạch môn hồng phấn", "Hoa lộ vi vàng", "Hoa lộ vi trắng", "Cúc thược dược cam", "Cúc thược dược đen", "Lan vũ nữ vàng", "Hoa poppy himalaya vàng", "Hoa poppy himalaya xanh", "Hoa phi yến tím", "Hoa anh thảo vàng", "Hồng lenten vàng", "Cây sống đời đỏ", "Cây sống đời vàng", "Mộc hương vàng", "Mộc hương trắng", "Thược dược đỏ", "Lay ơn tím", "Tường vi hồng", "Lay ơn trắng", "Hải quỳ cam", "San hô cam", "Hải quỳ đỏ", "Hoa hải quỳ tím", "Hoa hải quỳ hồng", "Hoa hải quỳ trắng", "Thược dược trắng", "Hồng môn phấn", "Thanh cúc tím", "Lạc tân phụ lam", "Lạc tân phụ đỏ", "Lạc tân phụ tím", "Tỏi trời", "Trúc đào hồng nhạt", "Địa lan trắng", "Hoa hành tím", "Diên vĩ đức trắng vàng", "Hồng lenten đỏ", "Mộc hương cam", "Vạn tuế lá lam", "Thanh cúc hồng", "Hoa baby trắng", "San hô tím", "Hoa báo xuân vàng", "Me đất cam vàng", "Thược dược dương xỉ hồng đào", "Thược dược dương xỉ đỏ tươi", "Ghim cài hồng hạnh", "Hoa hồng sa mạc hồng nhạt"];
-
-    const redList = rawRedList.map(standardizeName);
-    const orangeList = rawOrangeList.map(standardizeName);
-    const purpleList = rawPurpleList.map(standardizeName);
-    const blueList = rawBlueList.map(standardizeName);
-    const xuList = [...new Set(rawXuList.map(standardizeName))];
-
-    const flowerTierMap = new Map();
-    redList.forEach(f => flowerTierMap.set(f, 4));
-    orangeList.forEach(f => flowerTierMap.set(f, 3));
-    purpleList.forEach(f => flowerTierMap.set(f, 2));
-    blueList.forEach(f => flowerTierMap.set(f, 1));
-
-    function getFlowerWeight(name) {
-        const score = flowerTierMap.get(name) || 2; 
-        const tierClasses = { 1: 'tier-blue', 2: 'tier-purple', 3: 'tier-orange', 4: 'tier-red' };
-        return { score, className: tierClasses[score] };
-    }
-
-    // Các biến lưu trữ dữ liệu toàn cục sau khi tải từ Sheet
+    // ----- DỮ LIỆU ĐỘNG SẼ ĐƯỢC NẠP TỪ API -----
     let finalMembersData = [];
     let flowerOwnersMap = new Map();
-    const allKnownFlowers = new Set([...xuList, ...redList, ...orangeList, ...purpleList, ...blueList]);
+    let allKnownFlowers = new Set();
+    
+    // Cấu trúc phân loại mới
+    let redList = [], orangeList = [], purpleList = [], blueList = [], xuList = [];
+    const flowerTierMap = new Map();
+
+    function getFlowerWeight(name) {
+        const score = flowerTierMap.get(name) || 0; 
+        const tierClasses = { 1: 'tier-blue', 2: 'tier-purple', 3: 'tier-orange', 4: 'tier-red' };
+        return { score, className: tierClasses[score] || 'tier-default' };
+    }
 
     // ----- DOM ELEMENTS -----
     const mainRankArea = document.getElementById('mainRankArea');
@@ -305,29 +291,38 @@
     const defaultGardenWidgets = document.getElementById('defaultGardenWidgets');
     const searchViewArea = document.getElementById('searchViewArea');
 
-    // ----- LẤY DỮ LIỆU TỪ GOOGLE SHEET -----
+    // ----- FETCH DỮ LIỆU -----
     async function loadDataFromSheet() {
-        if (!GOOGLE_SHEET_API_URL || GOOGLE_SHEET_API_URL === "https://script.google.com/macros/s/AKfycbzdVPxV9gHIiHMlzh48wcD4bSbIcI-2D1GlDvfO0Vb6o68jRHOqxnsrPDg8QUA46rt8Sg/exec") {
-            mainRankArea.innerHTML = `<div style="text-align: center; color: #e63946; font-weight: bold;">❌ Bạn chưa dán Link API Google Sheet vào code!</div>`;
-            return;
-        }
-
         try {
             const response = await fetch(GOOGLE_SHEET_API_URL);
-            const rawMembers = await response.json();
+            const data = await response.json();
             
-            // Xử lý dữ liệu vừa tải về
-            const membersDataProcessed = rawMembers.map(m => ({
+            // 1. Phân loại hoa từ Google Sheet (data.tiers)
+            redList = (data.tiers.red || []).map(standardizeName);
+            orangeList = (data.tiers.orange || []).map(standardizeName);
+            purpleList = (data.tiers.purple || []).map(standardizeName);
+            blueList = (data.tiers.blue || []).map(standardizeName);
+            xuList = [...new Set((data.tiers.xu || []).map(standardizeName))];
+
+            flowerTierMap.clear();
+            redList.forEach(f => flowerTierMap.set(f, 4));
+            orangeList.forEach(f => flowerTierMap.set(f, 3));
+            purpleList.forEach(f => flowerTierMap.set(f, 2));
+            blueList.forEach(f => flowerTierMap.set(f, 1));
+
+            allKnownFlowers = new Set([...xuList, ...redList, ...orangeList, ...purpleList, ...blueList]);
+
+            // 2. Xử lý thành viên từ Google Sheet (data.members)
+            const membersDataProcessed = data.members.map(m => ({
                 name: m.name,
                 flowers: [...new Set(m.flowers.map(standardizeName))]
             }));
 
-            // Reset map hoa
             flowerOwnersMap.clear();
             allKnownFlowers.forEach(f => flowerOwnersMap.set(f, []));
 
             finalMembersData = membersDataProcessed.map(item => {
-                const totalCount = item.flowers.filter(f => (flowerTierMap.get(f) || 2) >= 2).length;
+                const totalCount = item.flowers.filter(f => (flowerTierMap.get(f) || 0) >= 2).length;
                 const memberObj = { name: item.name, allFlowers: item.flowers, totalCount };
                 
                 item.flowers.forEach(f => {
@@ -338,13 +333,13 @@
                 return memberObj;
             });
 
-            // Sau khi có data, render lại UI và mở khóa ô tìm kiếm
+            // 3. Render giao diện
             initRenderRankList();
             updateMissingXu();
             flowerInput.disabled = false;
 
         } catch (error) {
-            mainRankArea.innerHTML = `<div style="text-align: center; color: #e63946; font-weight: bold;">❌ Đã xảy ra lỗi khi tải dữ liệu từ bãi biển! Vui lòng tải lại trang.</div>`;
+            mainRankArea.innerHTML = `<div style="text-align: center; color: #e63946; font-weight: bold;">❌ Đã xảy ra lỗi khi tải dữ liệu từ bãi biển! Hãy kiểm tra lại API Google Sheets.</div>`;
             console.error("Lỗi fetch dữ liệu: ", error);
         }
     }
@@ -360,7 +355,7 @@
 
         sortedRank.forEach((item, index) => {
             const collapseItem = document.createElement('div');
-            const isBoy = item.name === "Cá chiên (Anh Kiệt)" || item.name === "ChồgcủaHạDi (Quốc Toàn)";
+            const isBoy = item.name.includes("Anh Kiệt") || item.name.includes("Quốc Toàn");
             collapseItem.className = isBoy ? "cute-rank-item gentleman-card-style" : "cute-rank-item";
 
             const sortedFlowersWithTier = item.allFlowers
@@ -369,7 +364,7 @@
 
             let tierCounts = { 4: 0, 3: 0, 2: 0, 1: 0 };
             const chipsHtml = sortedFlowersWithTier.map(f => {
-                tierCounts[f.score]++;
+                if(f.score > 0) tierCounts[f.score]++;
                 return `<span class="flower-chip-item ${f.className}">${f.name}</span>`;
             }).join('');
             
@@ -478,7 +473,6 @@
     document.getElementById('btnRank').addEventListener('click', () => toggleBox(rankBox, helpBox, missingBox));
     document.getElementById('btnXu').addEventListener('click', () => toggleBox(missingBox, helpBox, rankBox));
 
-    // Khởi chạy việc lấy dữ liệu từ Google Sheet khi load trang
     loadDataFromSheet();
 </script>
 </body>
