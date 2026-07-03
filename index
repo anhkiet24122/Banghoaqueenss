@@ -216,6 +216,15 @@
         return s.charAt(0).toUpperCase() + s.slice(1);
     };
 
+    // Hàm xóa dấu tiếng Việt phục vụ tìm kiếm thông minh không dấu
+    const removeVietnameseTones = str => {
+        if (!str) return '';
+        return str.normalize('NFD')
+                  .replace(/[\u0300-\u036f]/g, '')
+                  .replace(/đ/g, 'd')
+                  .replace(/Đ/g, 'D');
+    };
+
     const rawRedList = ["Đào Nguyệt Vân tịch chước hoa", "Ngân hà chiếu nhụy", "Chép vàng vượt sóng", "Thiên cung", "Thanh loan bích vũ", "Có rồng ắt linh", "Gia nguyệt neo thuyền câu cá", "Mai nguyệt huyền âm", "Đình hoa đêm mộng", "Liễu nguyệt én hót bên đình", "Hạnh nguyệt nghỉ dưới bóng hoa", "Trái tim mộng ảo", "Sắc xuân núi non", "Hươu thần chín màu"];
     const rawOrangeList = ["Mộc lan ngọc ngà", "Thuyền tiên sông ngân", "Bóng quế cành ngọc", "Tùng linh chiếu rọi", "Hồng cecil lam", "Hồng cecil phấn", "Lạp mai hương phi", "Lạp mai linh lung", "Mẫu đơn ánh tím", "Cá heo xanh", "Cá heo hồng", "Cá heo trắng", "Sắc cam mùa xuân", "Mẫu đơn ánh ngọc", "Mẫu đơn ánh xanh", "Tiên nữ rải hoa", "Phù dung hồng hộp báu", "Phù dung cam hộp báu", "Phù dung tím hộp báu", "Mưa bụi cô tô", "Trúc ánh sắc vàng", "Nguyệt quý mây hồng", "Nguyệt quý ánh vàng", "Nguyệt quý sắc cam", "Thỏ ngọc ôm ánh sáng", "Hạc gửi ngân hà", "Tử linh phúc lộc", "Chương hoa mộng điệp", "Sách mai điệp ảnh", "Hương hoa diên vĩ", "Đế vương hồng tía", "Đế vương lam lưu ly", "Đế vương xích diễm", "Cháo ngọt sương hoa", "Hương lam đêm", "Gấu hoa hồng", "Cừu bông ngọt ngào", "Cúc mẫu đơn tím nho", "Trái tim tìm mật", "Trái tim đá quý", "Ngọc lan lưu hương", "Diều giấy đón xuân", "Lạp mai lung linh", "Cúc mẫu đơn cam ráng chiều", "Hoa lung toả hương", "Tiếng sao hoa lung", "Hoa lửa thanh ly", "Hoa lửa ráng đỏ"];
     const rawPurpleList = ["Hoa sao sáng bạc", "Hoa tử đằng cánh kép", "Cúc thược dược cam", "Cúc thược dược đen", "Vạn tuế lá lam", "Hoa hải quỳ trắng", "Hải quỳ trắng (không hoa)", "Hồng môn phấn", "Tường vi vàng", "Đại nham đồng hồng sẫm", "Mộc lan vàng", "Lung linh bóng trăng", "Thược dược hồng", "Ngót nghẻo đỏ lửa", "Ngót nghẻo hồng phấn", "Gừng sen ban mai", "Gừng sen bạch ngọc", "Gừng sen hồng đào", "Cẩm chướng gấm tím", "Nhài dây trắng mây", "Từ cô hồng nhạt", "Cẩm chướng gấm đỏ", "Từ cô tím mây", "Nhài dây sắc sao", "San hô tím", "San hô cam", "Hải quỳ cam", "Hải quỳ đỏ", "Hoa hải quỳ tím", "Hoa hải quỳ hồng", "Hoa hành tím", "Diên vĩ đức trắng vàng", "Hồng lenten đỏ", "Hồng lenten vàng", "Cây sống đời đỏ", "Cây sống đời vàng", "Mộc hương cam", "Lay ơn tím", "Tường vi hồng", "Lay ơn trắng", "Hoa phi yến tím", "Trúc đào xanh", "Tử đằng hồng", "Tử đằng lam", "Hoa anh thảo vàng", "Hoa lộ vi vàng"];
@@ -363,13 +372,15 @@
             return;
         }
 
-        let fKey = standardizeName(rawInput).toLowerCase();
+        // Loại bỏ dấu của từ khóa tìm kiếm để so sánh ngầm
+        let fKeyNoTone = removeVietnameseTones(standardizeName(rawInput)).toLowerCase();
 
         defaultGardenWidgets.style.display = "none";
         searchViewArea.style.display = "block";
         
+        // Lọc danh sách hoa bằng cách so sánh chuỗi không dấu
         const sortedMatches = Array.from(flowerOwnersMap.keys())
-            .filter(name => name.toLowerCase().includes(fKey))
+            .filter(name => removeVietnameseTones(name).toLowerCase().includes(fKeyNoTone))
             .sort((a, b) => a.localeCompare(b, 'vi'));
 
         if (!sortedMatches.length) {
@@ -377,6 +388,7 @@
             return;
         }
 
+        // Kết quả hiển thị ra màn hình (name) vẫn giữ nguyên là chuỗi có dấu gốc đầy đủ
         searchResultArea.innerHTML = sortedMatches.map(name => {
             const owners = (flowerOwnersMap.get(name) || [])
                 .sort((a, b) => a.totalCount - b.totalCount)
