@@ -139,7 +139,7 @@
 
     <h2 style="text-align: center; color: var(--sea-dark); margin-bottom: 20px; font-size: 24px; text-shadow: 2px 2px 4px rgba(255,255,255,0.8);">🌴 Bảng hoa Queens - Hè là phải đi biển 🐚</h2>
     
-    <div id="loadingArea" class="loading-screen">⚓ Đang căng buồm tải song song dữ liệu 2 Sheet...</div>
+    <div id="loadingArea" class="loading-screen">⚓ Chờ xíu có liền...</div>
 
     <div id="mainContentArea" style="display: none;">
         <div class="search-box">
