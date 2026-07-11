@@ -6,7 +6,7 @@
     <title>🌴 Bảng hoa Queens - Đồng bộ song song 2 Sheets 🐚</title>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght=400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ----- HỆ THỐNG BIẾN MÀU TƯƠI MÁT HÈ ĐI BIỂN ----- */
+        /* ----- HỆ THỐNG BIẾN ----- */
         :root {
             --sea-main: #0096c7; 
             --sea-dark: #0077b6;
@@ -14,7 +14,6 @@
             --text-gray: #457b9d;
             --boy-bg: rgba(235, 252, 255, 0.85); 
             --boy-border: #48cae4;
-            --boy-text: #0077b6;
             --glass-bg: rgba(255, 255, 255, 0.75);
             --glass-border: rgba(255, 255, 255, 0.9);
         }
@@ -28,107 +27,128 @@
         body { 
             background: linear-gradient(180deg, #caf0f8 0%, #90e0ef 30%, #48cae4 70%, #f2cc8f 100%);
             background-attachment: fixed;
-            padding: 30px 15px; 
+            padding: 20px 10px; 
             display: flex; 
             justify-content: center; 
             min-height: 100vh; 
         }
 
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-15px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInSoft { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes floating { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-12px) rotate(8deg); } 100% { transform: translateY(0px) rotate(0deg); } }
+        @keyframes fadeInSoft { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes floating { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-12px) rotate(8deg); } }
 
-        .fade-in-box { animation: fadeInSoft 0.4s ease-out forwards; }
-
+        /* ----- CONTAINER CHÍNH ----- */
         .garden-container { 
             width: 100%; max-width: 520px; 
             background: var(--glass-bg); 
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            padding: 35px 25px; border-radius: 40px; 
+            padding: 25px 15px; border-radius: 30px; 
             box-shadow: 0 25px 50px rgba(0, 150, 199, 0.15); 
             border: 2px solid var(--glass-border); 
-            display: flex; flex-direction: column; position: relative; 
+            position: relative; 
             animation: fadeInDown 0.6s ease-out;
         }
         
         .decor-float { position: absolute; top: -20px; font-size: 38px; animation: floating 3s ease-in-out infinite; cursor: pointer; text-shadow: 0 5px 15px rgba(0, 180, 216, 0.3); }
         .decor-float.left { left: 10px; }
         .decor-float.right { right: 10px; animation-delay: 1.5s; top: -15px; }
-        
-        .search-box { 
-            background: rgba(255, 255, 255, 0.95); 
-            border: 2px dashed #48cae4; padding: 18px; border-radius: 28px; margin-bottom: 25px; 
-            box-shadow: inset 0 4px 10px rgba(0, 180, 216, 0.05); 
-        }
-        .search-box-title { font-size: 13px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--sea-dark); display: flex; align-items: center; gap: 6px; }
-        .search-input { 
-            width: 100%; padding: 14px 18px; font-size: 14px; border-radius: 20px; 
-            border: 2px solid #caf0f8; outline: none; background: #fff; color: var(--text-dark); 
-            transition: all 0.3s;
-        }
+
+        .main-title { text-align: center; color: var(--sea-dark); margin-bottom: 20px; font-size: 22px; text-shadow: 2px 2px 4px rgba(255,255,255,0.8); }
+        .loading-screen { text-align: center; padding: 40px; color: var(--sea-dark); font-weight: 700; font-size: 16px; }
+
+        /* ----- LAYOUT BỐ CỤC ----- */
+        .main-layout { display: flex; flex-direction: column; gap: 20px; }
+        .left-col { display: flex; flex-direction: column; gap: 20px; }
+        .right-col { display: flex; flex-direction: column; }
+        .button-group { display: flex; flex-direction: column; gap: 12px; }
+
+        /* ----- TÌM KIẾM & NÚT BẤM ----- */
+        .search-box { background: rgba(255, 255, 255, 0.95); border: 2px dashed #48cae4; padding: 16px; border-radius: 24px; box-shadow: inset 0 4px 10px rgba(0, 180, 216, 0.05); }
+        .search-box-title { font-size: 13px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; color: var(--sea-dark); display: flex; align-items: center; gap: 6px; }
+        .search-input { width: 100%; padding: 12px 16px; font-size: 14px; border-radius: 16px; border: 2px solid #caf0f8; outline: none; background: #fff; color: var(--text-dark); transition: all 0.3s; }
         .search-input:focus { border-color: var(--sea-main); box-shadow: 0 0 15px rgba(0, 180, 216, 0.3); }
 
-        .btn-main { 
-            width: 100%; padding: 16px 20px; font-size: 14.5px; font-weight: 700; border: none; 
-            border-radius: 25px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; 
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
-        .btn-main:hover { transform: translateY(-4px); filter: brightness(1.08); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
-        .btn-main:active { transform: translateY(1px); }
+        .btn-main { width: 100%; padding: 14px 18px; font-size: 14px; font-weight: 700; border: none; border-radius: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        .btn-main:hover { transform: translateY(-3px); filter: brightness(1.08); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+        .btn-main.active-btn { transform: scale(0.98); box-shadow: inset 0 4px 10px rgba(0,0,0,0.2); outline: 3px solid rgba(255,255,255,0.8); }
         
         .btn-help { color: #855b00; background: linear-gradient(135deg, #ffe066, #ffb703); }
         .btn-rank { color: #fff; background: linear-gradient(135deg, #48cae4, #0096c7); }
         .btn-xu { color: #fff; background: linear-gradient(135deg, #2a9d8f, #264653); }
 
-        .info-box { margin-top: 8px; padding: 20px; background: rgba(255, 255, 255, 0.95); border: 2px dashed #48cae4; border-radius: 28px; display: none; }
+        /* ----- HỘP NỘI DUNG ----- */
+        .info-box { display: none; padding: 20px; background: rgba(255, 255, 255, 0.95); border: 2px dashed #48cae4; border-radius: 24px; }
+        .info-box.active { display: block; animation: fadeInSoft 0.4s ease-out forwards; }
+        
         .help-content { color: var(--text-gray); font-size: 13.5px; line-height: 1.8; }
         .help-content p { margin-bottom: 6px; }
         .help-content .help-title { margin-bottom: 12px; font-weight: 700; color: var(--sea-main); font-size: 15px;}
 
-        .total-badge { font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 14px; background: var(--sea-main); padding: 6px 14px; border-radius: 15px; display: inline-block; box-shadow: 0 4px 10px rgba(0, 150, 199, 0.3); text-transform: uppercase;}
-        .rank-list-container { display: flex; flex-direction: column; gap: 12px; width: 100%; }
-        
-        .cute-rank-item { border: 1.5px solid rgba(255,255,255,0.9); border-radius: 22px; overflow: hidden; background: rgba(255,255,255,0.95); box-shadow: 0 4px 15px rgba(0, 150, 199, 0.08); transition: all 0.3s ease; }
-        .cute-rank-item:hover { box-shadow: 0 8px 25px rgba(0, 150, 199, 0.15); }
+        /* ----- BẢNG XẾP HẠNG ----- */
+        .total-badge { font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 14px; background: var(--sea-main); padding: 6px 14px; border-radius: 15px; display: inline-block; text-transform: uppercase; }
+        .rank-list-container { display: flex; flex-direction: column; gap: 12px; }
+        .cute-rank-item { border: 1.5px solid rgba(255,255,255,0.9); border-radius: 20px; overflow: hidden; background: rgba(255,255,255,0.95); transition: all 0.3s ease; }
         .gentleman-card-style.cute-rank-item { border-color: var(--boy-border); background: var(--boy-bg); }
 
-        .click-header-line { display: flex; justify-content: space-between; align-items: center; padding: 16px 18px; cursor: pointer; user-select: none; transition: background 0.3s; }
-        .click-header-line:hover { background: rgba(255,255,255,1); }
-        .active-folder .click-header-line { background: #e0fbfc !important; color: var(--sea-dark) !important; }
-        .active-folder.gentleman-card-style .click-header-line { background: #caf0f8 !important; }
+        .click-header-line { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; cursor: pointer; user-select: none; transition: background 0.3s; }
+        .click-header-line:hover { background: #fff; }
+        .active-folder .click-header-line { background: #e0fbfc; }
+        .active-folder.gentleman-card-style .click-header-line { background: #caf0f8; }
 
-        .header-left { display: flex; align-items: center; gap: 10px; font-size: 14.5px; color: var(--text-dark); font-weight: 700; }
+        .header-left { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-dark); font-weight: 700; }
         .rank-number { font-weight: 800; width: 24px; text-align: center; }
-        .count-badge { font-weight: 700; padding: 5px 12px; border-radius: 20px; font-size: 11px; color: #fff; background: var(--sea-main); }
-        .gentleman-card-style .count-badge { color: #fff; background: var(--sea-dark); }
+        .count-badge { font-weight: 700; padding: 4px 10px; border-radius: 15px; font-size: 11px; color: #fff; background: var(--sea-main); }
 
-        .rank-content-box { display: none; padding: 18px; background: rgba(255,255,255,0.98); border-top: 1px solid #e0fbfc; }
-        .active-folder .rank-content-box { display: block !important; animation: fadeInSoft 0.3s ease-out; }
+        .rank-content-box { display: none; padding: 16px; background: rgba(255,255,255,0.98); border-top: 1px solid #e0fbfc; }
+        .active-folder .rank-content-box { display: block; animation: fadeInSoft 0.3s ease-out; }
 
-        .summary-rarity-line { font-size: 12px; padding: 10px 14px; margin-bottom: 12px; border-radius: 12px; background: #f0fafd; border-left: 5px solid var(--sea-main); color: var(--text-dark); font-weight: 500; line-height: 1.5; }
-        .flower-chip-container { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
-        .flower-chip-item { display: inline-block; padding: 6px 12px; border-radius: 14px; font-size: 11.5px; margin: 3px; transition: transform 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .flower-chip-item:hover { transform: scale(1.08) translateY(-2px); z-index: 2; }
+        .summary-rarity-line { font-size: 12px; padding: 10px; margin-bottom: 12px; border-radius: 10px; background: #f0fafd; border-left: 4px solid var(--sea-main); color: var(--text-dark); font-weight: 500; }
+        .flower-chip-container { display: flex; flex-wrap: wrap; gap: 5px; }
+        .flower-chip-item, .xu-missing-badge { display: inline-block; padding: 6px 10px; border-radius: 12px; font-size: 11px; transition: transform 0.2s; }
+        .flower-chip-item:hover, .xu-missing-badge:hover { transform: translateY(-2px); }
         
-        .xu-missing-badge { display: inline-block; padding: 6px 12px; border-radius: 14px; font-size: 11.5px; background: #fff; border: 1.5px solid #e76f51; color: #e76f51; font-weight: 600; margin: 3px; transition: transform 0.2s; }
-        .xu-missing-badge:hover { transform: translateY(-2px); background: #fff5f3;}
-        .all-cleared-msg { width: 100%; text-align: center; padding: 18px; color: var(--sea-main); font-weight: 700; font-size: 14.5px; border: 2.5px dashed #90e0ef; border-radius: 18px; background: rgba(255,255,255,0.85); }
+        .xu-missing-badge { background: #fff; border: 1.5px solid #e76f51; color: #e76f51; font-weight: 600; }
+        .all-cleared-msg { text-align: center; padding: 16px; color: var(--sea-main); font-weight: 700; font-size: 14px; border: 2px dashed #90e0ef; border-radius: 16px; background: rgba(255,255,255,0.85); }
 
-        /* ----- MÀU SẮC THEO PHẨM CHẤT ĐỌC TỪ FILE ----- */
-        .tier-blue { background: linear-gradient(135deg, #e0f2fe, #bae6fd) !important; border: 1px solid #7dd3fc !important; color: #0284c7 !important; }
-        .tier-purple { background: linear-gradient(135deg, #f3e5f5, #e1bee7) !important; border: 1px solid #ba68c8 !important; color: #6a1b9a !important; }
-        .tier-orange { background: linear-gradient(135deg, #fff3e0, #ffe0b2) !important; border: 1px solid #ffb74d !important; color: #e65100 !important; font-weight: 600 !important; }
-        .tier-red { background: linear-gradient(135deg, #fff0f2, #ffccd5) !important; border: 2px solid #e63946 !important; color: #d90429 !important; font-weight: 700 !important; }
+        /* ----- MÀU SẮC HOA VÀ VIỀN TĨNH ----- */
+        .tier-blue { background: linear-gradient(135deg, #e0f2fe, #bae6fd); border: 1px solid #7dd3fc; color: #0284c7; }
+        .tier-purple { background: linear-gradient(135deg, #f3e5f5, #e1bee7); border: 1px solid #ba68c8; color: #6a1b9a; }
+        .tier-orange { background: linear-gradient(135deg, #fff3e0, #ffe0b2); border: 1px solid #ffb74d; color: #e65100; font-weight: 600; }
+        .tier-red { background: linear-gradient(135deg, #fff0f2, #ffccd5); border: 2px solid #e63946; color: #d90429; font-weight: 700; }
 
-        .search-title { font-size: 13px; font-weight: 700; color: var(--sea-dark); margin-bottom: 15px; text-transform: uppercase; display: flex; align-items: center; gap: 4px; }
-        .single-flower-block { padding: 18px; border-radius: 24px; font-size: 13.5px; line-height: 1.6; margin-bottom: 14px; }
-        .flower-found { border: 2.5px solid #48cae4; background: #fff; color: var(--sea-dark); }
-        .flower-empty { border: 2.5px dashed #90e0ef; background: rgba(255,255,255,0.8); color: var(--sea-main); }
-        .flower-not-found { border: 2.5px dashed #e76f51; background: rgba(255,255,255,0.8); color: #e76f51; text-align: center; font-weight: 600;}
-        .loading-screen { text-align: center; padding: 40px; color: var(--sea-dark); font-weight: 700; font-size: 16px; }
+        /* Text màu cho chữ phẩm chất trong ô tìm kiếm */
+        .text-tier-red { color: #d90429; font-weight: 700; }
+        .text-tier-orange { color: #e65100; font-weight: 700; }
+        .text-tier-purple { color: #6a1b9a; font-weight: 700; }
+        .text-tier-blue { color: #0284c7; font-weight: 700; }
 
-        @media (max-width: 480px) { body { padding: 20px 10px; } .garden-container { padding: 25px 15px; border-radius: 30px; } }
+        /* ----- TÌM KIẾM HOA ----- */
+        .search-title { font-size: 13px; font-weight: 700; color: var(--sea-dark); margin-bottom: 15px; text-transform: uppercase; }
+        .single-flower-block { padding: 16px; border-radius: 20px; font-size: 13px; line-height: 1.6; margin-bottom: 12px; transition: all 0.3s;}
+        
+        .flower-found { border: 2px solid #48cae4; background: #fff; color: var(--sea-dark); }
+        .flower-empty { border: 2px dashed #90e0ef; background: rgba(255,255,255,0.8); color: var(--sea-main); }
+        .flower-not-found { border: 2px dashed #e76f51; background: rgba(255,255,255,0.8); color: #e76f51; text-align: center; font-weight: 600;}
+
+        /* Áp dụng màu viền tĩnh cho ô tìm kiếm nếu là hoa Đỏ / Cam */
+        .flower-found.box-tier-red { border-color: #e63946; border-width: 2.5px; }
+        .flower-found.box-tier-orange { border-color: #ffb74d; border-width: 2.5px; }
+        .flower-empty.box-tier-red { border-color: #e63946; border-width: 2.5px; }
+        .flower-empty.box-tier-orange { border-color: #ffb74d; border-width: 2.5px; }
+
+
+        /* ----- TỐI ƯU PC (2 CỘT CHUYÊN NGHIỆP) ----- */
+        @media (min-width: 1024px) {
+            body { padding: 50px 20px; }
+            .garden-container { max-width: 900px; padding: 40px; border-radius: 40px; }
+            .main-title { font-size: 26px; margin-bottom: 30px; }
+            .main-layout { flex-direction: row; align-items: flex-start; gap: 30px; }
+            .left-col { flex: 0 0 320px; position: sticky; top: 20px; }
+            .right-col { flex: 1; min-width: 0; }
+            .search-box { padding: 20px; margin-bottom: 0; }
+            .button-group { gap: 15px; }
+            .info-box { padding: 25px; min-height: 400px; } 
+        }
     </style>
 </head>
 <body>
@@ -137,55 +157,51 @@
     <span class="decor-float left">🐠</span>
     <span class="decor-float right">⛵</span>
 
-    <h2 style="text-align: center; color: var(--sea-dark); margin-bottom: 20px; font-size: 24px; text-shadow: 2px 2px 4px rgba(255,255,255,0.8);">🌴 Bảng hoa Queens - Hè là phải đi biển 🐚</h2>
+    <h2 class="main-title">🌴 Bảng hoa Queens - Hè là phải đi biển 🐚</h2>
     
-    <div id="loadingArea" class="loading-screen">⚓ Chờ xíu có liền...</div>
+    <div id="loadingArea" class="loading-screen">⚓ Đang tải dữ liệu từ bãi biển...</div>
 
-    <div id="mainContentArea" style="display: none;">
-        <div class="search-box">
-            <div class="search-box-title">🔍 Tìm hoa ở bãi biển:</div>
-            <input type="text" id="flowerSearch" class="search-input" placeholder="Nhập tên loài hoa bạn muốn tìm...">
-        </div>
-        
-        <div style="flex-grow: 1;">
-            <div id="defaultGardenWidgets" style="display: flex; flex-direction: column; gap: 18px;">
-                <div>
-                    <button id="btnHelp" class="btn-main btn-help">🗺️ Hướng dẫn khám phá các loại hoa</button>
-                    <div id="helpBox" class="info-box">
-                        <div class="help-content">
-                            <p class="help-title">Aloha! Chào mừng tới Đảo Hoa Mùa Hè 🏝️</p>
-                            <p>🐚 <strong>Tìm hoa ở bãi biển:</strong> Gõ tên hoa vào ô tìm kiếm ở trên để xem ai đang sở hữu.</p>
-                            <p>🏄‍♀️ <strong>Bảng xếp hạng:</strong> Xem độ giàu có của từng người (tính từ phẩm tím trở lên).</p>
-                            <p>🦀 <strong>Hoa xu chưa nhặt:</strong> Xem danh sách các loài hoa xu mà cả hội chưa ai vớt được.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <button id="btnRank" class="btn-main btn-rank">🏄‍♀️ Bảng xếp hạng hoa các thành viên</button>
-                    <div id="rankBox" class="info-box">
-                        <div id="mainRankArea"></div>
-                    </div>
-                </div>
-
-                <div>
-                    <button id="btnXu" class="btn-main btn-xu">🦀 Các loại hoa xu chưa nhặt trên bờ cát</button>
-                    <div id="missingBox" class="info-box">
-                        <div id="missingArea" style="display: flex; flex-wrap: wrap; gap: 6px;"></div>
-                    </div>
-                </div>
+    <div id="mainContentArea" class="main-layout" style="display: none;">
+        <div class="left-col">
+            <div class="search-box">
+                <div class="search-box-title">🔍 Tìm hoa ở bãi biển:</div>
+                <input type="text" id="flowerSearch" class="search-input" placeholder="Nhập tên loài hoa...">
+            </div>
+            
+            <div class="button-group">
+                <button id="btnHelp" class="btn-main btn-help active-btn" onclick="toggleTab('helpBox', this)">🗺️ Hướng dẫn khám phá</button>
+                <button id="btnRank" class="btn-main btn-rank" onclick="toggleTab('rankBox', this)">🏄‍♀️ Bảng xếp hạng</button>
+                <button id="btnXu" class="btn-main btn-xu" onclick="toggleTab('missingBox', this)">🦀 Hoa xu chưa nhặt</button>
             </div>
         </div>
         
-        <div id="searchViewArea" style="display: none;" class="fade-in-box">
-            <div class="search-title">🪸 Lưới thu hoạch:</div>
-            <div id="searchResultArea"></div>
+        <div class="right-col">
+            <div id="helpBox" class="info-box active">
+                <div class="help-content">
+                    <p class="help-title">Aloha! Chào mừng tới Đảo Hoa Mùa Hè 🏝️</p>
+                    <p>🐚 <strong>Tìm hoa:</strong> Gõ tên hoa vào ô tìm kiếm để xem ai đang sở hữu.</p>
+                    <p>🏄‍♀️ <strong>Xếp hạng:</strong> Xem độ giàu có của từng người (tính từ phẩm tím trở lên).</p>
+                    <p>🦀 <strong>Hoa xu:</strong> Xem danh sách các loài hoa xu mà cả hội chưa ai vớt được.</p>
+                </div>
+            </div>
+
+            <div id="rankBox" class="info-box">
+                <div id="mainRankArea"></div>
+            </div>
+
+            <div id="missingBox" class="info-box">
+                <div id="missingArea" style="display: flex; flex-wrap: wrap; gap: 6px;"></div>
+            </div>
+
+            <div id="searchViewArea" class="info-box">
+                <div class="search-title">🪸 Kết quả tìm kiếm:</div>
+                <div id="searchResultArea"></div>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
-    // Link kết nối xuất bản trực tiếp dạng CSV (Đã tối ưu hóa chống chặn bảo mật cấu trúc)
     const URL_THANH_VIEN = "https://docs.google.com/spreadsheets/d/1tEoux6IzG80zh2oMIWLYasYziOH3bv37EGKG3UVA9WY/export?format=csv&gid=0";
     const URL_PHAM_MAU = "https://docs.google.com/spreadsheets/d/1tEoux6IzG80zh2oMIWLYasYziOH3bv37EGKG3UVA9WY/export?format=csv&gid=2019890526";
 
@@ -200,33 +216,29 @@
 
     const removeVietnameseTones = str => {
         if (!str) return '';
-        str = str.toLowerCase();
-        str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
-        str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
-        str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
-        str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
-        str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
-        str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
-        str = str.replace(/đ/g, "d");
-        str = str.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, ""); 
-        str = str.replace(/[\u02C6\u0306\u031B]/g, "");
-        return str.trim();
+        return str.toLowerCase()
+            .replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a")
+            .replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e")
+            .replace(/ì|í|ị|ỉ|ĩ/g, "i")
+            .replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o")
+            .replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u")
+            .replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y")
+            .replace(/đ/g, "d")
+            .replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, "")
+            .replace(/[\u02C6\u0306\u031B]/g, "")
+            .trim();
     };
 
     function parseCSV(text) {
-        let lines = text.split(/\r\n|\n/);
-        let result = [];
-        for (let i = 0; i < lines.length; i++) {
-            let line = lines[i].trim();
+        let lines = text.split(/\r\n|\n/), result = [];
+        for (let line of lines) {
+            line = line.trim();
             if (!line) continue;
-            let row = [];
-            let inQuotes = false;
-            let current = '';
-            for (let j = 0; j < line.length; j++) {
-                let c = line[j];
-                if (c === '"') { inQuotes = !inQuotes; }
+            let row = [], inQuotes = false, current = '';
+            for (let c of line) {
+                if (c === '"') inQuotes = !inQuotes;
                 else if (c === ',' && !inQuotes) { row.push(current); current = ''; }
-                else { current += c; }
+                else current += c;
             }
             row.push(current);
             result.push(row);
@@ -236,18 +248,19 @@
 
     const flowerTierMap = new Map();
     const xuList = [];
-    let finalMembersData = [];
+    const finalMembersData = [];
     const flowerOwnersMap = new Map();
+    let currentActiveTabId = 'helpBox'; 
 
     function getFlowerWeight(name) {
-        const score = flowerTierMap.get(name) || 2; // Nếu không tìm thấy phẩm màu, mặc định là Tím (2)
+        const fData = flowerTierMap.get(name);
+        const score = fData ? fData.score : 2; 
         const tierClasses = { 1: 'tier-blue', 2: 'tier-purple', 3: 'tier-orange', 4: 'tier-red' };
         return { score, className: tierClasses[score] };
     }
 
     async function loadDataFromGoogleSheets() {
         try {
-            // Tải dữ liệu song song từ 2 Sheet chống nghẽn bảo mật CORS
             const [resThanhVien, resPhamMau] = await Promise.all([
                 fetch(URL_THANH_VIEN).then(res => res.text()),
                 fetch(URL_PHAM_MAU).then(res => res.text())
@@ -256,27 +269,21 @@
             const phammauRows = parseCSV(resPhamMau);
             const thanhvienRows = parseCSV(resThanhVien);
 
-            // 1. Phân tích Sheet phammau để nạp từ điển phẩm màu và danh sách hoa xu
             for (let i = 1; i < phammauRows.length; i++) {
                 let row = phammauRows[i];
                 if (row.length < 2) continue;
                 let flowerName = standardizeName(row[0].replace(/^"|"$/g, ''));
-                let tierStr = row[1] ? row[1].replace(/^"|"$/g, '').trim().toLowerCase() : '';
+                
+                let rawTier = row[1] ? row[1].replace(/^"|"$/g, '') : '';
+                let tierStrNoTone = removeVietnameseTones(rawTier);
                 let xuStr = row[2] ? row[2].replace(/^"|"$/g, '').trim().toLowerCase() : '';
 
-                let score = 2;
-                if (tierStr.includes('do')) score = 4;
-                else if (tierStr.includes('cam')) score = 3;
-                else if (tierStr.includes('tim')) score = 2;
-                else if (tierStr.includes('xanh')) score = 1;
-
-                flowerTierMap.set(flowerName, score);
-                if (xuStr.includes('xu')) {
-                    xuList.push(flowerName);
-                }
+                let score = tierStrNoTone.includes('do') ? 4 : tierStrNoTone.includes('cam') ? 3 : tierStrNoTone.includes('xanh') ? 1 : 2;
+                
+                flowerTierMap.set(flowerName, { score, searchKey: removeVietnameseTones(flowerName) });
+                if (xuStr.includes('xu')) xuList.push(flowerName);
             }
 
-            // 2. Phân tích Sheet thanhvien để lấy danh sách hoa của từng người
             for (let i = 1; i < thanhvienRows.length; i++) {
                 let row = thanhvienRows[i];
                 if (row.length < 2) continue;
@@ -284,11 +291,11 @@
                 if (!memberName) continue;
 
                 let flowersRaw = row[1].replace(/^"|"$/g, '').split(',');
-                let flowers = [...new Set(flowersRaw.map(f => standardizeName(f)))].filter(f => f !== "");
+                let flowers = [...new Set(flowersRaw.map(f => standardizeName(f)))].filter(f => f);
 
-                const totalCount = flowers.filter(f => (flowerTierMap.get(f) || 2) >= 2).length;
-                const memberObj = { name: memberName, allFlowers: flowers, totalCount };
+                let totalCount = flowers.reduce((sum, f) => sum + ((flowerTierMap.get(f)?.score || 2) >= 2 ? 1 : 0), 0);
                 
+                const memberObj = { name: memberName, allFlowers: flowers, totalCount };
                 finalMembersData.push(memberObj);
 
                 flowers.forEach(f => {
@@ -297,92 +304,102 @@
                 });
             }
 
-            // Ẩn màn hình chờ, hiện giao diện chính
             document.getElementById('loadingArea').style.display = "none";
-            document.getElementById('mainContentArea').style.display = "block";
+            document.getElementById('mainContentArea').style.display = "flex";
 
             initRenderRankList();
             updateMissingXu();
 
         } catch (error) {
-            document.getElementById('loadingArea').innerHTML = "❌ Lỗi kết nối API Google Sheets. Hãy chắc chắn bạn đã bật quyền 'Bất kỳ ai có đường liên kết đều có thể xem' trên file Sheets nhé!";
+            document.getElementById('loadingArea').innerHTML = "❌ Lỗi kết nối API Google Sheets. Kiểm tra quyền truy cập link.";
             console.error(error);
         }
     }
 
-    const mainRankArea = document.getElementById('mainRankArea');
-    const searchResultArea = document.getElementById('searchResultArea');
-    const missingArea = document.getElementById('missingArea');
-    const missingBox = document.getElementById('missingBox');
-    const rankBox = document.getElementById('rankBox');
-    const helpBox = document.getElementById('helpBox');
-    const flowerInput = document.getElementById('flowerSearch');
-    const defaultGardenWidgets = document.getElementById('defaultGardenWidgets');
-    const searchViewArea = document.getElementById('searchViewArea');
+    function toggleTab(targetId, btnElement) {
+        currentActiveTabId = targetId; 
+        document.getElementById('flowerSearch').value = ''; 
+        
+        document.querySelectorAll('.info-box').forEach(box => box.classList.remove('active'));
+        document.getElementById(targetId).classList.add('active');
+
+        if(btnElement) {
+            document.querySelectorAll('.btn-main').forEach(btn => btn.classList.remove('active-btn'));
+            btnElement.classList.add('active-btn');
+        }
+    }
 
     function initRenderRankList() {
+        const mainRankArea = document.getElementById('mainRankArea');
         mainRankArea.innerHTML = `<div class="total-badge">⚓ Tổng số: ${finalMembersData.length} thành viên</div>`;
+        
+        const fragment = document.createDocumentFragment();
         const container = document.createElement('div');
         container.className = "rank-list-container";
+        
         const sortedRank = [...finalMembersData].sort((a, b) => b.totalCount - a.totalCount);
         const rankColors = ["#e76f51", "#f4a261", "#e9c46a", "#2a9d8f"];
 
         sortedRank.forEach((item, index) => {
             const collapseItem = document.createElement('div');
             const isBoy = item.name.includes("Anh Kiệt") || item.name.includes("Quốc Toàn");
-            collapseItem.className = isBoy ? "cute-rank-item gentleman-card-style" : "cute-rank-item";
+            collapseItem.className = `cute-rank-item ${isBoy ? 'gentleman-card-style' : ''}`;
 
-            const sortedFlowersWithTier = item.allFlowers.map(f => ({ name: f, ...getFlowerWeight(f) }))
+            const sortedFlowers = item.allFlowers.map(f => ({ name: f, ...getFlowerWeight(f) }))
                 .sort((a, b) => b.score - a.score || a.name.localeCompare(b.name, 'vi'));
 
             let tierCounts = { 4: 0, 3: 0, 2: 0, 1: 0 };
-            const chipsHtml = sortedFlowersWithTier.map(f => {
+            const chipsHtml = sortedFlowers.map(f => {
                 tierCounts[f.score]++;
                 return `<span class="flower-chip-item ${f.className}">${f.name}</span>`;
             }).join('');
             
-            const summaryHtml = `<div class="summary-rarity-line">🌊 <strong>Kho báu:</strong> ${tierCounts[4]} Đỏ | ${tierCounts[3]} Cam | ${tierCounts[2]} Tím | <strong>${tierCounts[1]} Xanh</strong></div>`;
             const numColor = index < 3 ? rankColors[index] : "#1d3557";
 
             collapseItem.innerHTML = `
                 <div class="click-header-line">
                     <div class="header-left">
                         <span class="rank-number" style="color: ${numColor};">#${index + 1}</span>
-                        <span class="member-display-name"></span>
+                        <span>${(isBoy ? '🎩 ' : '👑 ') + item.name}</span>
                     </div>
                     <span class="count-badge">${item.totalCount} loại hoa</span>
                 </div>
                 <div class="rank-content-box">
-                    ${summaryHtml}
+                    <div class="summary-rarity-line">🌊 <strong>Kho báu:</strong> ${tierCounts[4]} Đỏ | ${tierCounts[3]} Cam | ${tierCounts[2]} Tím | <strong>${tierCounts[1]} Xanh</strong></div>
                     <div class="flower-chip-container">${chipsHtml}</div>
                 </div>
             `;
-            collapseItem.querySelector('.member-display-name').textContent = (isBoy ? '🎩 ' : '👑 ') + item.name;
             container.appendChild(collapseItem);
         });
         
         container.addEventListener('click', (e) => {
-            const headerBtn = e.target.closest('.click-header-line');
-            if (headerBtn) headerBtn.parentElement.classList.toggle('active-folder');
+            const header = e.target.closest('.click-header-line');
+            if (header) header.parentElement.classList.toggle('active-folder');
         });
-        mainRankArea.appendChild(container);
+        
+        fragment.appendChild(container);
+        mainRankArea.appendChild(fragment);
     }
 
     let debounceTimer;
     function searchFlowerLogic() {
-        const rawInput = flowerInput.value.trim();
+        const rawInput = document.getElementById('flowerSearch').value.trim();
         if (rawInput === "") {
-            searchViewArea.style.display = "none";
-            defaultGardenWidgets.style.display = "flex";
+            document.querySelectorAll('.info-box').forEach(box => box.classList.remove('active'));
+            document.getElementById(currentActiveTabId).classList.add('active');
             return;
         }
 
-        let fKeyNoTone = removeVietnameseTones(rawInput);
-        defaultGardenWidgets.style.display = "none";
-        searchViewArea.style.display = "block";
+        document.querySelectorAll('.info-box').forEach(box => box.classList.remove('active'));
+        document.querySelectorAll('.btn-main').forEach(btn => btn.classList.remove('active-btn'));
+        document.getElementById('searchViewArea').classList.add('active');
         
-        const sortedMatches = Array.from(flowerTierMap.keys())
-            .filter(name => removeVietnameseTones(name).includes(fKeyNoTone))
+        let fKeyNoTone = removeVietnameseTones(rawInput);
+        const searchResultArea = document.getElementById('searchResultArea');
+        
+        const sortedMatches = Array.from(flowerTierMap.entries())
+            .filter(([name, data]) => data.searchKey.includes(fKeyNoTone))
+            .map(([name]) => name)
             .sort((a, b) => a.localeCompare(b, 'vi'));
 
         if (!sortedMatches.length) {
@@ -395,13 +412,27 @@
                 .sort((a, b) => a.totalCount - b.totalCount)
                 .map(m => m.name);
 
+            const fData = flowerTierMap.get(name);
+            const score = fData ? fData.score : 2;
+            
+            const tierInfo = {
+                4: { text: "Hoa phẩm Đỏ", colorClass: "text-tier-red", boxClass: "box-tier-red" },
+                3: { text: "Hoa phẩm Cam", colorClass: "text-tier-orange", boxClass: "box-tier-orange" },
+                2: { text: "Hoa phẩm Tím", colorClass: "text-tier-purple", boxClass: "" },
+                1: { text: "Hoa phẩm Xanh", colorClass: "text-tier-blue", boxClass: "" }
+            };
+            
+            const tierStr = tierInfo[score].text;
+            const tierColor = tierInfo[score].colorClass;
+            const glowBox = tierInfo[score].boxClass; 
+
             return owners.length 
-                ? `<div class="single-flower-block flower-found fade-in-box">🌸 <strong>${name}</strong> có <strong>${owners.length}</strong> thành viên (Xếp từ ít hoa nhất 👇):<br>👉 <em>${owners.join(', ')}</em></div>`
-                : `<div class="single-flower-block flower-empty fade-in-box">🌸 <strong>${name}</strong>: Cả đảo chưa ai vớt được.</div>`;
+                ? `<div class="single-flower-block flower-found ${glowBox}">🌸 <strong>${name}</strong> - <span class="${tierColor}">[${tierStr}]</span> có <strong>${owners.length}</strong> thành viên (Xếp từ ít hoa nhất 👇):<br>👉 <em>${owners.join(', ')}</em></div>`
+                : `<div class="single-flower-block flower-empty ${glowBox}">🌸 <strong>${name}</strong> - <span class="${tierColor}">[${tierStr}]</span>: Cả đảo chưa ai vớt được.</div>`;
         }).join('');
     }
 
-    flowerInput.addEventListener('input', () => {
+    document.getElementById('flowerSearch').addEventListener('input', () => {
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(searchFlowerLogic, 300);
     });
@@ -411,30 +442,14 @@
         finalMembersData.forEach(m => m.allFlowers.forEach(f => ownedSet.add(f)));
         const uniqueMissing = xuList.filter(f => !ownedSet.has(f)).sort((a, b) => a.localeCompare(b, 'vi'));
         
+        const missingArea = document.getElementById('missingArea');
         if (uniqueMissing.length === 0) {
-            missingArea.innerHTML = `<div class="all-cleared-msg fade-in-box">🎉 Đã đổi hết hoa xu đến hiện tại, mọi người cần thì trade hoa với nhau nhé ^^ 🌸</div>`;
+            missingArea.innerHTML = `<div class="all-cleared-msg">🎉 Đã đổi hết hoa xu đến hiện tại, mọi người cần thì trade hoa với nhau nhé ^^ 🌸</div>`;
         } else {
             missingArea.innerHTML = uniqueMissing.map(item => `<span class="xu-missing-badge">${item}</span>`).join('');
         }
     }
 
-    const toggleBox = (showBox, hideBox1, hideBox2) => {
-        if (showBox.style.display === "block") {
-            showBox.style.display = "none";
-            showBox.classList.remove("fade-in-box");
-        } else {
-            showBox.style.display = "block";
-            showBox.classList.add("fade-in-box");
-            hideBox1.style.display = "none"; hideBox1.classList.remove("fade-in-box");
-            hideBox2.style.display = "none"; hideBox2.classList.remove("fade-in-box");
-        }
-    };
-
-    document.getElementById('btnHelp').addEventListener('click', () => toggleBox(helpBox, rankBox, missingBox));
-    document.getElementById('btnRank').addEventListener('click', () => toggleBox(rankBox, helpBox, missingBox));
-    document.getElementById('btnXu').addEventListener('click', () => toggleBox(missingBox, helpBox, rankBox));
-
-    // Kích hoạt nạp dữ liệu từ xa
     loadDataFromGoogleSheets();
 </script>
 </body>
